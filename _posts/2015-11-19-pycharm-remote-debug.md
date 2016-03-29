@@ -8,14 +8,14 @@ published: true
 pycharm不得不说是用的最顺手的一个IDE了，最近尝试了下pycharm的远程调试功能。
 
 # pycharm配置如下
- ![](https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/post/20151119-pycharm-debug-1.png)
+ ![](http://7xqb88.com1.z0.glb.clouddn.com/20151119-pycharm-debug-1.png)
 
- ![](https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/post/20151119-pycharm-debug-2.png)
+ ![](http://7xqb88.com1.z0.glb.clouddn.com/20151119-pycharm-debug-2.png)
 
- ![](https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/post/20151119-pycharm-debug-3.png)  local host name是本机ip，port选择一个空闲端口即可，实际上本机是作为server端。
+ ![](http://7xqb88.com1.z0.glb.clouddn.com/20151119-pycharm-debug-3.png)  local host name是本机ip，port选择一个空闲端口即可，实际上本机是作为server端。
 
 # 启用调试
-点击调试按钮（快捷键：Shift+F9）开启调试，IDE会弹出Debug窗口 ![](https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/post/20151119-pycharm-debug-4.png)
+点击调试按钮（快捷键：Shift+F9）开启调试，IDE会弹出Debug窗口 ![](http://7xqb88.com1.z0.glb.clouddn.com/20151119-pycharm-debug-4.png)
 
 如上图中有一段代码，里面包换了刚才设置的本机ip和port。将这段代码加入到执行机器上的代码里即可。
 
@@ -48,6 +48,6 @@ print CONF.o2
 Connected to pydev debugger (build 139.1001)
 ```
 
-此时点击Debugger选项卡，进入调试界面 ![](https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/post/20151119-pycharm-debug-5.png)
+此时点击Debugger选项卡，进入调试界面 ![](http://7xqb88.com1.z0.glb.clouddn.com/20151119-pycharm-debug-5.png)
 
 `1`里面就是常用的流程控制了step over, step into等等，`2`里面就是程序的变量列表了。这样调试python就方便多了。

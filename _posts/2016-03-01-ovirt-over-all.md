@@ -14,7 +14,7 @@ RHEV是红帽的虚拟化管理平台，社区相应的是ovirt，在体验了�
 # Neutron in ovirt
 Neutron在openstack中提供网络即服务的组建，ovirt加入neutron服务，正可以弥补在对于虚机网络的配置和管理功能的缺陷，目前ovirt3.5版本后加入了这个功能，官方有非常详细的文档[http://www.ovirt.org/develop/release-management/features/cloud/neutronvirtualappliance/](http://www.ovirt.org/develop/release-management/features/cloud/neutronvirtualappliance/),也可以[点击这里下载](https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/document/ovirt-over-all-docs.tar.gz)。文档非常详细，整体的网络拓扑：
 
-![neutron appliance拓扑图](https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/post/20160301-ovirt-over-all-1.png)
+![neutron appliance拓扑图](http://7xqb88.com1.z0.glb.clouddn.com/20160301-ovirt-over-all-1.png)
 
 这里ovirt提供了一个集成了keystone以及neutron服务的镜像，用这个镜像启动虚机(neutron appliance )就可以直接提供neutron服务，主机两块网卡分别eth0、eth1,eth0相当于管理网络也可以提供外部网络，eth1走数据网络，用于虚机之间的通信。另外提一点，镜像应该用的是红帽RDO搭建的服务，基于I版本的。
 
