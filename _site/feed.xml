@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>大葱</title>
+    <description>随便写点</description>
+    <link>http://cheneydc.xyz/</link>
+    <atom:link href="http://cheneydc.xyz/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 29 Mar 2016 21:39:02 +0800</pubDate>
+    <lastBuildDate>Tue, 29 Mar 2016 21:39:02 +0800</lastBuildDate>
+    <generator>Jekyll v2.2.0</generator>
+    
+      <item>
+        <title>Mistral小记</title>
+        <description>&lt;p&gt;组里开始是拿来当crontab来使用的，这也是我最早对mistral的印象，云环境下的很多新项目其实也就是传统服务器上的应用的一个迁移。Mistral可以当作crontab来使用，但是远不止这些，Mistral实际是workflow-as-a-service，提供云环境下的工作流服务。更像是crontab+ansible的东西。&lt;/p&gt;
+
+&lt;p&gt;I think,工作流是一些动作或者操作的集合，按照一定的规则或者顺序执行，实现期望的结果。Mistral就是提供了这样的服务。下面的图是官方文档中的架构图：&lt;/p&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;结构&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;http://docs.openstack.org/developer/mistral/_images/mistral_architecture.png&quot; alt=&quot;Architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;engine: 处理工作流以及其中的数据流。判断任务状态，将任务放入任务队列，在任务间传递数据。&lt;/li&gt;
+  &lt;li&gt;Task Executor:执行任务动作，从对立中取出任务并执行具体动作，最后将结果返回给engine&lt;/li&gt;
+  &lt;li&gt;API server：提供REST API&lt;/li&gt;
+  &lt;li&gt;Scheduler:保存并执行延时任务，与engine和executor进行交互，并根据事件以触发workflow&lt;/li&gt;
+  &lt;li&gt;Persistence：存储数据&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;mistraldsl&quot;&gt;Mistral的DSL&lt;/h1&gt;
+&lt;p&gt;Mistral有自己的工作流描述语言，汲取了&lt;a href=&quot;https://pypi.python.org/pypi/yaql/1.0.0&quot;&gt;YAQL&lt;/a&gt;优点，主要包括两个部分：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Workflow&lt;/li&gt;
+  &lt;li&gt;Action&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;wrokflow&quot;&gt;Wrokflow&lt;/h2&gt;
+&lt;p&gt;Workflow是Mistral的主体部分，一个Workflow由至少一个task组成，task描述了具体的执行步骤，Workflow则描述了task之间的执行顺序、方式，以及输入、输出等。&lt;/p&gt;
+
+&lt;p&gt;看一个例子：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;---
+version: &#39;2.0&#39;
+
+create_vm:
+  description: Simple workflow example
+  type: direct
+
+  input:
+    - vm_name
+    - image_ref
+    - flavor_ref
+  output:
+    vm_id: &amp;lt;% $.vm_id %&amp;gt;
+
+  tasks:
+    create_server:
+      action: nova.servers_create name=&amp;lt;% $.vm_name %&amp;gt; image=&amp;lt;% $.image_ref %&amp;gt; flavor=&amp;lt;% $.flavor_ref %&amp;gt;
+      publish:
+        vm_id: &amp;lt;% task(create_server).result.id %&amp;gt;
+      on-success:
+        - wait_for_instance
+
+    wait_for_instance:
+      action: nova.servers_find id=&amp;lt;% $.vm_id %&amp;gt; status=&#39;ACTIVE&#39;
+      retry:
+        delay: 5
+        count: 15
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Wrokflow名字定义为”create_vm”,需要输入三个参数：&lt;code class=&quot;highlighter-rouge&quot;&gt;vm_name&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;image_ref&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;flavor_ref&lt;/code&gt;,执行结束后输出&lt;code class=&quot;highlighter-rouge&quot;&gt;vm_id&lt;/code&gt;,整个过程需要两个任务完成，首先&lt;code class=&quot;highlighter-rouge&quot;&gt;create_server&lt;/code&gt;,通过调用openstack相应的action，创建虚机，task可以使用workflow的输入进行传参，执行结束将&lt;code class=&quot;highlighter-rouge&quot;&gt;vm_id&lt;/code&gt;返回给workflow，&lt;code class=&quot;highlighter-rouge&quot;&gt;on-success&lt;/code&gt;指定如果task执行成功的动作，这里跳转到&lt;code class=&quot;highlighter-rouge&quot;&gt;wait_for_instance&lt;/code&gt;,通过&lt;code class=&quot;highlighter-rouge&quot;&gt;retry&lt;/code&gt;在设定时间和次数内轮询虚机的状态，确保虚机状态为ACTIVE后执行结束。通过这个例子可以大致看出workflow的基本结构。查看Workflow定义的具体关键字和属性列表请&lt;a href=&quot;http://docs.openstack.org/developer/mistral/dsl/dsl_v2.html#common-workflow-attributes&quot;&gt;点击这里&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;对任务的流程主要有两种处理方式也很清晰，主要有两种方式：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Direct Workflow&lt;/li&gt;
+  &lt;li&gt;Reverse Workflow&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;direct-workflow&quot;&gt;Direct Workflow&lt;/h3&gt;
+&lt;p&gt;这种方式可以简单理解为正向流程，一个任务结束，触发另一个或多个任务，直到流程结束。主要通过三个属性完成：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;on-success:此任务执行成功后需要执行的任务列表。&lt;/li&gt;
+  &lt;li&gt;on-error:此任务执行出错后需要执行的任务列表。&lt;/li&gt;
+  &lt;li&gt;on-complete:此任务执行结束后（不管成功还是失败）需要执行的任务列表&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;比如：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tasks:
+  A:
+    action: action.x
+    on-success:
+      B
+
+  B:
+    action: action.y
+    on-success:
+      C
+
+  C:
+    action: action.z
+    publish:
+      ret
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;简单写一个例子，任务A成功后执行B，B成功后执行C，这就是一个最简单的顺序执行的方式。多个任务有可以有很多种触发方式。&lt;/p&gt;
+
+&lt;p&gt;如果一个任务结束，需要触发其他多个任务，称为&lt;code class=&quot;highlighter-rouge&quot;&gt;Fork&lt;/code&gt;。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tasks:
+  A:
+    action: action.x
+    on-success:
+      - B
+      - C
+  B:
+    action: action.y
+
+  C:
+    action: action.z
+    publish:
+      ret
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;任务A执行成功后需要触发Task B和Task C，这里B和C的执行是并行的。再换一种方式：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tasks:
+  A:
+    action: action.x
+    on-success:
+      C
+
+  B:
+    action: action.y
+    on-success:
+      C
+
+  C:
+    join: all
+    action: action.z
+    publish:
+      ret
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;这种方式Task A执行成功会执行C，然而任务B执行成功也会执行C，C的执行可以通过&lt;code class=&quot;highlighter-rouge&quot;&gt;join&lt;/code&gt;来指定，这个例子中&lt;code class=&quot;highlighter-rouge&quot;&gt;join&lt;/code&gt;的值是&lt;code class=&quot;highlighter-rouge&quot;&gt;all&lt;/code&gt;，这种情况下，C会在A、B都执行成功后再执行，如果指定&lt;code class=&quot;highlighter-rouge&quot;&gt;join&lt;/code&gt;是一个值N，则会在上有任务至少有N个满足执行条件的时候执行。这种方式就是&lt;code class=&quot;highlighter-rouge&quot;&gt;Join&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;reverse-wrokflow&quot;&gt;Reverse Wrokflow&lt;/h3&gt;
+&lt;p&gt;在这个类型的Wrokflow中，任务的关系是被动依赖的，比如要执行A，指定必须先执行B，这样的关系可以在这种类型的Workflow中进行处理。可以使用&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;requires: 在执行此任务前需要执行的任务列表。比如：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; tasks:
+   A:
+     action: action.x
+
+   B:
+     action: action.y
+
+   C:
+     action: action.z
+       requires: [A，B]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;action&quot;&gt;Action&lt;/h2&gt;
+&lt;p&gt;Action是每一步要执行的内容，Mistra提供了一些标准的Action，并对openstack的各个组件的API进行了处理，都提供了相应的Action，众多的Action，如果可以方便的查询，就基本解决了使用的最大问题，通过mistral提供的工具可以将这些Action导入到数据库：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mistral-db-manage --config-file /path/to/mistral.conf populate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;导入后，可以获得action的列表：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mistral action-list
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;查询某一个action的具体参数，返回值等信息可以通过：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mistral action-get xxx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;workbook&quot;&gt;WorkBook&lt;/h2&gt;
+&lt;p&gt;WorkBook相当于一个命名空间，可以将workflow和task归到一个workbook中，导入一个workbook后，其中的workflow和action以及trigger也都会独立的被创建，与普通创建他们是一样的，但是通过workbook创建的，名字会以workbook的名字为前缀。&lt;/p&gt;
+
+&lt;p&gt;先整理到这，像cron-trigger之类的查查命令行就比较容易看懂了，mistral看起来功能比较单一，但是放在云环境中，应用点可以很多，对于业务的部署，甚至虚拟数据中心的管理都是很有帮助的，可以通过Mistral提供统一的操作，并且也很方便对工作流进行迁移。&lt;/p&gt;
+
+&lt;p&gt;各个部分具体的属性可以参考&lt;a href=&quot;http://docs.openstack.org/developer/mistral/dsl/dsl_v2.html#mistral-dsl-v2-specification&quot;&gt;官方文档&lt;/a&gt;。&lt;/p&gt;
+</description>
+        <pubDate>Sat, 19 Mar 2016 00:00:00 +0800</pubDate>
+        <link>http://cheneydc.xyz/%E6%8A%80%E6%9C%AF/2016/03/19/mistral-study/</link>
+        <guid isPermaLink="true">http://cheneydc.xyz/%E6%8A%80%E6%9C%AF/2016/03/19/mistral-study/</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>VDI之ovirt</title>
+        <description>&lt;p&gt;最早接触虚拟化的东西是08、09左右上学玩虚拟机，搭个环境弄下ubuntu什么的，后来学习编程，虚拟机天天跑，那时候觉得挺神奇的，点一点就在我的电脑里弄出来一个机器了，但是性能比较差，图形界面一般是不敢开的;后来到红帽也是意外的很，做了虚拟化相关的测试，接触了libvirt、kvm之类的，从技术上对虚拟化有了些了解，然后接触了RHEV，如果说从一个用户角度去看的话，这是让我惊艳的地方了。&lt;/p&gt;
+
+&lt;p&gt;RHEV是红帽的虚拟化管理平台，社区相应的是ovirt，在体验了迁移的效果后我表示很happy，通过spice使用windows虚机的效果也不错，脑洞放大点的话，以后每个人就不需要电脑了，如果突破了显示和能源的显示，只需要一个小小的终端，随时随地都可以访问自己远程的机器（主机 or 手机也没有分别），计算资源统一管理，从环保角度看也是不错的。&lt;/p&gt;
+
+&lt;p&gt;这个YY不是不可能的，但是当时接触的ovirt功能还是比较单一的，对于资源的调度和管理相对于云平台要弱势很多，最近又看了下ovirt，发现ovirt也是加了些好玩的东西啊。ovirt可以加入外部服务这个功能可以弥补N多弱点，比如ovirt可以直接加入openstack的neutron服务，如果没有虚拟网络，ovirt上的虚机就会占用IP资源，加入neutron，虚机可以使用虚机网络，对于隔离和管理都很方便了;加入cinder后，ovirt的卷也可以通过cinder进行管理，也可以很方便的使用ceph存储。&lt;/p&gt;
+
+&lt;h1 id=&quot;neutron-in-ovirt&quot;&gt;Neutron in ovirt&lt;/h1&gt;
+&lt;p&gt;Neutron在openstack中提供网络即服务的组建，ovirt加入neutron服务，正可以弥补在对于虚机网络的配置和管理功能的缺陷，目前ovirt3.5版本后加入了这个功能，官方有非常详细的文档&lt;a href=&quot;http://www.ovirt.org/develop/release-management/features/cloud/neutronvirtualappliance/&quot;&gt;http://www.ovirt.org/develop/release-management/features/cloud/neutronvirtualappliance/&lt;/a&gt;,也可以&lt;a href=&quot;https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/document/ovirt-over-all-docs.tar.gz&quot;&gt;点击这里下载&lt;/a&gt;。文档非常详细，整体的网络拓扑：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/post/20160301-ovirt-over-all-1.png&quot; alt=&quot;neutron appliance拓扑图&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这里ovirt提供了一个集成了keystone以及neutron服务的镜像，用这个镜像启动虚机(neutron appliance )就可以直接提供neutron服务，主机两块网卡分别eth0、eth1,eth0相当于管理网络也可以提供外部网络，eth1走数据网络，用于虚机之间的通信。另外提一点，镜像应该用的是红帽RDO搭建的服务，基于I版本的。&lt;/p&gt;
+
+&lt;p&gt;不足之处，ovirt管理界面中只提供了子网的建立，如果要顺利使用需要通过命令行手动进行路由的配置。不过后面应该会集成进来的吧。&lt;/p&gt;
+
+&lt;h1 id=&quot;cinder-in-ovirt&quot;&gt;Cinder in ovirt&lt;/h1&gt;
+&lt;p&gt;cinder在openstack中提供块存储服务，对于卷和快照的管理也很方便，支持N多种后端，如果想在ovirt中使用ceph存储，通过接入cinder服务的方式简单的不得了啊，不过此功能在ovirt3.6开始支持。官方文档是好东西，不过ovirt最近网站更新改版了，好多格式没法看啊，幸好之前留了pdf，可以&lt;a href=&quot;https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/document/ovirt-over-all-docs.tar.gz&quot;&gt;点击这里下载&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;添加cinder服务方便，如果ceph配置认证的话还需要配置key，这个可以在UI直接操作了。&lt;/p&gt;
+
+&lt;h1 id=&quot;ovirt-ha&quot;&gt;ovirt HA&lt;/h1&gt;
+&lt;p&gt;ovirt-engine是ovirt的核心服务了，关键服务的HA功能也是一个产品的可靠保证，ovirt提供了ovirt-host-engine-setup的工具，进行HA部署，ovirt的HA是虚机层的HA，工具会先启动一个虚拟环境，在这个虚拟环境里安装一个虚机，把ovirt-engine装到虚机里面，然后服务再管理这个主机，用同样的工具将其他主机添加到服务中，如果ovirt-engine被检测挂了，会在其他主机启动这个虚机，所以恢复服务时间稍微长了一些，如果做到了服务层的HA就好了。具体的部署也请看文档，&lt;a href=&quot;https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/document/ovirt-over-all-docs.tar.gz&quot;&gt;点击这里下载&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;“云”的发展快的吓人啊，不过从公有云到私有云到混合云，其实更多的在追求的是“简”，大道至简啊，消除差异化，提供标准统一，稳定的平台和服务。将来openstack与VDI可能也会渐渐的打破界限，甚至融为一体，但是从目前ovirt的效果来看，性能以及稳定性是更首要的问题。&lt;/p&gt;
+</description>
+        <pubDate>Tue, 01 Mar 2016 00:00:00 +0800</pubDate>
+        <link>http://cheneydc.xyz/%E6%8A%80%E6%9C%AF/2016/03/01/ovirt-over-all/</link>
+        <guid isPermaLink="true">http://cheneydc.xyz/%E6%8A%80%E6%9C%AF/2016/03/01/ovirt-over-all/</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>2016年春节随笔(一)</title>
+        <description>&lt;p&gt;15年顺利结束，带着媳妇回家头一年感觉挺有意思，不过我俩家走路也就是十分钟的事情，这两对老头老太，都快比我们熟了。春节过完胖三斤啊，可叹的是三斤又三斤，三斤何其多……老人盼着这几天，摆满桌子好吃的，看着我们回去吃就开心，冲这个回去几个三斤都成，呵呵……（回来该哭就哭吧，反正都减不掉了）&lt;/p&gt;
+
+&lt;p&gt;记得小时候特喜欢过春节，好吃的多不说，那几天没人看着我写作业啊，心里那个舒坦，各家走亲戚跟走马灯一样，爹娘让叫这个叫这个，让叫那个叫那个，然后能收到好多红包，当然是我娘给我保管了，之前都说长大了给我，以为是骗人了的，现在想想他们亏大了，房子首付得用多少红包呢……认完亲戚就没我什么事情了，他们该聊聊，电视就是我自己的了。不过打小到现在走亲戚送的东西都差不多，饮料、啤酒、水果balabala……小时候不总喝饮料，所以过节能喝珍珍、健力宝什么的，大人们聊的越热闹，我自己越乐呵，喝着饮料看着电视，倍儿爽。说起饮料，小时候也闹过笑话，刚有乌龙茶饮料那会，有人送家里一箱，小时候都寻思饮料市甜的啊，当时其他饮料箱子包装的不那么精细，那天就看见乌龙茶了，当时想啊，这箱子不错，肯定好东西，心里想喝，不敢说，万一爸妈再转手要送人了呢，所以我没事就去看看，摸摸，我这点小心眼在爹娘眼里太小儿科了，我娘终于下令了，这个不送礼，开开喝了吧……结果我一口下去快哭了，忒苦了……哈哈，小插曲一个。说到年啊节啊的现在也差不多，饮料大多什么杏仁露啦、可乐、雪碧，啤酒也还是青岛、蓝带什么的，不过时光就是时光，就那么任性的悄悄的被大人们的家常就唠过去了，突然之间坐在亲戚朋友里面发现，蓝带还是那个蓝带……可惜我已经不是当初的我了，一下子我成了扯家常的了，不知道带走了谁的时光啊……&lt;/p&gt;
+
+&lt;p&gt;不过今年回家也多了个头疼的事情啊，老哥先回家的，有一天给我微信了个照片，多年没贴过年画的家啊……卧室里挂了诺大一个年画，俩胖小子，脸对脸在那提醒着我和我媳妇的重大责任，画中间一个中文单词一个英文单词分别是“宝宝”和“baby”，估计老哥偷着坏笑呢吧……不赶紧找对象，结果让我抗啊……赤裸裸的坑弟。但是老爷子何老太太在家没啥事也就想着这个了，可以理解，产品经理再着急，这技术活也得我们工程师说了算了（条件允许我们一定抓紧呢）。&lt;/p&gt;
+
+&lt;p&gt;其实过年就是图个团圆，今年我家人都去媳妇家里过的，两家一拼也挺热闹，挺好的。两个非亲非故的人“莫名其妙”的在了一起，然后有了宝宝，宝宝长大，两个人依偎老去，不说浪漫，只是很奇妙，这种关系是这么强烈，能将两个人，甚至两个家庭紧紧联系起来，同时也很脆弱，可能一句话一个眼神就会丢失……所以拥有就是恩赐，对父母、家人要珍惜、尊重，我觉得能将这种奇妙的关系维持到成为回忆的时候，就是伟大的，也是最幸福的！从父母和岳父岳母身上我都看到了他们的幸福，按照老婆的话说，要幸福啊，很简单，爸爸爱妈妈，妈妈爱宝宝，这个家就会很幸福！哈哈，16年，幸福！&lt;/p&gt;
+</description>
+        <pubDate>Sat, 13 Feb 2016 00:00:00 +0800</pubDate>
+        <link>http://cheneydc.xyz/%E7%94%9F%E6%B4%BB/2016/02/13/spring-festival/</link>
+        <guid isPermaLink="true">http://cheneydc.xyz/%E7%94%9F%E6%B4%BB/2016/02/13/spring-festival/</guid>
+        
+        
+        <category>生活</category>
+        
+      </item>
+    
+      <item>
+        <title>忘了jenkins管理员密码了</title>
+        <description>&lt;p&gt;好不容易配置好了jenkins，走的LDAP，然后脑残的设置了安全矩阵，进不去了吧…还好可以改配置文件救回来&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# vim $JENKINS_HOME/config.xml
+
+  &amp;lt;useSecurity&amp;gt;true&amp;lt;/useSecurity&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;把true改成false，然后重启jenkins就好了&lt;/p&gt;
+</description>
+        <pubDate>Thu, 14 Jan 2016 00:00:00 +0800</pubDate>
+        <link>http://cheneydc.xyz/2016/01/14/forget-jenkins-admin-passwd/</link>
+        <guid isPermaLink="true">http://cheneydc.xyz/2016/01/14/forget-jenkins-admin-passwd/</guid>
+        
+        <category>技术</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>写在15年最后一天</title>
+        <description>&lt;p&gt;#家庭&lt;br /&gt;
+今年不错啊，完成了一个小伙子到一个丈夫角色的重要转变，爱人从10年就挂我这棵树上了，今年终于拴牢了，哈哈。对于结婚我没有特殊的看法，不是烤蛋糕，多大火候多长时间都要算得一清二楚才能出炉，完全是两人感觉到了时候，好了，那我们结婚吧。更重要的是能得到家人的全力支持，这对于我们的小家是最好的开始了。不过想想5年多的异地，走到今天很是不易啊，多亏爱人的理解和坚持，珍惜，这也是两人走到现在让我理解最深刻的两个字了。新年希望爱人继续漂亮，继续健康，找到好工作。&lt;/p&gt;
+
+&lt;p&gt;#工作&lt;br /&gt;
+除了组成了幸福的小家庭，工作上也结束了北漂，虽然没有回到老家，不过在东北也差不多算是返乡了，IT环境不可能和北上相比，不过幸运的能到现在的公司，继续感兴趣的云计算还是很幸运的了。同时也真正的做起了开发工作，算是可喜可贺了。不过对于知识的积累还不够，工作效率有待提升，坚持番茄工作法啊。团队的兄弟都很猛，要努力尽快赶上。明年就是一个字：冲。&lt;/p&gt;
+
+&lt;p&gt;还是那句话：不忘初心。&lt;/p&gt;
+
+&lt;p&gt;Happy new year!&lt;/p&gt;
+</description>
+        <pubDate>Thu, 31 Dec 2015 00:00:00 +0800</pubDate>
+        <link>http://cheneydc.xyz/%E7%94%9F%E6%B4%BB/2015/12/31/summary-this-year/</link>
+        <guid isPermaLink="true">http://cheneydc.xyz/%E7%94%9F%E6%B4%BB/2015/12/31/summary-this-year/</guid>
+        
+        
+        <category>生活</category>
+        
+      </item>
+    
+      <item>
+        <title>Gitlab与jenkins集成</title>
+        <description>&lt;p&gt;熟悉了一下openstack社区的工作流程，初觉繁琐，用下来觉得异常清晰，CI虽然稳定欠佳，但是一些基本的单元测试等苦累之活可以交与它的。所以想着怎么把gitlab和jenkins集成一下。&lt;/p&gt;
+
+&lt;h1 id=&quot;jenkins&quot;&gt;偷懒搭建jenkins&lt;/h1&gt;
+&lt;p&gt;只是一次探索，就偷个懒，用docker拉一个镜像搞定&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker pull jenkins
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;gitlab-plugin&quot;&gt;安装Gitlab plugin&lt;/h1&gt;
+&lt;p&gt;在jenkins的插件管理界面，在可选插件中搜索gitlab hook plugin，然后安装&lt;/p&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;任务中配置触发器&lt;/h1&gt;
+&lt;p&gt;任务中的构建触发器中，开启”Poll SCM”&lt;/p&gt;
+
+&lt;h1 id=&quot;gitlab-hook&quot;&gt;Gitlab hook&lt;/h1&gt;
+&lt;p&gt;在gitlab的项目设置界面，有一个web hook配置选项，这里可以配置触发类型和触发链接，触发链接：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http://$jenkins_url/git/notifyCommit?url=$project_git_url
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;将$jenkins_url替换成自己的jenkin地址，$project_git_url替换成项目的git地址。添加成功后会有一个测试按钮，可以点击“TEST HOOK”,看看jenkins的任务是否被触发。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 18 Dec 2015 00:00:00 +0800</pubDate>
+        <link>http://cheneydc.xyz/%E5%B7%A5%E5%85%B7/2015/12/18/gitlab_jenkins/</link>
+        <guid isPermaLink="true">http://cheneydc.xyz/%E5%B7%A5%E5%85%B7/2015/12/18/gitlab_jenkins/</guid>
+        
+        
+        <category>工具</category>
+        
+      </item>
+    
+      <item>
+        <title>怎样加入freenode的openstack频道</title>
+        <description>&lt;p&gt;openstack相关开发有时候去irc里面与大神们直接交流是很方便有效的，进入频道很方便，下载个irc，ubuntu下面常用的就xchat了，也有windows的版本，不过记得貌似收费的啊。然后起好名字，临时上去的话名字无所谓啊，不过长期交流的话尽量保持名字不变，然后在freenode里面进行注册，这样很方便找人。&lt;/p&gt;
+
+&lt;p&gt;注册freenode：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;告诉NickServ，偶要注册，然后写好密码和邮箱，有的频道需要验证身份才能进入，验证的时候就要输入密码了。随后freenode会发送一个邮件到你的邮箱：&lt;code class=&quot;highlighter-rouge&quot;&gt;/msg NickServ REGISTER password youremail@example.com&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;收到邮件，意思是收到了一个验证码，验证一下，大致是这个模样：&lt;code class=&quot;highlighter-rouge&quot;&gt;msg NickServ VERIFY REGISTER yourname xxxxxxx&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果不想公开邮箱可以设置隐藏： &lt;code class=&quot;highlighter-rouge&quot;&gt;/msg NickServ SET HIDEMAIL ON&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;验证用户，相当于登录吧&lt;code class=&quot;highlighter-rouge&quot;&gt;：/msg NickServ IDENTIFY foo password&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;官方文档&lt;a href=&quot;http://freenode.net/faq.shtml#nicksetup&quot;&gt;看这里&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 17 Dec 2015 00:00:00 +0800</pubDate>
+        <link>http://cheneydc.xyz/%E5%B7%A5%E5%85%B7/2015/12/17/how-work-on-freenode-openstack/</link>
+        <guid isPermaLink="true">http://cheneydc.xyz/%E5%B7%A5%E5%85%B7/2015/12/17/how-work-on-freenode-openstack/</guid>
+        
+        
+        <category>工具</category>
+        
+      </item>
+    
+      <item>
+        <title>ubuntu配置shadowsocks</title>
+        <description>&lt;p&gt;还是用ubuntu舒服，不过发现装完系统shadowsocks不好链接啊，想办法配置一下：&lt;/p&gt;
+
+&lt;p&gt;先安装shadowsocks&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo apt-get install shadowsocks
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;写个配置文件：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;cat config.conf
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;&quot;server&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;,
+&lt;span class=&quot;s2&quot;&gt;&quot;server_port&quot;&lt;/span&gt;:,
+&lt;span class=&quot;s2&quot;&gt;&quot;local_address&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;127.0.0.1&quot;&lt;/span&gt;,
+&lt;span class=&quot;s2&quot;&gt;&quot;local_port&quot;&lt;/span&gt;:1080,
+&lt;span class=&quot;s2&quot;&gt;&quot;password&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;,
+&lt;span class=&quot;s2&quot;&gt;&quot;timeout&quot;&lt;/span&gt;:300,
+&lt;span class=&quot;s2&quot;&gt;&quot;method&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;rc4-md5&quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;做成系统启动服务， 将&lt;a href=&quot;https://github.com/cheneydc/linux_profile/blob/master/shadowsocks/sslocal&quot;&gt;启动脚本&lt;/a&gt;放到&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/init.d/&lt;/code&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 06 Dec 2015 00:00:00 +0800</pubDate>
+        <link>http://cheneydc.xyz/%E5%B7%A5%E5%85%B7/2015/12/06/shadowsocks-on-ubuntu/</link>
+        <guid isPermaLink="true">http://cheneydc.xyz/%E5%B7%A5%E5%85%B7/2015/12/06/shadowsocks-on-ubuntu/</guid>
+        
+        
+        <category>工具</category>
+        
+      </item>
+    
+      <item>
+        <title>配置horizon支持keystone v3 api</title>
+        <description>&lt;p&gt;From:&lt;br /&gt;
+&lt;a href=&quot;https://docs.hpcloud.com/commercial/GA1/1.1commerical.services-identity-configure-v3.html&quot;&gt;https://docs.hpcloud.com/commercial/GA1/1.1commerical.services-identity-configure-v3.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;To switch Horizon from Keystone v2 to Keystone v3:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;In each controller node, navigate to the local_settings.py file located in /opt/stack/venvs/openstack/lib/python2.7/site-packages/openstack_dashboard/local/local_settings.py&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Edit the file as follows:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;a. Set the OpenStack API version to version 3:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;OPENSTACK_API_VERSIONS = {
+&quot;identity&quot;: 3,
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;b. Enable multi-domain support:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;OPENSTACK_KEYSTONE_MULTIDOMAIN_SUPPORT = True
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;c. Point to Keystone V3 endpoint:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;OPENSTACK_KEYSTONE_URL = &quot;http://%s:5000/v3&quot; % OPENSTACK_HOST
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The Keystone v3 endpoint is in the format: http://&lt;host&gt;:&lt;port&gt;/v3 and is the same host/port as the v2 endpoint. The local_settings.py file will have the endpoint for v2 by default.&lt;/port&gt;&lt;/host&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Restart the apache server in each controller nodes:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo service apache2 restart
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Thu, 03 Dec 2015 00:00:00 +0800</pubDate>
+        <link>http://cheneydc.xyz/%E6%8A%80%E6%9C%AF/2015/12/03/horizon-support-v3/</link>
+        <guid isPermaLink="true">http://cheneydc.xyz/%E6%8A%80%E6%9C%AF/2015/12/03/horizon-support-v3/</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>python - stevedore</title>
+        <description>&lt;p&gt;计划中&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://docs.openstack.org/developer/stevedore/&quot;&gt;文档&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;http://yansu.org/2013/06/07/learn-python-setuptools-in-detail.html&lt;br /&gt;
+http://yansu.org/2013/06/09/learn-python-abc-module.html&lt;br /&gt;
+http://yansu.org/2013/06/09/learn-python-stevedore-module-in-detail.html&lt;/p&gt;
+</description>
+        <pubDate>Fri, 20 Nov 2015 00:00:00 +0800</pubDate>
+        <link>http://cheneydc.xyz/%E6%8A%80%E6%9C%AF/2015/11/20/python-stevedore/</link>
+        <guid isPermaLink="true">http://cheneydc.xyz/%E6%8A%80%E6%9C%AF/2015/11/20/python-stevedore/</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shell--再来一遍-1</title>
+<meta name="description" content="随便写点">
+
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+</head>
+
+
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>大葱</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+  
+  
+  
+  <a href="https://github.com/cheneydc" target="_new"><i class="fa fa-github-alt"></i></a>
+  
+  <a href="/feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+
+      <h1 class="header" itemprop="name">Shell--再来一遍-1</h1>
+
+      <div class="author">
+        <small><i>
+          
+          on <span itemprop="datePublished" content="2014-08-28">October 2, 2015</span>
+           under 技术
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          1 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+        <span itemprop="articleBody"><p>Linux用了好几年了，没有很熟练，也没有深入内核，平时工作发现shell还是很实用，现在重新的系统来一遍，吼吼……：）</p>
+
+<p>主要看看<a href="http://manual.51yip.com/shell/">ABS</a>然后多做练习是必须的</p>
+
+<hr />
+<p># 1. 从#!开始<br />
+Shell脚本第一行都是#！开头的，用来指定命令解释器，当然，如果用的不是shell，python或者perl也都可以通过#！来指定，如果指定的路径错误，执行脚本的时候会报错，例如：<br />
+```<br />
+#! /bin/cat/bash</p>
+
+<p>echo “hello”<br />
+```</p>
+
+<p>保存脚本并执行<br />
+<code class="highlighter-rouge">
+# chmod +x script.sh
+# ./script.sh
+bash: ./script.sh: /bin/cat/bash: bad interpreter: Not a directory
+</code></p>
+
+<p>这里#！也可以有其他好玩的地方</p>
+
+<p>直接删除自身的脚本：<br />
+<code class="highlighter-rouge">
+#! /bin/rm
+</code></p>
+
+<p>显示自身的脚本：<br />
+<code class="highlighter-rouge">
+#! /bin/cat
+</code></p>
+
+<p>除了第一行的#！外，脚本中其他以#开头的都是注释啦</p>
+
+<h2 id="section">井号的其他用法</h2>
+
+<ul>
+  <li>表示传入脚本参数个数：</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># cat script.sh
+#! /bin/bash
+
+echo $#
+# sh script.sh 1 2 3
+3
+</code></pre>
+</div>
+
+<ul>
+  <li>${var#Pattern}删除最小匹配：</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+# echo ${PATH#*:}
+/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+</code></pre>
+</div>
+
+<p>这里匹配的模板是*:，最小匹配的是/usr/local/sbin:，所以使用#的时候将其删除</p>
+
+<p><br /></p>
+
+<ul>
+  <li>${var#Pattern}删除最长匹配：</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+# echo ${PATH##*:}
+/usr/local/games
+</code></pre>
+</div>
+
+<p>这里使用##表示对模板*：的最长匹配，因此匹配到的应该是/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:</p>
+
+<p><br /></p>
+
+<ul>
+  <li>数字常量的表示（不同的进制）</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#  echo $(( 2#101011 ))
+43
+#  echo $(( 8#101011 ))
+33289
+#  echo $(( 10#101011 ))
+101011
+</code></pre>
+</div>
+
+<p>这里的三个#分别指定了2进制，8进制，10进制</p>
+
+<h1 id="section-1">2. 特殊字符</h1>
+
+<h2 id="section-2">井号</h2>
+<p>上面已经说过了</p>
+
+<h2 id="section-3">分号</h2>
+<p>同一行中如果想写多个命令用；进行分隔</p>
+
+<h2 id="section-4">双分号</h2>
+<p>case的语句分支结束符<br />
+<code class="highlighter-rouge">
+case "$variable" in
+abc)  echo "\$variable = abc" ;;
+xyz)  echo "\$variable = xyz" ;;
+esac
+</code></p>
+
+<h2 id="section-5">英文句号</h2>
+<p>等同于source<br />
+<code class="highlighter-rouge">
+.  ~/.bashrc
+</code></p>
+
+<h2 id="section-6">双引号</h2>
+<p>部分引用<br />
+<code class="highlighter-rouge">
+echo "PATH is : $PATH"
+PATH is : /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+</code></p>
+
+<h2 id="section-7">单引号</h2>
+<p>完全引用<br />
+<code class="highlighter-rouge">
+# echo 'PATH is : $PATH'
+# PATH is : $PATH
+</code></p>
+
+<h2 id="section-8">冒号</h2>
+<p>空命令<br />
+什么也不做，返回值是0<br />
+所以死循环可以这么写<br />
+<code class="highlighter-rouge">
+while :
+do
+    operation-1
+    operation-2
+    ...
+    operation-n
+done
+</code></p>
+
+<h2 id="section-9">反引号</h2>
+<p>命令替换 `command`<br />
+<code class="highlighter-rouge">
+# `echo "ls"`
+bash  gh-pages  hadoop_init.tar.gz  ssh-key  ubuntu.sh
+</code></p>
+</span>
+
+        
+
+        
+
+      </div>
+
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/">@</a> or leave a comment below!
+      </div>
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+function disqus_config() { this.experiment.enable_scroll_container = true; }
+var disqus_shortname = "cheneydc"; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-6">
+    Made with <i class="fa fa-heart"></i> by <a href="https://twitter.com/_JacobTomlinson">Jacob Tomlinson</a>
+  </div>
+  <div class="col-md-6">
+    &lt;/&gt; on <a href="https://github.com/jacobtomlinson/carte-noire">Github</a> &nbsp;<i class="fa fa-github-alt"></i>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70353781-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shell--再来一遍-2</title>
+<meta name="description" content="随便写点">
+
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+</head>
+
+
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>大葱</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+  
+  
+  
+  <a href="https://github.com/cheneydc" target="_new"><i class="fa fa-github-alt"></i></a>
+  
+  <a href="/feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+
+      <h1 class="header" itemprop="name">Shell--再来一遍-2</h1>
+
+      <div class="author">
+        <small><i>
+          
+          on <span itemprop="datePublished" content="2014-08-28">October 3, 2015</span>
+           under 技术
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          2 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+        <span itemprop="articleBody"><h1 id="section">3.变量和参数</h1>
+
+<p>##变量的赋值</p>
+
+<p>$var、var，区别好这两个，就基本能正常使用变量了，var只是变量的名字，好比一个人的名字，狗蛋啊、狗剩啊……$var才是这个变量的值，实际上$var只是<strong>${var}</strong>的简化方式，有的地方写成$var会不好理解，就要写成${var}的形式了。</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># a=&quot;hello&quot;</span>
+<span class="c"># echo $a</span>
+<span class="c">#------------------------</span>
+变量的复制用<span class="o">=</span>，左右两边不能有空格
+声明变量的时候不需要<span class="nv">$，</span>使用的时候需要<span class="err">$</span>
+<span class="c">#------------------------</span></code></pre></div>
+
+<p>##变量是没有类型的</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">a</span><span class="o">=</span>123
+<span class="nv">a</span><span class="o">=</span><span class="si">${</span><span class="nv">a</span><span class="p">/3/b</span><span class="si">}</span>
+<span class="c">#------------------------</span>
+将a中的数字直接替换成字符，这是a便是一个字符串了
+实际上变量没有类型区别，再次将字符b替换成数字，
+a又变成了数字
+<span class="c">#------------------------</span>
+<span class="nv">a</span><span class="o">=</span><span class="si">${</span><span class="nv">a</span><span class="p">/b/4</span><span class="si">}</span></code></pre></div>
+
+<p>这样增加了脚本的灵活性，但是很容易出现错误，写脚本时要做好一定的<br />
+变量检查</p>
+
+<p>##特殊的变量</p>
+
+<p>###环境变量</p>
+
+<p>大多数情况下，一个进程会有一个“进程表”，它是一组进程使用的环境变量。一个Shell启动时，会创建一个相应的“进程表”，当更新一个变量时，这个表会立即更新，shell的子进程可以继承它的环境变量。</p>
+
+<p>如果一个脚本要设置一个环境变量，需要将它导出，通知给执行这个脚本的进程，使用export进行导出<br />
+<code class="highlighter-rouge">
+export VAR_TEST=1
+</code><br />
+####set、export和env区别<br />
+检查环境变量常用到的几个命令有set，export和env，举个例子看一下</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#------------------------</span>
+<span class="nb">set</span> --- 当前shell的变量，包括当前用户变量
+env --- 显示当前用户变量
+<span class="nb">export</span> --- 显示当前导出成用户变量的shell变量
+<span class="c">#------------------------</span>
+
+<span class="c"># var_test=1</span>
+<span class="c"># env | grep var_test</span>
+<span class="c"># export | grep var_test</span>
+<span class="c"># set | grep var_test</span>
+<span class="nv">var_test</span><span class="o">=</span>1
+<span class="c"># export var_test</span>
+<span class="c"># set | grep var_test</span>
+<span class="nv">_</span><span class="o">=</span>var_test
+<span class="nv">var_test</span><span class="o">=</span>1
+<span class="c"># env | grep var_test</span>
+<span class="nv">var_test</span><span class="o">=</span>1
+<span class="c"># export | grep var_test</span>
+<span class="nb">declare</span> -x <span class="nv">var_test</span><span class="o">=</span><span class="s2">&quot;1&quot;</span></code></pre></div>
+
+<p>###位置参数<br />
+$0是脚本的名字，$1是第一个参数，$2是第二个参数，$3是第三个，以此类推。在位置参数$9之后的参数必须用括号括起来，例如：${10}, ${11}, ${12}</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#------------------------</span>
+<span class="nv">$*</span> <span class="nv">$@</span>都表示命令行中所有的参数（不包括<span class="nv">$0</span>，区别在于使用被“”修饰的时候，<span class="nv">$*</span>会将所有参数作为一个整体，用下面的脚本测试一下：
+<span class="c">#------------------------</span>
+<span class="c">#!/bin/bash</span>
+
+<span class="c"># cat test.sh</span>
+<span class="nb">echo</span> <span class="s2">&quot;---------With \&quot;\&quot;--------&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;\&quot;\$*\&quot;:&quot;</span>
+<span class="k">for</span> var in <span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">&quot;</span>
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="nv">$var</span>
+<span class="k">done</span>
+<span class="nb">echo </span>
+
+<span class="nb">echo</span> <span class="s2">&quot;\&quot;\$@\&quot;:&quot;</span>
+<span class="k">for</span> var in <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="nv">$var</span>
+<span class="k">done</span>
+<span class="nb">echo </span>
+
+
+<span class="nb">echo</span> <span class="s2">&quot;---------Without \&quot;\&quot;--------&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;\$*:&quot;</span>
+<span class="k">for</span> var in <span class="nv">$*</span>
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="nv">$var</span>
+<span class="k">done</span>
+<span class="nb">echo </span>
+
+<span class="nb">echo</span> <span class="s2">&quot;\$@:&quot;</span>
+<span class="k">for</span> var in <span class="nv">$@</span>
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="nv">$var</span>
+<span class="k">done</span>
+<span class="nb">echo</span></code></pre></div>
+
+<p>执行脚本：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># chmod +x test.sh</span>
+<span class="c"># ./test.sh a b c d</span>
+---------With <span class="s2">&quot;&quot;</span>--------
+<span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">&quot;</span>:
+a b c d
+
+<span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>:
+a
+b
+c
+d
+
+---------Without <span class="s2">&quot;&quot;</span>--------
+<span class="nv">$*</span>:
+a
+b
+c
+d
+
+<span class="nv">$@</span>:
+a
+b
+c
+d</code></pre></div>
+
+<p>####shift命令</p>
+
+<p>shift命令会使命令行参数移位，删除$1位置的参数，将后面的参数均向前移位</p>
+
+<p>测试脚本：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/bash</span>
+
+<span class="k">until</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> <span class="o">]</span>
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+    <span class="nb">shift</span>
+<span class="k">done</span>
+
+<span class="nb">echo </span>
+<span class="nb">exit </span>0</code></pre></div>
+
+<p>执行脚本：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># ./b.sh a b c d</span>
+a
+b
+c
+d</code></pre></div>
+
+</span>
+
+        
+
+        
+
+      </div>
+
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/">@</a> or leave a comment below!
+      </div>
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+function disqus_config() { this.experiment.enable_scroll_container = true; }
+var disqus_shortname = "cheneydc"; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-6">
+    Made with <i class="fa fa-heart"></i> by <a href="https://twitter.com/_JacobTomlinson">Jacob Tomlinson</a>
+  </div>
+  <div class="col-md-6">
+    &lt;/&gt; on <a href="https://github.com/jacobtomlinson/carte-noire">Github</a> &nbsp;<i class="fa fa-github-alt"></i>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70353781-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

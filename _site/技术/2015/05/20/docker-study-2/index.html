@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>docker学习（2）</title>
+<meta name="description" content="随便写点">
+
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+</head>
+
+
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>大葱</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+  
+  
+  
+  <a href="https://github.com/cheneydc" target="_new"><i class="fa fa-github-alt"></i></a>
+  
+  <a href="/feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+
+      <h1 class="header" itemprop="name">docker学习（2）</h1>
+
+      <div class="author">
+        <small><i>
+          
+          on <span itemprop="datePublished" content="2014-08-28">May 20, 2015</span>
+           under 技术
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          4 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+        <span itemprop="articleBody"><p>###5. 运行第一个容器</p>
+
+<p>第一步，查看docker程序是否存在，功能是否正常</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>sudo docker info iContainers: <span class="m">0</span> Images: <span class="m">2</span> Storage Driver: aufs  Root Dir: /var/lib/docker/aufs  Backing Filesystem: extfs  Dirs: <span class="m">2</span>  Dirperm1 Supported: <span class="nb">true </span>Execution Driver: native-0.2 Kernel Version: 3.16.0-37-generic Operating System: Ubuntu Kylin 14.10 CPUs: <span class="m">4</span> Total Memory: 5.63 GiB Name: codong ID: WTRJ:5GFG:QWBJ:VKF2:KB4S:UQAE:UGPS:YDIR:L6DI:DRAE:BTRU:AMVG WARNING: No swap limit support</code></pre></div>
+
+<p>这里调用了docker可执行程序的info命令，该命令会返回所有容器和镜像的数量、docker使用的执行驱动和存储驱动以及docker的基本配置。</p>
+
+<p>Docker是基于C/S架构的。它有一个docker程序，既能作为客户端也能作为服务端。作为客户端，docker程序向Docker守护进程发送请求，然后再对返回的结果进行处理。</p>
+
+<p>现在，开始启动第一个docker容器。使用docker run命令创建容器，docker run命令提供了Docker容器的创建到启动的功能。</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>sudo docker run -i -t ubuntu /bin/bash Unable to find image <span class="s1">&#39;ubuntu:latest&#39;</span> locally latest: Pulling from ubuntu
+
+e9e06b06e14c: Pull <span class="nb">complete  </span>a82efea989f9: Pull <span class="nb">complete  </span>37bea4ee0c81: Pull <span class="nb">complete  </span>07f8e8c5e660: Already exists  ubuntu:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+
+Digest: sha256:8126991394342c2775a9ba4a843869112da8156037451fc424454db43c25d8b0 Status: Downloaded newer image <span class="k">for</span> ubuntu:latest root@b924caf80ca5:/# ls</code></pre></div>
+
+<p>这里指定了-i和-t两个参数，-i标志保证容器中STDIN是开启的，尽管我们没有附着到容器中。持久的标准输入是交互式shell的”半边天”，-t则是另外一半，它告诉Docker为要创建的容器分配一个伪tty终端。这样，新创建的容器才能提供一个交互式shell。若要在命令行下创建一个我们能与之进行交互的容器，而不是一个运行后台的服务的容器，则这两个参数已经是最基本的参数了。</p>
+
+<blockquote>
+  <p><a href="http://docs.docker.com/reference/commandline/cli/#run">官方文档</a>列出了docker run命令的所有标志，还可以用docker help run查看这些标志。或者可以勇Docker的man page</p>
+</blockquote>
+
+<p>示例中使用的是ubuntu镜像。这是一个”基础”（base）镜像，它由docker公司提供，保存在<a href="http://hub.docker.com">Docker Hub</a> Registry上。</p>
+
+<p>Dokcer首先会检查本地是否存在ubuntu镜像，如果本地没有的话，就连接Docker Hub Registry，查看Docker Hub是否有该镜像。一旦找到，就会下载镜像并保存到本地宿主机中。</p>
+
+<p>随后，Docker在文件系统内部使用这个镜像创建了一个新容器。该容器拥有自己的网络、IP地址，以及一个用来和宿主机进行通信的桥接网络接口。最后，我们告诉Docker在新容器中执行什么命令，上面的例子，我们运行了一个Bash shell。</p>
+
+<p>###6. 使用容器 Docker 启动后可以像正常宿主机一样操作。</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">root@b924caf80ca5:/# hostname  b924caf80ca5 root@b924caf80ca5:/# cat /etc/hosts  172.17.0.1  b924caf80ca5 127.0.0.1   localhost ::1 localhost ip6-localhost ip6-loopback fe00::0 ip6-localnet ff00::0 ip6-mcastprefix ff02::1 ip6-allnodes ff02::2 ip6-allrouters root@b924caf80ca5:/# ip a 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu <span class="m">65536</span> qdisc noqueue state UNKNOWN group default      link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00     inet 127.0.0.1/8 scope host lo        valid_lft forever preferred_lft forever     inet6 ::1/128 scope host         valid_lft forever preferred_lft forever 9: eth0: &lt;BROADCAST,UP,LOWER_UP&gt; mtu <span class="m">1500</span> qdisc noqueue state UP group default      link/ether 02:42:ac:11:00:01 brd ff:ff:ff:ff:ff:ff     inet 172.17.0.1/16 scope global eth0        valid_lft forever preferred_lft forever     inet6 fe80::42:acff:fe11:1/64 scope link         valid_lft forever preferred_lft forever root@b924caf80ca5:/# apt-get install vim Reading package lists... Done Building dependency tree&lt;br&gt;Reading state information... Done The following extra packages will be installed:   libgpm2 libpython2.7 libpython2.7-minimal libpython2.7-stdlib vim-runtime Suggested packages:   gpm ctags vim-doc vim-scripts The following NEW packages will be installed:   libgpm2 libpython2.7 libpython2.7-minimal libpython2.7-stdlib vim   vim-runtime <span class="m">0</span> upgraded, <span class="m">6</span> newly installed, <span class="m">0</span> to remove and <span class="m">0</span> not upgraded. Need to get <span class="m">9083</span> kB of archives. After this operation, 42.9 MB of additional disk space will be used. Do you want to <span class="k">continue</span>? <span class="o">[</span>Y/n<span class="o">]</span> y Get:1 <span class="o">[</span>http://archive.ubuntu.com/ubuntu/<span class="o">](</span>http://archive.ubuntu.com/ubuntu/<span class="o">)</span> trusty/main libgpm2 amd64 1.20.4-6.1 <span class="o">[</span>16.5 kB<span class="o">]</span> Get:2 <span class="o">[</span>http://archive.ubuntu.com/ubuntu/<span class="o">](</span>http://archive.ubuntu.com/ubuntu/<span class="o">)</span> trusty/main libpython2.7-minimal amd64 2.7.6-8 <span class="o">[</span><span class="m">307</span> kB<span class="o">]</span> Get:3 <span class="o">[</span>http://archive.ubuntu.com/ubuntu/<span class="o">](</span>http://archive.ubuntu.com/ubuntu/<span class="o">)</span> trusty/main libpython2.7-stdlib amd64 2.7.6-8 <span class="o">[</span><span class="m">1872</span> kB<span class="o">]</span> Get:4 <span class="o">[</span>http://archive.ubuntu.com/ubuntu/<span class="o">](</span>http://archive.ubuntu.com/ubuntu/<span class="o">)</span> trusty/main libpython2.7 amd64 2.7.6-8 <span class="o">[</span><span class="m">1044</span> kB<span class="o">]</span> Get:5 <span class="o">[</span>http://archive.ubuntu.com/ubuntu/<span class="o">](</span>http://archive.ubuntu.com/ubuntu/<span class="o">)</span> trusty/main vim-runtime all 2:7.4.052-1ubuntu3 <span class="o">[</span><span class="m">4888</span> kB<span class="o">]</span> Get:6 <span class="o">[</span>http://archive.ubuntu.com/ubuntu/<span class="o">](</span>http://archive.ubuntu.com/ubuntu/<span class="o">)</span> trusty/main vim amd64 2:7.4.052-1ubuntu3 <span class="o">[</span><span class="m">956</span> kB<span class="o">]</span> Fetched <span class="m">9083</span> kB in 12min 2s <span class="o">(</span>12.6 kB/s<span class="o">)</span>&lt;br&gt;Selecting previously unselected package libgpm2:amd64. <span class="o">(</span>Reading database ... <span class="m">11528</span> files and directories currently installed.<span class="o">)</span> Preparing to unpack .../libgpm2_1.20.4-6.1_amd64.deb ... Unpacking libgpm2:amd64 <span class="o">(</span>1.20.4-6.1<span class="o">)</span> ... Selecting previously unselected package libpython2.7-minimal:amd64. Preparing to unpack .../libpython2.7-minimal_2.7.6-8_amd64.deb ... Unpacking libpython2.7-minimal:amd64 <span class="o">(</span>2.7.6-8<span class="o">)</span> ... Selecting previously unselected package libpython2.7-stdlib:amd64. Preparing to unpack .../libpython2.7-stdlib_2.7.6-8_amd64.deb ... Unpacking libpython2.7-stdlib:amd64 <span class="o">(</span>2.7.6-8<span class="o">)</span> ... Selecting previously unselected package libpython2.7:amd64. Preparing to unpack .../libpython2.7_2.7.6-8_amd64.deb ... Unpacking libpython2.7:amd64 <span class="o">(</span>2.7.6-8<span class="o">)</span> ... Selecting previously unselected package vim-runtime. Preparing to unpack .../vim-runtime_2%3a7.4.052-1ubuntu3_all.deb ... Adding <span class="s1">&#39;diversion of /usr/share/vim/vim74/doc/help.txt to /usr/share/vim/vim74/doc/help.txt.vim-tiny by vim-runtime&#39;</span> Adding <span class="s1">&#39;diversion of /usr/share/vim/vim74/doc/tags to /usr/share/vim/vim74/doc/tags.vim-tiny by vim-runtime&#39;</span> Unpacking vim-runtime <span class="o">(</span>2:7.4.052-1ubuntu3<span class="o">)</span> ... Selecting previously unselected package vim. Preparing to unpack .../vim_2%3a7.4.052-1ubuntu3_amd64.deb ... Unpacking vim <span class="o">(</span>2:7.4.052-1ubuntu3<span class="o">)</span> ... Setting up libgpm2:amd64 <span class="o">(</span>1.20.4-6.1<span class="o">)</span> ... Setting up libpython2.7-minimal:amd64 <span class="o">(</span>2.7.6-8<span class="o">)</span> ... Setting up libpython2.7-stdlib:amd64 <span class="o">(</span>2.7.6-8<span class="o">)</span> ... Setting up libpython2.7:amd64 <span class="o">(</span>2.7.6-8<span class="o">)</span> ... Setting up vim-runtime <span class="o">(</span>2:7.4.052-1ubuntu3<span class="o">)</span> ... Processing /usr/share/vim/addons/doc Setting up vim <span class="o">(</span>2:7.4.052-1ubuntu3<span class="o">)</span> ... update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vim <span class="o">(</span>vim<span class="o">)</span> in auto mode update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vimdiff <span class="o">(</span>vimdiff<span class="o">)</span> in auto mode update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/rvim <span class="o">(</span>rvim<span class="o">)</span> in auto mode update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/rview <span class="o">(</span>rview<span class="o">)</span> in auto mode update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vi <span class="o">(</span>vi<span class="o">)</span> in auto mode update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/view <span class="o">(</span>view<span class="o">)</span> in auto mode update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/ex <span class="o">(</span>ex<span class="o">)</span> in auto mode update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/editor <span class="o">(</span>editor<span class="o">)</span> in auto mode Processing triggers <span class="k">for</span> libc-bin <span class="o">(</span>2.19-0ubuntu6.6<span class="o">)</span> ... root@b924caf80ca5:/# vim root@b924caf80ca5:/# ps -aux USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND root         <span class="m">1</span>  0.0  0.0  <span class="m">18180</span>  <span class="m">3436</span> ?        Ss   14:09   0:00 /bin/bash root       <span class="m">171</span>  0.0  0.0  <span class="m">15572</span>  <span class="m">2180</span> ?        R+   14:26   0:00 ps -aux</code></pre></div>
+
+<p>结束工作后，exit就可以退出，回到宿主机命令行提示符了。</p>
+
+<p>[未完…]</p>
+</span>
+
+        
+
+        
+
+      </div>
+
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/">@</a> or leave a comment below!
+      </div>
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+function disqus_config() { this.experiment.enable_scroll_container = true; }
+var disqus_shortname = "cheneydc"; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-6">
+    Made with <i class="fa fa-heart"></i> by <a href="https://twitter.com/_JacobTomlinson">Jacob Tomlinson</a>
+  </div>
+  <div class="col-md-6">
+    &lt;/&gt; on <a href="https://github.com/jacobtomlinson/carte-noire">Github</a> &nbsp;<i class="fa fa-github-alt"></i>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70353781-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

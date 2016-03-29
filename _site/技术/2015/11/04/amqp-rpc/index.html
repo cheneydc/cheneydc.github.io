@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>openstack中的AMQP & RPC</title>
+<meta name="description" content="随便写点">
+
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+</head>
+
+
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>大葱</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+  
+  
+  
+  <a href="https://github.com/cheneydc" target="_new"><i class="fa fa-github-alt"></i></a>
+  
+  <a href="/feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+
+      <h1 class="header" itemprop="name">openstack中的AMQP & RPC</h1>
+
+      <div class="author">
+        <small><i>
+          
+          on <span itemprop="datePublished" content="2014-08-28">November 4, 2015</span>
+           under 技术
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          1 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+        <span itemprop="articleBody"><p>主要看了这些文档：</p>
+
+<ul>
+  <li><a href="http://www.ibm.com/developerworks/cn/cloud/library/1403_renmm_opestackrpc/">Openstack RPC通信原理</a></li>
+  <li><a href="http://docs.openstack.org/developer/nova/rpc.html">AMQP and Nova</a></li>
+  <li><a href="http://lingxiankong.github.io/blog/2015/04/01/rabbitmq-oslo-messaging/">RabbitMQ and Oslo.messaging</a></li>
+  <li><a href="http://guibin.iteye.com/blog/910903">基于AMQP实现RPC的设计</a></li>
+  <li><a href="https://www.rabbitmq.com/tutorials/tutorial-four-python.html">RabbitMQ文档</a></li>
+  <li><a href="http://www.cnblogs.com/metoy/p/4321311.html">RPC原理详解</a></li>
+</ul>
+
+<p>开始的时候我只是想要了解下opensatck中的消息队列如何工作的，消息从哪来怎样分发，到哪去。网上搜寻了写资料，看的似懂非懂，转天我发现已然成了浆糊，一般通信协议就那么回事，和咱打电话聊聊天差不多，不过晕就晕在概念太多，没分清层次，那就捋捋概念伐……</p>
+
+<h1 id="amqp">AMQP</h1>
+<p>AMQP，即Advanced Message Queuing Protocol,一个提供统一消息服务的应用层标准高级消息队列协议,是应用层协议的一个开放标准,为面向消息的中间件设计。</p>
+
+<p>你看，AMQP只是一个协议，是一个虚的东西，要说实的嘛，有啊，比如:</p>
+
+<ul>
+  <li><a href="https://www.rabbitmq.com/">RabbitMQ</a></li>
+  <li><a href="http://qpid.apache.org/">Qpid</a></li>
+</ul>
+
+<p>AMQP中有三个重要的角色（其实还有一个routing key,待会说它）：</p>
+
+<ul>
+  <li>Publisher: 消息的发出者</li>
+  <li>Exchange: 消息的传递者</li>
+  <li>Consumer: 消息的接收者</li>
+</ul>
+
+<p>咔咔……整理的简明扼要啊（啪啪，让你多嘴）</p>
+
+<p>好吧，看着几个角色就知道了，消息也无非是酱紫走的啦：</p>
+
+<p><img src="https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/post/20151104-amqp-acts.png" alt="" /></p>
+
+<p>这就很像是你写了一封信，为了传递给收件人，首先需要信封把信的内容装起来，然后在信封上写好收件人的信息，再把信放到邮筒里，后面邮局会拿到信然后根据信封上的收件人信息来看最终把信给谁。你，也就是写信的人就是那个Publisher，邮局就是Exchange，收件人就是Consumer。</p>
+
+<p>不同的Consumer会创建不同的Queue，然后将对应的Exchange绑定到Queue上。在消息的传递过程中，Publisher从来不会直接的把Message放到Queue中，也从来不管Message如何分发。Publisher只管准备好消息，然后上交给国家……不对，是交给Exchange，而Exchange做的事情也很简单，一手从Publisher拿到消息，然后就把消息扔到Queue中。</p>
+
+<p>对于Exchange，这个扔就有学问了，怎么扔？扔到某一个Queue中，还是扔给多个Queue，或者扔垃圾桶里？实际上在Publisher发出消息的时候会附加一个条件，Exchange会根据这个条件来决定扔的方法，这个条件就是<code class="highlighter-rouge">routing key</code>。Exchange有几种扔的方式：</p>
+
+<ul>
+  <li>Direct Exchange: 点对点的方式，精确匹配routing key的Queue才能收到消息</li>
+  <li>Fanout Exchange: 将消息广播给所有知道的Queue</li>
+  <li>Topic Exchange：根据routing key进行模式匹配</li>
+</ul>
+
+<p>Direct 方式图解：</p>
+
+<p><img src="https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/post/20151104-exchange-direct.png" alt="Direct Exchange" /></p>
+
+<p>Topic 方式图解</p>
+
+<p><img src="https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/post/20151104-exchange-topic.png" alt="Topic Exchange" /></p>
+
+<p>AMQP的其他概念，这篇文章介绍的很简练：<a href="http://fishcried.com/2014-12-16/openstack_rabbitmq01/">AMQP基本概念</a></p>
+
+<h1 id="rpc">RPC</h1>
+<p>哎呀……这也是个协议，RPC（Remote Procedure Call Protocol）—-远程过程调用协议，干嘛用的呢？比如我想在远程节点调用一个方法，并且要知道结果，咋办咧……就得RPC了。在RPC中有两个角色，client和server。Client发起RPC请求，Server接收RPC请求然后调用本地的程序，再把结果返回给client。当然，这只是最简单的理解，实际RPC是为了方便构建分布式的应用更加容易，为此，RPC框架提供了一种方式，让使用者不必在意和区分是本地调用还是远程调用。</p>
+
+<p>RPC调用分为两种方式：</p>
+
+<ul>
+  <li>同步调用： Client发出消息后，等待Server端执行完成并返回相应结果。</li>
+  <li>异步调用： Client发出消息后，不需要等待server执行完成。如果关心结果，可用其他方式获取结果，如果不关心则Server端不需要返回结果。</li>
+</ul>
+
+<h1 id="openstack-">Openstack 通信原理</h1>
+<p>Openstack中有着众多组件，他们之间交互的信息也异常之多，这些消息都是通过rpc的方式进行的。Openstack中的rpc又是利用AMQP来实现的。每个Nova的组件都要连接消息队列中间件，可能是以消息的发出者的身份，比如：API、Scheduler，也可能是作为消息的接收者，比如：Compute、Network。消息的发出者通过rpc.call或者rpc.cast将消息发出到消息队列，消息的接收者从队列里获得消息，并对rpc.call的发出者返回结果。</p>
+
+<h2 id="rpccall">rpc.call实现：</h2>
+<p><img src="http://docs.openstack.org/developer/nova/_images/flow1.png" alt="rpc call" /></p>
+
+<ul>
+  <li>初始化一个topic publisher，将消息发送到消息队列，在此之前，初始化一个direct consumer，用来等待返回的结果</li>
+  <li>消息根据routing-key进行分发，被相应的topic consumer获取到，然后与进行处理</li>
+  <li>处理结束后，创建一个direct publisher，将结果发送到相应的消息队列</li>
+  <li>结果通过direct exchange分发到消息队列中被direct consumer获取</li>
+</ul>
+
+<h2 id="rpccast">rpc.cast实现：</h2>
+<p><img src="http://docs.openstack.org/developer/nova/_images/flow2.png" alt="rpc cast" /></p>
+
+<ul>
+  <li>初始化Topic publisher，将消息发送到消息队列</li>
+  <li>根据routing key，exchage分发消息，相应的topic consumer获得消息并进行处理。</li>
+</ul>
+
+<blockquote>
+  <p>图中consumer均有两个队列，因为每一个nova服务都会初始化的时候创建两个队列，一个用来接收routing key匹配<code class="highlighter-rouge">NODE-TYPE.NODE-ID</code>的消息，一个用来接收routing key匹配<code class="highlighter-rouge">NODE-TYPE</code>的消息。</p>
+</blockquote>
+
+<p>由于openstack中的rpc调用到处都是，为了方便维护和使用，就把rpc相关的功能打包成了一个库，奏是oslo.messaging了。openstack中使用的rabbitmq库是kombu，oslo.messaging是对其的一个封装。但是具体实现还没有看，以后再说。</p>
+</span>
+
+        
+
+        
+
+      </div>
+
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/">@</a> or leave a comment below!
+      </div>
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+function disqus_config() { this.experiment.enable_scroll_container = true; }
+var disqus_shortname = "cheneydc"; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-6">
+    Made with <i class="fa fa-heart"></i> by <a href="https://twitter.com/_JacobTomlinson">Jacob Tomlinson</a>
+  </div>
+  <div class="col-md-6">
+    &lt;/&gt; on <a href="https://github.com/jacobtomlinson/carte-noire">Github</a> &nbsp;<i class="fa fa-github-alt"></i>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70353781-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

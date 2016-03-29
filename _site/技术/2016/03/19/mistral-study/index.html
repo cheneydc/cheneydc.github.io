@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mistral小记</title>
+<meta name="description" content="随便写点">
+
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+</head>
+
+
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>大葱</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+  
+  
+  
+  <a href="https://github.com/cheneydc" target="_new"><i class="fa fa-github-alt"></i></a>
+  
+  <a href="/feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+
+      <h1 class="header" itemprop="name">Mistral小记</h1>
+
+      <div class="author">
+        <small><i>
+          
+          on <span itemprop="datePublished" content="2014-08-28">March 19, 2016</span>
+           under 技术
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          1 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+        <span itemprop="articleBody"><p>组里开始是拿来当crontab来使用的，这也是我最早对mistral的印象，云环境下的很多新项目其实也就是传统服务器上的应用的一个迁移。Mistral可以当作crontab来使用，但是远不止这些，Mistral实际是workflow-as-a-service，提供云环境下的工作流服务。更像是crontab+ansible的东西。</p>
+
+<p>I think,工作流是一些动作或者操作的集合，按照一定的规则或者顺序执行，实现期望的结果。Mistral就是提供了这样的服务。下面的图是官方文档中的架构图：</p>
+
+<h1 id="section">结构</h1>
+<p><img src="http://docs.openstack.org/developer/mistral/_images/mistral_architecture.png" alt="Architecture" /></p>
+
+<ul>
+  <li>engine: 处理工作流以及其中的数据流。判断任务状态，将任务放入任务队列，在任务间传递数据。</li>
+  <li>Task Executor:执行任务动作，从对立中取出任务并执行具体动作，最后将结果返回给engine</li>
+  <li>API server：提供REST API</li>
+  <li>Scheduler:保存并执行延时任务，与engine和executor进行交互，并根据事件以触发workflow</li>
+  <li>Persistence：存储数据</li>
+</ul>
+
+<h1 id="mistraldsl">Mistral的DSL</h1>
+<p>Mistral有自己的工作流描述语言，汲取了<a href="https://pypi.python.org/pypi/yaql/1.0.0">YAQL</a>优点，主要包括两个部分：</p>
+
+<ul>
+  <li>Workflow</li>
+  <li>Action</li>
+</ul>
+
+<h2 id="wrokflow">Wrokflow</h2>
+<p>Workflow是Mistral的主体部分，一个Workflow由至少一个task组成，task描述了具体的执行步骤，Workflow则描述了task之间的执行顺序、方式，以及输入、输出等。</p>
+
+<p>看一个例子：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>---
+version: '2.0'
+
+create_vm:
+  description: Simple workflow example
+  type: direct
+
+  input:
+    - vm_name
+    - image_ref
+    - flavor_ref
+  output:
+    vm_id: &lt;% $.vm_id %&gt;
+
+  tasks:
+    create_server:
+      action: nova.servers_create name=&lt;% $.vm_name %&gt; image=&lt;% $.image_ref %&gt; flavor=&lt;% $.flavor_ref %&gt;
+      publish:
+        vm_id: &lt;% task(create_server).result.id %&gt;
+      on-success:
+        - wait_for_instance
+
+    wait_for_instance:
+      action: nova.servers_find id=&lt;% $.vm_id %&gt; status='ACTIVE'
+      retry:
+        delay: 5
+        count: 15
+</code></pre>
+</div>
+
+<p>Wrokflow名字定义为”create_vm”,需要输入三个参数：<code class="highlighter-rouge">vm_name</code>,<code class="highlighter-rouge">image_ref</code>,<code class="highlighter-rouge">flavor_ref</code>,执行结束后输出<code class="highlighter-rouge">vm_id</code>,整个过程需要两个任务完成，首先<code class="highlighter-rouge">create_server</code>,通过调用openstack相应的action，创建虚机，task可以使用workflow的输入进行传参，执行结束将<code class="highlighter-rouge">vm_id</code>返回给workflow，<code class="highlighter-rouge">on-success</code>指定如果task执行成功的动作，这里跳转到<code class="highlighter-rouge">wait_for_instance</code>,通过<code class="highlighter-rouge">retry</code>在设定时间和次数内轮询虚机的状态，确保虚机状态为ACTIVE后执行结束。通过这个例子可以大致看出workflow的基本结构。查看Workflow定义的具体关键字和属性列表请<a href="http://docs.openstack.org/developer/mistral/dsl/dsl_v2.html#common-workflow-attributes">点击这里</a>。</p>
+
+<p>对任务的流程主要有两种处理方式也很清晰，主要有两种方式：</p>
+
+<ul>
+  <li>Direct Workflow</li>
+  <li>Reverse Workflow</li>
+</ul>
+
+<h3 id="direct-workflow">Direct Workflow</h3>
+<p>这种方式可以简单理解为正向流程，一个任务结束，触发另一个或多个任务，直到流程结束。主要通过三个属性完成：</p>
+
+<ul>
+  <li>on-success:此任务执行成功后需要执行的任务列表。</li>
+  <li>on-error:此任务执行出错后需要执行的任务列表。</li>
+  <li>on-complete:此任务执行结束后（不管成功还是失败）需要执行的任务列表</li>
+</ul>
+
+<p>比如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tasks:
+  A:
+    action: action.x
+    on-success:
+      B
+
+  B:
+    action: action.y
+    on-success:
+      C
+
+  C:
+    action: action.z
+    publish:
+      ret
+</code></pre>
+</div>
+
+<p>简单写一个例子，任务A成功后执行B，B成功后执行C，这就是一个最简单的顺序执行的方式。多个任务有可以有很多种触发方式。</p>
+
+<p>如果一个任务结束，需要触发其他多个任务，称为<code class="highlighter-rouge">Fork</code>。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tasks:
+  A:
+    action: action.x
+    on-success:
+      - B
+      - C
+  B:
+    action: action.y
+
+  C:
+    action: action.z
+    publish:
+      ret
+</code></pre>
+</div>
+
+<p>任务A执行成功后需要触发Task B和Task C，这里B和C的执行是并行的。再换一种方式：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tasks:
+  A:
+    action: action.x
+    on-success:
+      C
+
+  B:
+    action: action.y
+    on-success:
+      C
+
+  C:
+    join: all
+    action: action.z
+    publish:
+      ret
+</code></pre>
+</div>
+
+<p>这种方式Task A执行成功会执行C，然而任务B执行成功也会执行C，C的执行可以通过<code class="highlighter-rouge">join</code>来指定，这个例子中<code class="highlighter-rouge">join</code>的值是<code class="highlighter-rouge">all</code>，这种情况下，C会在A、B都执行成功后再执行，如果指定<code class="highlighter-rouge">join</code>是一个值N，则会在上有任务至少有N个满足执行条件的时候执行。这种方式就是<code class="highlighter-rouge">Join</code>。</p>
+
+<h3 id="reverse-wrokflow">Reverse Wrokflow</h3>
+<p>在这个类型的Wrokflow中，任务的关系是被动依赖的，比如要执行A，指定必须先执行B，这样的关系可以在这种类型的Workflow中进行处理。可以使用</p>
+
+<ul>
+  <li>requires: 在执行此任务前需要执行的任务列表。比如：</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> tasks:
+   A:
+     action: action.x
+
+   B:
+     action: action.y
+
+   C:
+     action: action.z
+       requires: [A，B]
+</code></pre>
+</div>
+
+<h2 id="action">Action</h2>
+<p>Action是每一步要执行的内容，Mistra提供了一些标准的Action，并对openstack的各个组件的API进行了处理，都提供了相应的Action，众多的Action，如果可以方便的查询，就基本解决了使用的最大问题，通过mistral提供的工具可以将这些Action导入到数据库：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mistral-db-manage --config-file /path/to/mistral.conf populate
+</code></pre>
+</div>
+
+<p>导入后，可以获得action的列表：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mistral action-list
+</code></pre>
+</div>
+
+<p>查询某一个action的具体参数，返回值等信息可以通过：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mistral action-get xxx
+</code></pre>
+</div>
+
+<h2 id="workbook">WorkBook</h2>
+<p>WorkBook相当于一个命名空间，可以将workflow和task归到一个workbook中，导入一个workbook后，其中的workflow和action以及trigger也都会独立的被创建，与普通创建他们是一样的，但是通过workbook创建的，名字会以workbook的名字为前缀。</p>
+
+<p>先整理到这，像cron-trigger之类的查查命令行就比较容易看懂了，mistral看起来功能比较单一，但是放在云环境中，应用点可以很多，对于业务的部署，甚至虚拟数据中心的管理都是很有帮助的，可以通过Mistral提供统一的操作，并且也很方便对工作流进行迁移。</p>
+
+<p>各个部分具体的属性可以参考<a href="http://docs.openstack.org/developer/mistral/dsl/dsl_v2.html#mistral-dsl-v2-specification">官方文档</a>。</p>
+</span>
+
+        
+
+        
+
+      </div>
+
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/">@</a> or leave a comment below!
+      </div>
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+function disqus_config() { this.experiment.enable_scroll_container = true; }
+var disqus_shortname = "cheneydc"; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-6">
+    Made with <i class="fa fa-heart"></i> by <a href="https://twitter.com/_JacobTomlinson">Jacob Tomlinson</a>
+  </div>
+  <div class="col-md-6">
+    &lt;/&gt; on <a href="https://github.com/jacobtomlinson/carte-noire">Github</a> &nbsp;<i class="fa fa-github-alt"></i>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70353781-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

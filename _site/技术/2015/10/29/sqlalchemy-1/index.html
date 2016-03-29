@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQLalchemmy - 1</title>
+<meta name="description" content="随便写点">
+
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+</head>
+
+
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>大葱</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+  
+  
+  
+  <a href="https://github.com/cheneydc" target="_new"><i class="fa fa-github-alt"></i></a>
+  
+  <a href="/feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+
+      <h1 class="header" itemprop="name">SQLalchemmy - 1</h1>
+
+      <div class="author">
+        <small><i>
+          
+          on <span itemprop="datePublished" content="2014-08-28">October 29, 2015</span>
+           under 技术
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          27 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+        <span itemprop="articleBody"><p>Openstack最近看的有点乱套了，openstack组件都是利用sqlalchemy来操作数据库的，赶上这个机会就看看了。</p>
+
+<p><a href="http://docs.sqlalchemy.org/en/rel_1_0/orm/tutorial.html">官方文档</a></p>
+
+<p>SQLAlchemy是ORM框架的一种，可以将Python中的类和数据库中的表进行映射，并将类的实例和表数据库表中的数据进行对应。 这样一个抽象的数据库表我们就可以很方便的通过一个类来记录和操作了。</p>
+
+<p>[TOC]</p>
+
+<p>#安装：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># pip install sqlalchemy</span>
+</code></pre>
+</div>
+
+<h1 id="section">1 连接数据库</h1>
+<p>通过<code class="highlighter-rouge">create_engine()</code>可以连接到数据库:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">form</span> <span class="n">sqlalchemy</span> <span class="kn">import</span> <span class="nn">create_engine</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'sqlite:///:memory:'</span><span class="p">,</span> <span class="n">echo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">echo</code>用来设置SQLAlchemy日志，通过python的logging模块实现，如果不需要则设置为<code class="highlighter-rouge">False</code>。通过调用<code class="highlighter-rouge">create_engine()</code>得到的engine是<code class="highlighter-rouge">Engine</code>的一个实例，包含了连接数据库的主要接口。</p>
+
+<blockquote>
+  <p>实际上我们得到engine的时候并没有真正的连接数据库，这里采用的是lazy connecting的方式，真正连接数据库的操作发生在我们第一次访问数据库执行操作的时候。</p>
+</blockquote>
+
+<h1 id="section-1">2 定义数据库样式</h1>
+<p>使用ORM的话，首先我们先要确定数据库表的样式，由于表和python中的类是对应的，这里我们需要定义相应的类。 这种映射关系的类我们需要通过Declarative系统中的<code class="highlighter-rouge">declarative base class</code>这个基类来实现。我们可以通过<code class="highlighter-rouge">declarative_base()</code>函数获得：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
+
+<span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>这样我们就得到了一个可以实现表-类映射关系的基类。我们尝试创建一个表<code class="highlighter-rouge">users</code>，保存用户信息。创建类<code class="highlighter-rouge">User</code>来与这个表进行关联。类中我们首先将这个表与之关联，随后定义相应的变量名和相应的类型。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">String</span>
+
+<span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'sqlite:///memory:'</span><span class="p">,</span> <span class="n">echo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">'users'</span>
+
+    <span class="nb">id</span>  <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">fullname</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">"&lt;User(name='</span><span class="si">%</span><span class="s">s', fullname='</span><span class="si">%</span><span class="s">s', password='</span><span class="si">%</span><span class="s">s')&gt;"</span> <span class="o">%</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span>
+                        <span class="p">)</span>
+</code></pre>
+</div>
+
+<blockquote>
+  <p>方法<strong>repr</strong>()是为了方便的显示格式，不是必须的</p>
+</blockquote>
+
+<p>类中必须有<code class="highlighter-rouge">_tablename_</code>属性，至少一个primary key的<code class="highlighter-rouge">Column</code>。</p>
+
+<blockquote>
+  <p>SQLAlchemy never makes any assumptions by itself about the table to which a class refers, including that it has no built-in conventions for names, datatypes, or constraints. But this doesn’t mean boilerplate is required; instead, you’re encouraged to create your own automated conventions using helper functions and mixin classes, which is described in detail at <a href="http://docs.sqlalchemy.org/en/rel_1_0/orm/extensions/declarative/mixins.html#declarative-mixins">Mixin and Custom Base Classes</a>.</p>
+</blockquote>
+
+<p>我们通过Declarative系统创建了<code class="highlighter-rouge">User</code>类，在类中我们定义了表相关的信息，也就是表的元数据。SQLAlchemy中有一个<code class="highlighter-rouge">Table</code>对象来表示这些信息，通过<code class="highlighter-rouge">__table__</code>属性可以得到。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">User</span><span class="o">.</span><span class="n">__table__</span>
+<span class="n">Table</span><span class="p">(</span><span class="s">'users'</span><span class="p">,</span> <span class="n">MetaData</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="bp">None</span><span class="p">),</span> <span class="n">Column</span><span class="p">(</span><span class="s">'id'</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(),</span> <span class="n">table</span><span class="o">=&lt;</span><span class="n">users</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="bp">False</span><span class="p">),</span> <span class="n">Column</span><span class="p">(</span><span class="s">'name'</span><span class="p">,</span> <span class="n">String</span><span class="p">(),</span> <span class="n">table</span><span class="o">=&lt;</span><span class="n">users</span><span class="o">&gt;</span><span class="p">),</span> <span class="n">Column</span><span class="p">(</span><span class="s">'fullname'</span><span class="p">,</span> <span class="n">String</span><span class="p">(),</span> <span class="n">table</span><span class="o">=&lt;</span><span class="n">users</span><span class="o">&gt;</span><span class="p">),</span> <span class="n">Column</span><span class="p">(</span><span class="s">'password'</span><span class="p">,</span> <span class="n">String</span><span class="p">(),</span> <span class="n">table</span><span class="o">=&lt;</span><span class="n">users</span><span class="o">&gt;</span><span class="p">),</span> <span class="n">schema</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">Table</code>对象是<code class="highlighter-rouge">MetaData</code>的一部分，Metadata是Table的集合。Metadata可以发送一些命令在数据库中执行。现在我们的SQLite数据库中实际上还没有<code class="highlighter-rouge">users</code>表。调用<code class="highlighter-rouge">MetaData.create_all()</code>方法，将我们的数据库连接engine作为参数传给它。首先执行的命令是查看<code class="highlighter-rouge">users</code>是否存在，然后是创建表的语句<code class="highlighter-rouge">CREATE_TABLE</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span><span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">29</span> <span class="mi">17</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">41</span><span class="p">,</span><span class="mi">372</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">CAST</span><span class="p">(</span><span class="s">'test plain returns'</span> <span class="n">AS</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">60</span><span class="p">))</span> <span class="n">AS</span> <span class="n">anon_1</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">29</span> <span class="mi">17</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">41</span><span class="p">,</span><span class="mi">374</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">()</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">29</span> <span class="mi">17</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">41</span><span class="p">,</span><span class="mi">375</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">CAST</span><span class="p">(</span><span class="s">'test unicode returns'</span> <span class="n">AS</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">60</span><span class="p">))</span> <span class="n">AS</span> <span class="n">anon_1</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">29</span> <span class="mi">17</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">41</span><span class="p">,</span><span class="mi">375</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">()</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">29</span> <span class="mi">17</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">41</span><span class="p">,</span><span class="mi">377</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">PRAGMA</span> <span class="n">table_info</span><span class="p">(</span><span class="s">"users"</span><span class="p">)</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">29</span> <span class="mi">17</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">41</span><span class="p">,</span><span class="mi">378</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">()</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">29</span> <span class="mi">17</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">41</span><span class="p">,</span><span class="mi">379</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span>
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">users</span> <span class="p">(</span>
+        <span class="nb">id</span> <span class="n">INTEGER</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+        <span class="n">name</span> <span class="n">VARCHAR</span><span class="p">,</span>
+        <span class="n">fullname</span> <span class="n">VARCHAR</span><span class="p">,</span>
+        <span class="n">password</span> <span class="n">VARCHAR</span><span class="p">,</span>
+        <span class="n">PRIMARY</span> <span class="n">KEY</span> <span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="mi">2015</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">29</span> <span class="mi">17</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">41</span><span class="p">,</span><span class="mi">379</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">()</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">29</span> <span class="mi">17</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">41</span><span class="p">,</span><span class="mi">410</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">COMMIT</span>
+</code></pre>
+</div>
+
+<hr />
+
+<blockquote>
+  <p><strong>Minimal Table Descriptions vs. Full Descriptions</strong> 熟悉CREATE_TABLE的可以看出来VARCHAR这里是没有长度的，对于数据库SQLite和Postgresql，这是允许的，但是其他的一些数据库，这个不可以的。所以如果要正确执行需要指定String的长度：</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<blockquote>
+  <p>Firebird和Oracle会要求给主键设定sequences，SQLAlchemy在没有明确制定的情况下是不指定的，需要的话需要自己指定：</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">Sequence</span>
+<span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">(</span><span class="s">'user_id_seq'</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<blockquote>
+  <p>所以一个完整的定义应该像这样：</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">Sequence</span>
+
+<span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'sqlite:///memory:'</span><span class="p">,</span> <span class="n">echo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">'users'</span>
+
+    <span class="nb">id</span>  <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">(</span><span class="s">'user_id_seq'</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">60</span><span class="p">))</span>
+    <span class="n">fullname</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">60</span><span class="p">))</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">"&lt;User(name='</span><span class="si">%</span><span class="s">s', fullname='</span><span class="si">%</span><span class="s">s', password='</span><span class="si">%</span><span class="s">s')&gt;"</span> <span class="o">%</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span>
+                        <span class="p">)</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h1 id="section-2">3 创建实例</h1>
+<p>与数据库中的表相关的类我们已经创建好了，下面创建一个实例：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">user_1</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'dc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheneydc'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'nopassword'</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">"user name is:    </span><span class="si">%</span><span class="s">s"</span>  <span class="o">%</span> <span class="p">(</span><span class="n">user_1</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">"user id is:      </span><span class="si">%</span><span class="s">s"</span>  <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">user_1</span><span class="o">.</span><span class="nb">id</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p>执行后的结果：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>user name is:    dc
+user id is:      None
+</code></pre>
+</div>
+
+<p>这里我们没有给id一个值，但id这里是<code class="highlighter-rouge">None</code>（Python通常对没有定义的属性会报AttributeError错误）。SQLAlchemy的<a href="http://docs.sqlalchemy.org/en/rel_1_0/glossary.html#term-instrumentation">instrumentation</a> 在第一次访问的时候会为这些和数据库表有映射关系的属性一个默认值。对于我们已经赋值的属性，<code class="highlighter-rouge">instrument</code>系统会跟踪赋值的过程直到最后的INSERT语句在数据库中执行。</p>
+
+<h1 id="session">4 创建Session</h1>
+<p>到这里我们就可以开始与数据库交互了。ORM与数据库进行交互的句柄就是<code class="highlighter-rouge">Session</code>。在程序的开头，create_engine()的地方，我们定义一个<code class="highlighter-rouge">Session</code>类，通过它来创建session。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span>
+<span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>如果程序还没有创建engine的情况下，可以只这样写：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>随后创建好engine可以用<code class="highlighter-rouge">configure()</code>进行关联：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">Session</span><span class="o">.</span><span class="n">cinfigure</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>这样一个Session类创建的session对象都是与我们的数据绑定的。想要操作数据库的话就需要创建一个session对象：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>上面创建的session就与数据库相关联了，但像我们上面说的，并没有真正的与数据库建立市实际的连接，第一次操作数据库的时候连接才被建立，直到提交了所有变更或者关闭了session对象。</p>
+
+<h1 id="section-3">5 添加对象</h1>
+<p>为了保存User对象，我们需要将对象添加到Session中：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">user_2</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'cc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheney'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'no'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user_2</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>这个时候，实际上SQL语句没有执行，对象也没有被实际写入到数据库中，session实例处于<strong>pending</strong>状态，只有执行了<strong>flush</strong>操作后，Session才会将对象写入数据库。如果当我们执行在数据库中查找<code class="highlighter-rouge">user_2</code>的操作的时候，所有的<code class="highlighter-rouge">pending</code>状态的数据会首先被<code class="highlighter-rouge">flushed</code>，之后才会执行查找。</p>
+
+<p>比如我们创建一个<code class="highlighter-rouge">Query</code>对象并加载<code class="highlighter-rouge">User</code>。指定查找<code class="highlighter-rouge">name</code>为<code class="highlighter-rouge">cc</code>的用户，指明只需要查找结果中的第一个。查找结果就返回一个我们添加的<code class="highlighter-rouge">User</code>实例：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">query_user</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'cc'</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">10</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="mi">865</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span> <span class="n">AS</span> <span class="n">users_id</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">users_name</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">users_fullname</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">password</span> <span class="n">AS</span> <span class="n">users_password</span>
+<span class="n">FROM</span> <span class="n">users</span>
+<span class="n">WHERE</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="err">?</span>
+ <span class="n">LIMIT</span> <span class="err">?</span> <span class="n">OFFSET</span> <span class="err">?</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">10</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="mi">865</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">(</span><span class="s">'cc'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">query_user</span> <span class="ow">is</span> <span class="n">user_2</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">query_user</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'cc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheney'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'no'</span><span class="p">)</span><span class="o">&gt;</span>
+</code></pre>
+</div>
+
+<p>实际上Session识别出返回的row和内部映射的对象中的一个是一样的（我们刚刚添加的一个对象），所以实际上我们得到的是和添加的同一个对象。</p>
+
+<p>对于一个在Session中存在的primary key，所有在session中查询这个key，都会返回这个特定key的Python对象。</p>
+
+<p>我们可以用add_all添加多个User对象：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">user_3</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ed'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'eeeddd'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'qweasd'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">user_4</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'zxc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'zxcvasdf'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'098765'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">add_all</span><span class="p">([</span><span class="n">user_3</span><span class="p">,</span> <span class="n">user_4</span><span class="p">])</span>
+</code></pre>
+</div>
+
+<p>我们对已经添加的对象做一些修改：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">user_1</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s">"123456"</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">user_2</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">'ccc'</span>
+</code></pre>
+</div>
+
+<p>Session会记录这些修改，新添加的对象记录在new属性中，修改过的对象记录在dirty中：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">new</span>
+<span class="n">IdentitySet</span><span class="p">([</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ed'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'eeeddd'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'qweasd'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'zxc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'zxcvasdf'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'098765'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">dirty</span>
+<span class="n">IdentitySet</span><span class="p">([</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'dc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheneydc'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'123456'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ccc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheney'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'no'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">])</span>
+</code></pre>
+</div>
+
+<p>通过commit()，session会提交所有的更改，并结束与数据库的交互。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>commit()会对所有的更改做flush操作，然后结束与数据库的事务（这里是transaction ，而不是前面说的engine的连接）。后续有其他操作的话实际都是发生在一个新的事务上，操作之前会首先自动连接数据库并获取相关资源。</p>
+
+<h1 id="section-4">6 回滚</h1>
+<p>由于Session的操作都是在事务（transaction）内执行的，在这个事务结束之前，我们也可以执行回滚操作。现在对对象做一些更改：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">user_1</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">'dongcong'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">dirty</span>
+<span class="n">IdentitySet</span><span class="p">([</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'dongcong'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheneydc'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'123456'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">])</span>
+</code></pre>
+</div>
+
+<p>添加一个新对象：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">fake_user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'fake'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'TestUser'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">"Nopassword"</span><span class="p">)</span>  
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">fake_user</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>然后执行一个查询操作，使更改有效的写入当前的事务中：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">in_</span><span class="p">([</span><span class="s">'dongcong'</span><span class="p">,</span> <span class="s">'fake'</span><span class="p">]))</span><span class="o">.</span><span class="nb">all</span><span class="p">()</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">11</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">37</span><span class="p">,</span><span class="mi">085</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">UPDATE</span> <span class="n">users</span> <span class="n">SET</span> <span class="n">name</span><span class="o">=</span><span class="err">?</span> <span class="n">WHERE</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span> <span class="o">=</span> <span class="err">?</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">11</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">37</span><span class="p">,</span><span class="mi">085</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">(</span><span class="s">'dongcong'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">11</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">37</span><span class="p">,</span><span class="mi">087</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">INSERT</span> <span class="n">INTO</span> <span class="n">users</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fullname</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span> <span class="n">VALUES</span> <span class="p">(</span><span class="err">?</span><span class="p">,</span> <span class="err">?</span><span class="p">,</span> <span class="err">?</span><span class="p">)</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">11</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">37</span><span class="p">,</span><span class="mi">088</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">(</span><span class="s">'fake'</span><span class="p">,</span> <span class="s">'TestUser'</span><span class="p">,</span> <span class="s">'Nopassword'</span><span class="p">)</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">11</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">37</span><span class="p">,</span><span class="mi">091</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span> <span class="n">AS</span> <span class="n">users_id</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">users_name</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">users_fullname</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">password</span> <span class="n">AS</span> <span class="n">users_password</span>
+<span class="n">FROM</span> <span class="n">users</span>
+<span class="n">WHERE</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">IN</span> <span class="p">(</span><span class="err">?</span><span class="p">,</span> <span class="err">?</span><span class="p">)</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">11</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">37</span><span class="p">,</span><span class="mi">092</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">(</span><span class="s">'dongcong'</span><span class="p">,</span> <span class="s">'fake'</span><span class="p">)</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'dongcong'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheneydc'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'123456'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'fake'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'TestUser'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'Nopassword'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<p>目前，事务还没有结束，执行回滚操作:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">user_1</span><span class="o">.</span><span class="n">name</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">dc</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fake_user</span> <span class="ow">in</span> <span class="n">session</span>
+<span class="bp">False</span>
+</code></pre>
+</div>
+
+<h1 id="section-5">7 查询</h1>
+<p>查询对象是通过Session中的<a href="http://docs.sqlalchemy.org/en/rel_1_0/orm/session_api.html#sqlalchemy.orm.session.Session.query">query()</a>方法创建的。采用的是可变数量的参数，任意数目的类实体或者基于列的实体均可以作为query()方法的参数<code class="highlighter-rouge">can be any combination of classes and class-instrumented descriptors</code>。下面加载User实例进行查询:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="nb">id</span><span class="p">):</span>
+<span class="o">...</span>     <span class="k">print</span> <span class="n">instance</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">instance</span><span class="o">.</span><span class="n">fullname</span>
+<span class="o">...</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">13</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mi">31</span><span class="p">,</span><span class="mi">632</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span> <span class="n">AS</span> <span class="n">users_id</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">users_name</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">users_fullname</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">password</span> <span class="n">AS</span> <span class="n">users_password</span>
+<span class="n">FROM</span> <span class="n">users</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">13</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mi">31</span><span class="p">,</span><span class="mi">633</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">()</span>
+<span class="n">aaa</span> <span class="n">cheneydc</span>
+<span class="n">ccc</span> <span class="n">cheney</span>
+<span class="n">ed</span> <span class="n">eeeddd</span>
+<span class="n">zxwer</span> <span class="n">zxcvasdf</span>
+<span class="n">fake</span> <span class="n">TestUser</span>
+</code></pre>
+</div>
+
+<p>这个例子中返回的是一组可迭代的User列表，然后通过for…in…语句输出name和fullname，如果不关心其他属性，也可以直接查询想要的类属性，前提是这个类需要时ORM映射的：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span><span class="n">fullname</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">User</span><span class="o">.</span><span class="n">fullname</span><span class="p">)</span><span class="o">.</span><span class="nb">all</span><span class="p">():</span>
+<span class="o">...</span>     <span class="k">print</span> <span class="n">name</span><span class="p">,</span> <span class="n">fullname</span>
+<span class="o">...</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">15</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="mi">691</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">users_name</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">users_fullname</span>
+<span class="n">FROM</span> <span class="n">users</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">15</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="mi">691</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">()</span>
+<span class="n">aaa</span> <span class="n">cheneydc</span>
+<span class="n">ccc</span> <span class="n">cheney</span>
+<span class="n">ed</span> <span class="n">eeeddd</span>
+<span class="n">zxwer</span> <span class="n">zxcvasdf</span>
+<span class="n">fake</span> <span class="n">TestUser</span>
+</code></pre>
+</div>
+
+<p>返回的仍然是元组（基于KeyedTuple类），可以当做普通的Python对象对待。属性名称归属性名称，类型名称归类型名称：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">User</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="nb">all</span><span class="p">():</span>
+<span class="o">...</span>     <span class="k">print</span> <span class="n">row</span>
+<span class="o">...</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">15</span><span class="p">:</span><span class="mi">35</span><span class="p">:</span><span class="mi">17</span><span class="p">,</span><span class="mi">303</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span> <span class="n">AS</span> <span class="n">users_id</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">users_name</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">users_fullname</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">password</span> <span class="n">AS</span> <span class="n">users_password</span>
+<span class="n">FROM</span> <span class="n">users</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">15</span><span class="p">:</span><span class="mi">35</span><span class="p">:</span><span class="mi">17</span><span class="p">,</span><span class="mi">303</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">()</span>
+<span class="p">(</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'aaa'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheneydc'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'123456'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">u'aaa'</span><span class="p">)</span>
+<span class="p">(</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ccc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheney'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'no'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">u'ccc'</span><span class="p">)</span>
+<span class="p">(</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ed'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'eeeddd'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'qweasd'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">u'ed'</span><span class="p">)</span>
+<span class="p">(</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'zxwer'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'zxcvasdf'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'098765'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">u'zxwer'</span><span class="p">)</span>
+<span class="p">(</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'fake'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'TestUser'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'Nopassword'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">u'fake'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>也可以通过label()方法来改变列表达式的名称:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s">'name_label'</span><span class="p">))</span><span class="o">.</span><span class="nb">all</span><span class="p">():</span>
+<span class="o">...</span>     <span class="k">print</span> <span class="n">row</span><span class="o">.</span><span class="n">name_label</span>
+<span class="o">...</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">15</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">48</span><span class="p">,</span><span class="mi">805</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">name_label</span>
+<span class="n">FROM</span> <span class="n">users</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">15</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">48</span><span class="p">,</span><span class="mi">806</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">()</span>
+<span class="n">aaa</span>
+<span class="n">ccc</span>
+<span class="n">ed</span>
+<span class="n">zxwer</span>
+<span class="n">fake</span>
+</code></pre>
+</div>
+
+<p>可以发现每次查询都会用到实体类的名称User，可以用aliased()给它一个别名：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">user_alias</span><span class="p">,</span> <span class="n">user_alias</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="nb">all</span><span class="p">():</span>
+<span class="o">...</span>     <span class="k">print</span> <span class="n">row</span>
+<span class="o">...</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">15</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="mi">58</span><span class="p">,</span><span class="mi">489</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">user_alias</span><span class="o">.</span><span class="nb">id</span> <span class="n">AS</span> <span class="n">user_alias_id</span><span class="p">,</span> <span class="n">user_alias</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">user_alias_name</span><span class="p">,</span> <span class="n">user_alias</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">user_alias_fullname</span><span class="p">,</span> <span class="n">user_alias</span><span class="o">.</span><span class="n">password</span> <span class="n">AS</span> <span class="n">user_alias_password</span>
+<span class="n">FROM</span> <span class="n">users</span> <span class="n">AS</span> <span class="n">user_alias</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">15</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="mi">58</span><span class="p">,</span><span class="mi">489</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">()</span>
+<span class="p">(</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'aaa'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheneydc'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'123456'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">u'aaa'</span><span class="p">)</span>
+<span class="p">(</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ccc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheney'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'no'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">u'ccc'</span><span class="p">)</span>
+<span class="p">(</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ed'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'eeeddd'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'qweasd'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">u'ed'</span><span class="p">)</span>
+<span class="p">(</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'zxwer'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'zxcvasdf'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'098765'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">u'zxwer'</span><span class="p">)</span>
+<span class="p">(</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'fake'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'TestUser'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'Nopassword'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">u'fake'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>LIMIT和OFFSET经常用来控制查询的数量和位置，这个可以很方便的用Python中的数组分页与ORDER BY组合完成：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="nb">id</span><span class="p">):</span>
+<span class="o">...</span>     <span class="k">print</span> <span class="n">row</span>
+<span class="o">...</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">15</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="mi">182</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span> <span class="n">AS</span> <span class="n">users_id</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">users_name</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">users_fullname</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">password</span> <span class="n">AS</span> <span class="n">users_password</span> <span class="n">FROM</span> <span class="n">users</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">15</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="mi">182</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">()</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'aaa'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheneydc'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'123456'</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ccc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheney'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'no'</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ed'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'eeeddd'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'qweasd'</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'zxwer'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'zxcvasdf'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'098765'</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'fake'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'TestUser'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'Nopassword'</span><span class="p">)</span><span class="o">&gt;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="nb">id</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]:</span>
+<span class="o">...</span>     <span class="k">print</span> <span class="n">row</span>
+<span class="o">...</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">15</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mo">01</span><span class="p">,</span><span class="mi">541</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span> <span class="n">AS</span> <span class="n">users_id</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">users_name</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">users_fullname</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">password</span> <span class="n">AS</span> <span class="n">users_password</span>
+<span class="n">FROM</span> <span class="n">users</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span>
+ <span class="n">LIMIT</span> <span class="err">?</span> <span class="n">OFFSET</span> <span class="err">?</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">15</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mo">01</span><span class="p">,</span><span class="mi">542</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ccc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheney'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'no'</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ed'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'eeeddd'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'qweasd'</span><span class="p">)</span><span class="o">&gt;</span>
+</code></pre>
+</div>
+
+<p>筛选的功能通过filter_by()实现，使用关键词参数：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">fullname</span><span class="o">=</span><span class="s">'cheney'</span><span class="p">):</span>
+<span class="o">...</span>     <span class="k">print</span> <span class="n">row</span>
+<span class="o">...</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">16</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="mi">818</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span> <span class="n">AS</span> <span class="n">users_id</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">users_name</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">users_fullname</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">password</span> <span class="n">AS</span> <span class="n">users_password</span>
+<span class="n">FROM</span> <span class="n">users</span>
+<span class="n">WHERE</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="o">=</span> <span class="err">?</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">16</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="mi">818</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">(</span><span class="s">'cheney'</span><span class="p">,)</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ccc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheney'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'no'</span><span class="p">)</span><span class="o">&gt;</span>
+</code></pre>
+</div>
+
+<p>用filter()也能实现，filter使用了更加灵活的SQL语言结构。这允许在处理映射类的属性时候更多的利用python的常规操作符：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">fullname</span><span class="o">==</span><span class="s">'cheney'</span><span class="p">):</span>            
+<span class="o">...</span>     <span class="k">print</span> <span class="n">row</span>
+<span class="o">...</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">16</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">39</span><span class="p">,</span><span class="mo">05</span><span class="mi">8</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span> <span class="n">AS</span> <span class="n">users_id</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">users_name</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">users_fullname</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">password</span> <span class="n">AS</span> <span class="n">users_password</span>
+<span class="n">FROM</span> <span class="n">users</span>
+<span class="n">WHERE</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="o">=</span> <span class="err">?</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">16</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">39</span><span class="p">,</span><span class="mo">05</span><span class="mi">9</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">(</span><span class="s">'cheney'</span><span class="p">,)</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ccc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheney'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'no'</span><span class="p">)</span><span class="o">&gt;</span>
+</code></pre>
+</div>
+
+<p>Query对象是完全generative，意味着大部分调用的方法返回的是一个Query对象，这样可以在此基础上增加新的条件。比如查询user的name是”ccc”，fullname是”cheney”，可以通过调用两次filter()完成，相当于两个条件AND的结果：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">fullname</span><span class="o">==</span><span class="s">'cheney'</span><span class="p">)</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span><span class="o">==</span><span class="s">'ccc'</span><span class="p">):</span>
+<span class="o">...</span>     <span class="k">print</span> <span class="n">row</span>
+<span class="o">...</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">16</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">51</span><span class="p">,</span><span class="mi">982</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span> <span class="n">AS</span> <span class="n">users_id</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">users_name</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">users_fullname</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">password</span> <span class="n">AS</span> <span class="n">users_password</span>
+<span class="n">FROM</span> <span class="n">users</span>
+<span class="n">WHERE</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="o">=</span> <span class="err">?</span> <span class="n">AND</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="err">?</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">16</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">51</span><span class="p">,</span><span class="mi">984</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">(</span><span class="s">'cheney'</span><span class="p">,</span> <span class="s">'ccc'</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ccc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheney'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'no'</span><span class="p">)</span><span class="o">&gt;</span>
+</code></pre>
+</div>
+
+<h2 id="section-6">常用筛选操作</h2>
+<p>列举一些filter()常用的过滤操作：<br />
+- equals:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">'ccc'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>not equals:</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s">'ccc'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>LIKE:</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">fullname</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="s">'</span><span class="si">%</span><span class="s">ene</span><span class="si">%</span><span class="s">'</span><span class="p">)):</span>
+<span class="o">...</span>     <span class="k">print</span> <span class="n">row</span>
+<span class="o">...</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">16</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="mi">320</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span> <span class="n">AS</span> <span class="n">users_id</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">users_name</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">users_fullname</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">password</span> <span class="n">AS</span> <span class="n">users_password</span>
+<span class="n">FROM</span> <span class="n">users</span>
+<span class="n">WHERE</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">LIKE</span> <span class="err">?</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">16</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="mi">321</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">(</span><span class="s">'</span><span class="si">%</span><span class="s">ene</span><span class="si">%</span><span class="s">'</span><span class="p">,)</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'aaa'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheneydc'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'123456'</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ccc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheney'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'no'</span><span class="p">)</span><span class="o">&gt;</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>IN:</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">in_</span><span class="p">([</span><span class="s">'ccc'</span><span class="p">,</span> <span class="s">'cheneydc'</span><span class="p">,</span> <span class="s">'aaa'</span><span class="p">]))</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>NOT IN:</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="o">~</span><span class="n">User</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">in_</span><span class="p">([</span><span class="s">'ccc'</span><span class="p">,</span> <span class="s">'cheneydc'</span><span class="p">,</span> <span class="s">'aaa'</span><span class="p">]))</span>
+
+<span class="c">#example.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="o">~</span><span class="n">User</span><span class="o">.</span><span class="n">fullname</span><span class="o">.</span><span class="n">in_</span><span class="p">([</span><span class="s">'cheneydc'</span><span class="p">,</span> <span class="s">'cheney'</span><span class="p">])):</span>
+<span class="o">...</span>     <span class="k">print</span> <span class="n">row</span>
+<span class="o">...</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">16</span><span class="p">:</span><span class="mi">33</span><span class="p">:</span><span class="mi">49</span><span class="p">,</span><span class="mi">204</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span> <span class="n">AS</span> <span class="n">users_id</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">users_name</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">users_fullname</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">password</span> <span class="n">AS</span> <span class="n">users_password</span> <span class="n">FROM</span> <span class="n">users</span>
+<span class="n">WHERE</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">NOT</span> <span class="n">IN</span> <span class="p">(</span><span class="err">?</span><span class="p">,</span> <span class="err">?</span><span class="p">)</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">16</span><span class="p">:</span><span class="mi">33</span><span class="p">:</span><span class="mi">49</span><span class="p">,</span><span class="mi">205</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">(</span><span class="s">'cheneydc'</span><span class="p">,</span> <span class="s">'cheney'</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ed'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'eeeddd'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'qweasd'</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'zxwer'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'zxcvasdf'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'098765'</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'fake'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'TestUser'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'Nopassword'</span><span class="p">)</span><span class="o">&gt;</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>IS NULL:</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="bp">None</span><span class="p">)</span>
+
+<span class="c"># alternatively, if pep8/linters are a concern</span>
+<span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">is_</span><span class="p">(</span><span class="bp">None</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>IS NOT NULL:</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">)</span>
+
+<span class="c"># alternatively, if pep8/linters are a concern</span>
+<span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">isnot</span><span class="p">(</span><span class="bp">None</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>AND:</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># 使用 and_()，这个and_不是python中的and操作符</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">and_</span>
+<span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">and_</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">'ccc'</span><span class="p">,</span> <span class="n">User</span><span class="o">.</span><span class="n">fullname</span> <span class="o">==</span> <span class="s">'cheney'</span><span class="p">))</span>
+
+<span class="c"># 发送多个表达式给.filter()</span>
+<span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">'ccc'</span><span class="p">,</span> <span class="n">User</span><span class="o">.</span><span class="n">fullname</span> <span class="o">==</span> <span class="s">'cheney'</span><span class="p">)</span>
+
+<span class="c"># 多次连续调用filter</span>
+<span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">'ccc'</span><span class="p">)</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">fullname</span> <span class="o">==</span> <span class="s">'cheney'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>OR:</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># 使用or_,这里的or_不是python中的or操作符</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">or_</span>
+<span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">or_</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">'ccc'</span><span class="p">,</span> <span class="n">User</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">'cheney'</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>MATCH：</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># match()使用的是数据库的MATCH或CONTAINS方法，依赖于后端的数据库，所以并不是所有数据库都支持，比如SQLite</span>
+<span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">'wendy'</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<h2 id="section-7">返回列表和标量</h2>
+<p>一些Query的方法会立即发出SQL语句并返回一个包含数据库结果的值。这里做简单介绍：<br />
+- all()返回一个列表：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">query</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="o">~</span><span class="n">User</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">in_</span><span class="p">([</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">]))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">query</span><span class="o">.</span><span class="nb">all</span><span class="p">()</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">17</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">55</span><span class="p">,</span><span class="mi">658</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span> <span class="n">AS</span> <span class="n">users_id</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">users_name</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">users_fullname</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">password</span> <span class="n">AS</span> <span class="n">users_password</span>
+<span class="n">FROM</span> <span class="n">users</span>
+<span class="n">WHERE</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">NOT</span> <span class="n">IN</span> <span class="p">(</span><span class="err">?</span><span class="p">,</span> <span class="err">?</span><span class="p">)</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">17</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">55</span><span class="p">,</span><span class="mi">659</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">)</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'aaa'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheneydc'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'123456'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ccc'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheney'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'no'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'ed'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'eeeddd'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'qweasd'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'zxwer'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'zxcvasdf'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'098765'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'fake'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'TestUser'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'Nopassword'</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>first()将第一个结果作为标量返回：</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">query</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">17</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">29</span><span class="p">,</span><span class="mi">597</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="n">SELECT</span> <span class="n">users</span><span class="o">.</span><span class="nb">id</span> <span class="n">AS</span> <span class="n">users_id</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">AS</span> <span class="n">users_name</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">fullname</span> <span class="n">AS</span> <span class="n">users_fullname</span><span class="p">,</span> <span class="n">users</span><span class="o">.</span><span class="n">password</span> <span class="n">AS</span> <span class="n">users_password</span>
+<span class="n">FROM</span> <span class="n">users</span>
+<span class="n">WHERE</span> <span class="n">users</span><span class="o">.</span><span class="n">name</span> <span class="n">NOT</span> <span class="n">IN</span> <span class="p">(</span><span class="err">?</span><span class="p">,</span> <span class="err">?</span><span class="p">)</span>
+ <span class="n">LIMIT</span> <span class="err">?</span> <span class="n">OFFSET</span> <span class="err">?</span>
+<span class="mi">2015</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">02</span> <span class="mi">17</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">29</span><span class="p">,</span><span class="mi">597</span> <span class="n">INFO</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span> <span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'aaa'</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="s">'cheneydc'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">'123456'</span><span class="p">)</span><span class="o">&gt;</span>
+</code></pre>
+</div>
+
+</span>
+
+        
+
+        
+
+      </div>
+
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/">@</a> or leave a comment below!
+      </div>
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+function disqus_config() { this.experiment.enable_scroll_container = true; }
+var disqus_shortname = "cheneydc"; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-6">
+    Made with <i class="fa fa-heart"></i> by <a href="https://twitter.com/_JacobTomlinson">Jacob Tomlinson</a>
+  </div>
+  <div class="col-md-6">
+    &lt;/&gt; on <a href="https://github.com/jacobtomlinson/carte-noire">Github</a> &nbsp;<i class="fa fa-github-alt"></i>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70353781-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

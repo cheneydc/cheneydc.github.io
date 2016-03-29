@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>openstack中的oslo_config</title>
+<meta name="description" content="随便写点">
+
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+</head>
+
+
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>大葱</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+  
+  
+  
+  <a href="https://github.com/cheneydc" target="_new"><i class="fa fa-github-alt"></i></a>
+  
+  <a href="/feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+
+      <h1 class="header" itemprop="name">openstack中的oslo_config</h1>
+
+      <div class="author">
+        <small><i>
+          
+          on <span itemprop="datePublished" content="2014-08-28">November 9, 2015</span>
+           under 技术
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          4 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+        <span itemprop="articleBody"><p>oslo_config 主要处理用来读取配置项，配置项可以从命令行或者配置文件中读取。但从命令行中获取的配置型需要由<code class="highlighter-rouge">register_cli_opts</code>来注册。</p>
+
+<p>配置项都是由<a href="http://docs.openstack.org/developer/oslo.config/opts.html#oslo_config.cfg.Opt">Opt</a>类或者其子类定义的。 配置项有多种类型：</p>
+
+<ul>
+  <li>strings</li>
+  <li>integers</li>
+  <li>floats</li>
+  <li>booleans</li>
+  <li>lists</li>
+  <li>multi strings</li>
+  <li>dictionary</li>
+</ul>
+
+<h1 id="section">读取配置文件中的配置项</h1>
+<p>如果是在配置文件中指定了配置项的值，oslo_config定义了两个命令行参数<code class="highlighter-rouge">--config-file</code>和<code class="highlighter-rouge">--config-dir</code>分别来指定配置文件或者配置目录。</p>
+
+<p>编辑<a href="https://github.com/cheneydc/test_example/tree/master/oslo_config">conf_test.py</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">oslo_config</span> <span class="kn">import</span> <span class="n">cfg</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c"># 定义配置项，并指定默认值</span>
+<span class="n">opts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">IntOpt</span><span class="p">(</span><span class="s">'o1'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">111</span><span class="p">),</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">StrOpt</span><span class="p">(</span><span class="s">'o2'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">'test opt'</span><span class="p">),</span>
+        <span class="p">]</span>
+
+<span class="n">CONF</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">CONF</span>
+
+<span class="c"># 注册配置项</span>
+<span class="n">CONF</span><span class="o">.</span><span class="n">register_opts</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">CONF</span><span class="o">.</span><span class="n">o1</span>
+<span class="k">print</span> <span class="n">CONF</span><span class="o">.</span><span class="n">o2</span>
+</code></pre>
+</div>
+
+<p>执行配置文件：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># python conf_test.py</span>
+111
+<span class="nb">test </span>opt
+</code></pre>
+</div>
+
+<p>可以正确读出默认值。</p>
+
+<p>现在将配置项在一个配置文件中指定相应的值，编辑配置文件<a href="https://github.com/cheneydc/test_example/tree/master/oslo_config">test.conf</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>DEFAULT]
+o1 <span class="o">=</span> 123
+o2 <span class="o">=</span> test2
+</code></pre>
+</div>
+
+<p>编辑脚本<a href="https://github.com/cheneydc/test_example/tree/master/oslo_config">conf_file.py</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">oslo_config</span> <span class="kn">import</span> <span class="n">cfg</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">opts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">IntOpt</span><span class="p">(</span><span class="s">'o1'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">111</span><span class="p">),</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">StrOpt</span><span class="p">(</span><span class="s">'o2'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">'test opt'</span><span class="p">),</span>
+        <span class="p">]</span>
+
+<span class="n">CONF</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">CONF</span>
+<span class="n">CONF</span><span class="o">.</span><span class="n">register_opts</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+
+<span class="c"># 从命令行参数出读取配置文件并解析</span>
+<span class="n">CONF</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="k">print</span> <span class="n">CONF</span><span class="o">.</span><span class="n">o1</span>
+<span class="k">print</span> <span class="n">CONF</span><span class="o">.</span><span class="n">o2</span>
+</code></pre>
+</div>
+
+<p>执行查看结果：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># python conf_file.py --config-file test.conf</span>
+123
+test2
+</code></pre>
+</div>
+
+<h1 id="section-1">组</h1>
+<p>这次没有返回配置项的默认值，而是读取到了配置文件中配置项的指定值。配置项可以进行分组，分组后先注册配置组，然后注册配置项，注册配置项的时候讲配置项添加到相应的组中。如果没有指定组的话，配置项默认都是<code class="highlighter-rouge">DEFAULT</code>组中的。</p>
+
+<p>编辑<a href="https://github.com/cheneydc/test_example/tree/master/oslo_config">conf_group.py</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">oslo_config</span> <span class="kn">import</span> <span class="n">cfg</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c"># 定义配置项o1, o2, o3, o4</span>
+<span class="n">opts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">IntOpt</span><span class="p">(</span><span class="s">'o1'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">111</span><span class="p">),</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">StrOpt</span><span class="p">(</span><span class="s">'o2'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">'test opt'</span><span class="p">),</span>
+        <span class="p">]</span>
+
+<span class="n">opt_o3</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">IntOpt</span><span class="p">(</span><span class="s">'o3'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">333</span><span class="p">)</span>
+<span class="n">opt_o4</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">StrOpt</span><span class="p">(</span><span class="s">'o4'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">'test opt4'</span><span class="p">)</span>
+
+<span class="n">opt_group</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">OptGroup</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'Group_test'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">'Group 1'</span><span class="p">)</span>
+
+<span class="n">CONF</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">CONF</span>
+<span class="c"># 注册配置项o1, o2</span>
+<span class="n">CONF</span><span class="o">.</span><span class="n">register_opts</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+
+<span class="c"># 注册配置项o3, o4并添加到组Group_test中</span>
+<span class="n">CONF</span><span class="o">.</span><span class="n">register_opt</span><span class="p">(</span><span class="n">opt_o3</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">opt_group</span><span class="p">)</span>
+<span class="n">CONF</span><span class="o">.</span><span class="n">register_opt</span><span class="p">(</span><span class="n">opt_o4</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="s">'Group_test'</span><span class="p">)</span>
+
+<span class="n">CONF</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="c"># 输出结果</span>
+<span class="k">print</span> <span class="s">"[DEFAULT]: o1, o2"</span>
+<span class="k">print</span> <span class="n">CONF</span><span class="o">.</span><span class="n">o1</span>
+<span class="k">print</span> <span class="n">CONF</span><span class="o">.</span><span class="n">o2</span>
+<span class="k">print</span> <span class="s">""</span>
+
+<span class="k">print</span> <span class="s">"[Group_test]: o3, o4"</span>
+<span class="k">print</span> <span class="n">CONF</span><span class="o">.</span><span class="n">Group_test</span><span class="o">.</span><span class="n">o3</span>
+<span class="k">print</span> <span class="n">CONF</span><span class="o">.</span><span class="n">Group_test</span><span class="o">.</span><span class="n">o4</span>
+<span class="k">print</span> <span class="s">""</span>
+</code></pre>
+</div>
+
+<p>添加<code class="highlighter-rouge">Group_test</code>组到配置文件<a href="https://github.com/cheneydc/test_example/tree/master/oslo_config">test.conf</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>DEFAULT]
+o1 <span class="o">=</span> 123
+o2 <span class="o">=</span> test2
+
+<span class="o">[</span>Group_test]
+o3 <span class="o">=</span> 98
+o4 <span class="o">=</span> laksdfa
+</code></pre>
+</div>
+
+<p>执行：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># python conf_group.py --config-file test.conf</span>
+<span class="o">[</span>DEFAULT]: o1, o2
+123
+test2
+
+<span class="o">[</span>Group_test]: o3, o4
+98
+laksdfa
+</code></pre>
+</div>
+
+<p>成功读取配置文件中<code class="highlighter-rouge">Group_test</code>组中的配置项的值。不同组中可以有相同的配置项，比如在<code class="highlighter-rouge">Group_test</code>中可以添加o1, o2配置项，</p>
+
+<p>编辑<a href="https://github.com/cheneydc/test_example/tree/master/oslo_config">test.conf</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>DEFAULT]
+o1 <span class="o">=</span> 123
+o2 <span class="o">=</span> test2
+
+<span class="o">[</span>Group_test]
+o1 <span class="o">=</span> 234
+o2 <span class="o">=</span> test4
+o3 <span class="o">=</span> 98
+o4 <span class="o">=</span> laksdfa
+</code></pre>
+</div>
+
+<p>在<a href="https://github.com/cheneydc/test_example/tree/master/oslo_config">conf_group.py</a>中添加：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">...</span>
+<span class="c"># 将o1, o2添加到Group_test组中</span>
+<span class="n">CONF</span><span class="o">.</span><span class="n">register_opts</span><span class="p">(</span><span class="n">opts</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">opt_group</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="c"># 输出Group_test组中o1, o2的值</span>
+<span class="k">print</span> <span class="s">"[Group_test]: o1, o2"</span>
+<span class="k">print</span> <span class="n">CONF</span><span class="o">.</span><span class="n">Group_test</span><span class="o">.</span><span class="n">o1</span>
+<span class="k">print</span> <span class="n">CONF</span><span class="o">.</span><span class="n">Group_test</span><span class="o">.</span><span class="n">o2</span>
+<span class="k">print</span> <span class="s">""</span>
+</code></pre>
+</div>
+
+<p>结果：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># python conf_group.py --config-file  test.conf</span>
+<span class="o">[</span>DEFAULT]: o1, o2
+123
+test2
+
+<span class="o">[</span>Group_test]: o3, o4
+98
+laksdfa
+
+<span class="o">[</span>Group_test]: o1, o2
+234
+test4
+</code></pre>
+</div>
+
+<p>可以看出，不同组的相同配置项可以指定不同的值，这样使配置更加灵活。</p>
+
+<h1 id="section-2">配置目录</h1>
+<p>除了可以在命令行中指定配置文件，也可以指定一个包含配置文件的目录，比如</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># ls ./conf/</span>
+test1.conf  test2.conf
+<span class="c"># cat ./conf/test1.conf</span>
+<span class="o">[</span>DEFAULT]
+o1 <span class="o">=</span> 123
+o2 <span class="o">=</span> test2
+<span class="c"># cat ./conf/test2.conf</span>
+<span class="o">[</span>Group_test]
+o1 <span class="o">=</span> 234
+o2 <span class="o">=</span> test4
+o3 <span class="o">=</span> 98
+o4 <span class="o">=</span> laksdfa
+</code></pre>
+</div>
+
+<p>同样用配置组例子中的脚本<a href="https://github.com/cheneydc/test_example/tree/master/oslo_config">conf_group.py</a>来执行，不过这次指定配置目录，查看结果：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># python conf_group.py --config-dir ./conf</span>
+<span class="o">[</span>DEFAULT]: o1, o2
+123
+test2
+
+<span class="o">[</span>Group_test]: o3, o4
+98
+laksdfa
+
+<span class="o">[</span>Group_test]: o1, o2
+234
+test4
+</code></pre>
+</div>
+
+<p>得到的结果和指定配置文件是一样的。</p>
+
+<h1 id="section-3">命令行中指定配置项</h1>
+<p>如果需要在命令行中指定配置项，相应的配置项需要由<code class="highlighter-rouge">register_cli_opts</code>进行注册。</p>
+
+<p>编辑<a href="https://github.com/cheneydc/test_example/tree/master/oslo_config">conf_cli.py</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">oslo_config</span> <span class="kn">import</span> <span class="n">cfg</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">opts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">IntOpt</span><span class="p">(</span><span class="s">'o1'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">111</span><span class="p">),</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">StrOpt</span><span class="p">(</span><span class="s">'o2'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">'test opt'</span><span class="p">),</span>
+        <span class="p">]</span>
+
+<span class="n">CONF</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">CONF</span>
+<span class="c"># 注册配置项，由命令行指定配置项的值</span>
+<span class="n">CONF</span><span class="o">.</span><span class="n">register_cli_opts</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+<span class="c"># 解析配置项</span>
+<span class="n">CONF</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="k">print</span> <span class="n">CONF</span><span class="o">.</span><span class="n">o1</span>
+<span class="k">print</span> <span class="n">CONF</span><span class="o">.</span><span class="n">o2</span>
+</code></pre>
+</div>
+
+<p>执行：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># python conf_cli.py --o1 98</span>
+98
+<span class="nb">test </span>opt
+</code></pre>
+</div>
+
+<p>在命令行中指定<code class="highlighter-rouge">o1</code>的值为98，可以看到o1的值被读取，没有指定值的o2读取的默认值。</p>
+
+<p>例子代码：<a href="https://github.com/cheneydc/test_example/tree/master/oslo_config">test_example</a></p>
+
+</span>
+
+        
+
+        
+
+      </div>
+
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/">@</a> or leave a comment below!
+      </div>
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+function disqus_config() { this.experiment.enable_scroll_container = true; }
+var disqus_shortname = "cheneydc"; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-6">
+    Made with <i class="fa fa-heart"></i> by <a href="https://twitter.com/_JacobTomlinson">Jacob Tomlinson</a>
+  </div>
+  <div class="col-md-6">
+    &lt;/&gt; on <a href="https://github.com/jacobtomlinson/carte-noire">Github</a> &nbsp;<i class="fa fa-github-alt"></i>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70353781-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

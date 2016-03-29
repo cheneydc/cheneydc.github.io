@@ -1,0 +1,34 @@
+# Site settings
+title: "大葱"
+email: cheneydc@gmail.com
+description: "随便写点"
+baseurl: ""
+url: "http://cheneydc.xyz"
+title_description: " 突然翻开老哥的寄语，觉的很好：以正道过沧桑，正己心对天地，无愧父母，爱人，亲朋。不执着于命运或时代，家庭事业，选择就坚守，岁月经年，你心灿烂。不为名为利沉沦，为爱情为义追逐自由的灵魂，了无牵挂，努力活得真，哪怕跌跌撞撞、不平坎坷。做不同的你，不要苟活，要灿烂的生活。上下求索的执着，天空海阔，不畏生命冷落，人生新篇章，幸福。"
+title_image: ""
+google_analytics: "UA-70353781-1"
+disqus_account: cheneydc
+#github_repository: https://github.com/jacobtomlinson/carte-noire
+#addthis_id: ra-513c6fa83da6ec67
+post_limit: 5
+
+# Social usernames/URLs
+#twitter_username: cheney
+github_username:  cheneydc
+#linkedin_link: 
+#google_plus_link: 
+#stackoverflow_link: http://carte-noire.jacobtomlinson.co.uk/
+
+# Footer
+footer_left: "Made with <i class=\"fa fa-heart\"></i> by <a href=\"https://twitter.com/_JacobTomlinson\">Jacob Tomlinson</a>"
+footer_right: "&lt;/&gt; on <a href=\"https://github.com/jacobtomlinson/carte-noire\">Github</a> &nbsp;<i class=\"fa fa-github-alt\"></i>"
+
+# Build settings
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+permalink: pretty
+exclude: [vendor]

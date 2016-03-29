@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSTF without fuel on openstack - 1</title>
+<meta name="description" content="随便写点">
+
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+</head>
+
+
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>大葱</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+  
+  
+  
+  <a href="https://github.com/cheneydc" target="_new"><i class="fa fa-github-alt"></i></a>
+  
+  <a href="/feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+
+      <h1 class="header" itemprop="name">OSTF without fuel on openstack - 1</h1>
+
+      <div class="author">
+        <small><i>
+          
+          on <span itemprop="datePublished" content="2014-08-28">October 16, 2015</span>
+           under 技术
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          1 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+        <span itemprop="articleBody"><p>最近弄了一阵子OSTF，小记一下。</p>
+
+<h1 id="ostf-">OSTF 是什么</h1>
+
+<p>openstack的庞大就不多说了，小可也刚刚摸出点门道，觉得晕的，自己开始能搭起来一个环境，看到虚机跑起来了就已经拜谢六丁六甲了，但是千里之堤溃于蚁穴，这样庞大复杂的系统想不出问题是不可能的，而对于我们平时搭建和基本的使用来说，有些问题是不容易发现的，这时候需要进行系统的和业务逻辑相关的测试来保证系统的正常运行。</p>
+
+<p>duangduangduang。。。</p>
+
+<p>这就是OSTF要做的了，OSTF 是 OpenStack Testing Framework 的缩写，也就是<strong>openstack框架测试</strong>，其实是Fuel-OSTF，看的出来了吧，其实是FUEL的一个项目，但是如果不用fuel的话通过写改造还是很容易和自己的环境配合的，这个找时间再系统整理下吧。</p>
+
+<h1 id="ostf--1">OSTF 优缺点</h1>
+
+<h2 id="section">缺点</h2>
+
+<ul>
+  <li>
+    <p>与fuel集成<br />
+fuel没有用过，ostf是人家的一部分也无可厚非，不过好用的东西还是拿出来啊</p>
+  </li>
+  <li>
+    <p>木有nose的attr<br />
+这个嘛觉得不是很方便啊，本来也是基于nose的，不好用attr不是很方便啊</p>
+  </li>
+  <li>
+    <p>一些值都写死在用例里面，加到conf里面会方便些</p>
+  </li>
+</ul>
+
+<h2 id="section-1">优点</h2>
+
+<ul>
+  <li>RESTapi</li>
+</ul>
+
+<h1 id="section-2">代码梳理</h1>
+<p>做东西总是逃不过代码啊，简单梳理下吧</p>
+
+<h2 id="section-3">结构</h2>
+<p>整体上OSTF由两部分组成</p>
+
+<ul>
+  <li>fuel_health 主要是测试用例及其相关内容</li>
+  <li>fuel_plugin OSTF本身的server,client等都在这里了，还有处理restapi</li>
+</ul>
+
+<p>话说如果只是要使用测试用例来检查openstack的话，基本可以不用fuel_plugin了，小调整下基本就能用nose直接跑fuel_health里面的用例了</p>
+
+<p>还有一个Nailgun，这个不太熟悉是什么东西，看文档感觉是OSTF中传递数据和配置的，反倒我自己环境的时候这个我基本给踢掉了(<code class="highlighter-rouge">If you want run OSTF for non Fuel installation, change the initialization of NailgunConfig() to FileConfig() </code>)。不用fuel的话就用不到nailgun了应该，配置文件可以通过FileConfig()来处理。</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">FuelConfig</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s">&#39;CUSTOM_FUEL_CONFIG&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">FileConfig</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">NailgunConfig</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">SetProxy</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">unittest2</span><span class="o">.</span><span class="n">TestCase</span><span class="o">.</span><span class="n">failureException</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span></code></pre></div>
+
+<p>一个环境变量<code class="highlighter-rouge">CUSTOM_FUEL_CONFIG=fuel_health/etc/test.conf</code>就可以搞定了。配置文件主要是openstack各个组件的一些信息。</p>
+
+<h2 id="section-4">流程</h2>
+<p>ostf服务起来后可以通过restapi访问了，OSTF是用pecan处理请求的。<br />
+<code class="highlighter-rouge">fuel_plugin/ostf_adapter/wsgi/root.py</code>中定义了三个controller分别负责tests,testsets和testruns的请求的分发。</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">fuel_plugin.ostf_adapter.wsgi</span> <span class="kn">import</span> <span class="n">controllers</span>
+<span class="kn">from</span> <span class="nn">pecan</span> <span class="kn">import</span> <span class="n">expose</span>
+
+
+<span class="k">class</span> <span class="nc">V1Controller</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="c"># TODO(???) Rewrite it with wsme expose</span>
+    <span class="n">tests</span> <span class="o">=</span> <span class="n">controllers</span><span class="o">.</span><span class="n">TestsController</span><span class="p">()</span>
+    <span class="n">testsets</span> <span class="o">=</span> <span class="n">controllers</span><span class="o">.</span><span class="n">TestsetsController</span><span class="p">()</span>
+    <span class="n">testruns</span> <span class="o">=</span> <span class="n">controllers</span><span class="o">.</span><span class="n">TestrunsController</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">RootController</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">v1</span> <span class="o">=</span> <span class="n">V1Controller</span><span class="p">()</span>
+
+    <span class="nd">@expose</span><span class="p">(</span><span class="s">&#39;json&#39;</span><span class="p">,</span> <span class="n">generic</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{}</span></code></pre></div>
+
+<p><code class="highlighter-rouge">fuel_plugin/ostf_adapter/wsgi/controllers.py</code>文件中对各个controller做了相应定义。<br />
+其中TestrunsController()中对post方法做了处理，因为通过这个方法要来出发测试代码的执行的。</p>
+
+<p><img src="https://raw.githubusercontent.com/cheneydc/blog/gh-pages/assets/img/post/20151016-ostf.png" alt="ostf-flow-chart" /></p>
+
+<p>最终由nose_test_runner也就是nose的接口了来执行测试代码。</p>
+
+<h1 id="section-5">参考链接</h1>
+<p><a href="https://docs.fuel-infra.org/fuel-dev/develop/ostf_contributors_guide.html">ostf官方文档</a><br />
+<a href="http://pecan.readthedocs.org/en/latest/index.html">pecan文档</a><br />
+<a href="http://segmentfault.com/a/1190000003810294">http://segmentfault.com/a/1190000003810294</a></p>
+</span>
+
+        
+
+        
+
+      </div>
+
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/">@</a> or leave a comment below!
+      </div>
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+function disqus_config() { this.experiment.enable_scroll_container = true; }
+var disqus_shortname = "cheneydc"; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-6">
+    Made with <i class="fa fa-heart"></i> by <a href="https://twitter.com/_JacobTomlinson">Jacob Tomlinson</a>
+  </div>
+  <div class="col-md-6">
+    &lt;/&gt; on <a href="https://github.com/jacobtomlinson/carte-noire">Github</a> &nbsp;<i class="fa fa-github-alt"></i>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70353781-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>
