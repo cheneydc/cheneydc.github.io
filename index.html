@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Blog cheneydc"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="种葱得葱">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="http://cheneydc.me/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> 种葱得葱 </title>
+  <link rel="stylesheet" href="/css/prism.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">种葱得葱</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">种葱得葱</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2018/03/24/deploy-minikube-on-windows/">windows上用minikube部署k8s(1.9.0)</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-03-24
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>k8s上的部署官方给了几种方式，机器多可以用kubeadm，自己只有一个机器，可以用minikube来弄个单机的虚拟机环境进行学习。当然也有<a href="https://github.com/kubernetes-incubator/kubespray" target="_blank" rel="noopener">kubespray</a>可以搞定生产环境级别的k8s环境部署。最近葱苦于笔记本上没有环境使用只能先试试minikube了，最难能可贵的是minikube支持多种虚拟化方式，我windows的机器也可以试试啦！按照官方知道还是很便捷的，所有部署方式中，最麻烦的莫过于镜像啦，因为镜像在那头，我在这头……</p>
+          <div class="read-more">
+            <a href="/2018/03/24/deploy-minikube-on-windows/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2018/03/14/network-knowledge/">网络知识</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-03-14
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <h1 id="网络命名空间"><a href="#网络命名空间" class="headerlink" title="网络命名空间"></a>网络命名空间</h1><p>Net Namesapce，网络命名空间，不同netns的网络栈是完全隔离的，相互不能通信，命名空间内部可以有自己独立的路由表以及iptables。为了隔离出独立的协议栈，需要纳入命名空间的元素有进程、套接字、网络设备等。</p>
+          <div class="read-more">
+            <a href="/2018/03/14/network-knowledge/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2016/04/15/keystone-v3-hierarchical-multitenancy/">Keystone_V3子项目概念梳理</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-04-15
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>项目的层级化，或者说是嵌套化，可以在横向上缩小了资源的管理维度，以更贴合实际业务的形式进行了资源的隔离；子项目对自己的资源有了更高的自由度，父项目的管理就得到了大大的简化。</p>
+<p>Keystone V3 API支持子项目，下面从概念以及实际的业务逻辑看看子项目是什么样的。</p>
+          <div class="read-more">
+            <a href="/2016/04/15/keystone-v3-hierarchical-multitenancy/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2016/04/08/publish-package-to-pypi/">提交package到pypi</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-04-08
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>小博客写写就烦了啊，虽然github免费啊，但是图片什么的整理好麻烦，又不想用太复杂的框架了，所以干脆附件了图片了都放七牛上了，当图床用了，不过每次都登录到上面再上传很麻烦啊，索性写了个小工具，上传然后返回链接，so方便啊，用的话<a href="https://github.com/cheneydc/qnupload" target="_blank" rel="noopener">点这里</a>。</p>
+          <div class="read-more">
+            <a href="/2016/04/08/publish-package-to-pypi/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2016/03/19/mistral-study/">Mistral小记</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-03-19
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>组里开始是拿来当crontab来使用的，这也是我最早对mistral的印象，云环境下的很多新项目其实也就是传统服务器上的应用的一个迁移。Mistral可以当作crontab来使用，但是远不止这些，Mistral实际是workflow-as-a-service，提供云环境下的工作流服务。更像是crontab+ansible的东西。</p>
+          <div class="read-more">
+            <a href="/2016/03/19/mistral-study/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2016/03/01/ovirt-over-all/">VDI之ovirt</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-03-01
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>最早接触虚拟化的东西是08、09左右上学玩虚拟机，搭个环境弄下ubuntu什么的，后来学习编程，虚拟机天天跑，那时候觉得挺神奇的，点一点就在我的电脑里弄出来一个机器了，但是性能比较差，图形界面一般是不敢开的;后来到红帽也是意外的很，做了虚拟化相关的测试，接触了libvirt、kvm之类的，从技术上对虚拟化有了些了解，然后接触了RHEV，如果说从一个用户角度去看的话，这是让我惊艳的地方了。</p>
+          <div class="read-more">
+            <a href="/2016/03/01/ovirt-over-all/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2016/02/13/spring-festival/">2016年春节随笔(一)</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-02-13
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/生活/">生活</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>15年顺利结束，带着媳妇回家头一年感觉挺有意思，不过我俩家走路也就是十分钟的事情，这两对老头老太，都快比我们熟了。春节过完胖三斤啊，可叹的是三斤又三斤，三斤何其多……老人盼着这几天，摆满桌子好吃的，看着我们回去吃就开心，冲这个回去几个三斤都成，呵呵……（回来该哭就哭吧，反正都减不掉了）</p>
+<p>记得小时候特喜欢过春节，好吃的多不说，那几天没人看着我写作业啊，心里那个舒坦，各家走亲戚跟走马灯一样，爹娘让叫这个叫这个，让叫那个叫那个，然后能收到好多红包，当然是我娘给我保管了，之前都说长大了给我，以为是骗人了的，现在想想他们亏大了，房子首付得用多少红包呢……认完亲戚就没我什么事情了，他们该聊聊，电视就是我自己的了。不过打小到现在走亲戚送的东西都差不多，饮料、啤酒、水果balabala……小时候不总喝饮料，所以过节能喝珍珍、健力宝什么的，大人们聊的越热闹，我自己越乐呵，喝着饮料看着电视，倍儿爽。说起饮料，小时候也闹过笑话，刚有乌龙茶饮料那会，有人送家里一箱，小时候都寻思饮料市甜的啊，当时其他饮料箱子包装的不那么精细，那天就看见乌龙茶了，当时想啊，这箱子不错，肯定好东西，心里想喝，不敢说，万一爸妈再转手要送人了呢，所以我没事就去看看，摸摸，我这点小心眼在爹娘眼里太小儿科了，我娘终于下令了，这个不送礼，开开喝了吧……结果我一口下去快哭了，忒苦了……哈哈，小插曲一个。说到年啊节啊的现在也差不多，饮料大多什么杏仁露啦、可乐、雪碧，啤酒也还是青岛、蓝带什么的，不过时光就是时光，就那么任性的悄悄的被大人们的家常就唠过去了，突然之间坐在亲戚朋友里面发现，蓝带还是那个蓝带……可惜我已经不是当初的我了，一下子我成了扯家常的了，不知道带走了谁的时光啊……</p>
+<p>不过今年回家也多了个头疼的事情啊，老哥先回家的，有一天给我微信了个照片，多年没贴过年画的家啊……卧室里挂了诺大一个年画，俩胖小子，脸对脸在那提醒着我和我媳妇的重大责任，画中间一个中文单词一个英文单词分别是“宝宝”和“baby”，估计老哥偷着坏笑呢吧……不赶紧找对象，结果让我抗啊……赤裸裸的坑弟。但是老爷子何老太太在家没啥事也就想着这个了，可以理解，产品经理再着急，这技术活也得我们工程师说了算了（条件允许我们一定抓紧呢）。</p>
+<p>其实过年就是图个团圆，今年我家人都去媳妇家里过的，两家一拼也挺热闹，挺好的。两个非亲非故的人“莫名其妙”的在了一起，然后有了宝宝，宝宝长大，两个人依偎老去，不说浪漫，只是很奇妙，这种关系是这么强烈，能将两个人，甚至两个家庭紧紧联系起来，同时也很脆弱，可能一句话一个眼神就会丢失……所以拥有就是恩赐，对父母、家人要珍惜、尊重，我觉得能将这种奇妙的关系维持到成为回忆的时候，就是伟大的，也是最幸福的！从父母和岳父岳母身上我都看到了他们的幸福，按照老婆的话说，要幸福啊，很简单，爸爸爱妈妈，妈妈爱宝宝，这个家就会很幸福！哈哈，16年，幸福！</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2016/01/14/forget-jenkins-admin-passwd/">忘了jenkins管理员密码了</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-01-14
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>好不容易配置好了jenkins，走的LDAP，然后脑残的设置了安全矩阵，进不去了吧…还好可以改配置文件救回来</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vim $JENKINS_HOME/config.xml</span></span><br><span class="line"></span><br><span class="line">  &lt;useSecurity&gt;<span class="literal">true</span>&lt;/useSecurity&gt;</span><br></pre></td></tr></table></figure>
+<p>把true改成false，然后重启jenkins就好了</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/12/31/summary-this-year/">写在15年最后一天</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-12-31
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/生活/">生活</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>#家庭<br>今年不错啊，完成了一个小伙子到一个丈夫角色的重要转变，爱人从10年就挂我这棵树上了，今年终于拴牢了，哈哈。对于结婚我没有特殊的看法，不是烤蛋糕，多大火候多长时间都要算得一清二楚才能出炉，完全是两人感觉到了时候，好了，那我们结婚吧。更重要的是能得到家人的全力支持，这对于我们的小家是最好的开始了。不过想想5年多的异地，走到今天很是不易啊，多亏爱人的理解和坚持，珍惜，这也是两人走到现在让我理解最深刻的两个字了。新年希望爱人继续漂亮，继续健康，找到好工作。</p>
+<p>#工作<br>除了组成了幸福的小家庭，工作上也结束了北漂，虽然没有回到老家，不过在东北也差不多算是返乡了，IT环境不可能和北上相比，不过幸运的能到现在的公司，继续感兴趣的云计算还是很幸运的了。同时也真正的做起了开发工作，算是可喜可贺了。不过对于知识的积累还不够，工作效率有待提升，坚持番茄工作法啊。团队的兄弟都很猛，要努力尽快赶上。明年就是一个字：冲。</p>
+<p>还是那句话：不忘初心。</p>
+<p>Happy new year!</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/12/18/gitlab_jenkins/">Gitlab与jenkins集成</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-12-18
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/工具/">工具</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>熟悉了一下openstack社区的工作流程，初觉繁琐，用下来觉得异常清晰，CI虽然稳定欠佳，但是一些基本的单元测试等苦累之活可以交与它的。所以想着怎么把gitlab和jenkins集成一下。</p>
+          <div class="read-more">
+            <a href="/2015/12/18/gitlab_jenkins/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+    
+      <a class="next" href="/page/2/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:cheneydc@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://plus.google.com/u/0/+CheneyDong" class="iconfont icon-google" title="google"></a>
+        
+      
+    
+      
+        
+          <a href="https://github.com/cheneydc" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Cheney Dong</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>

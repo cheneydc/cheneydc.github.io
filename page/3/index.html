@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Blog cheneydc"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="种葱得葱">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="http://cheneydc.me/page/3/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> 种葱得葱 </title>
+  <link rel="stylesheet" href="/css/prism.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">种葱得葱</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">种葱得葱</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/29/sqlalchemy-1/">SQLalchemmy - 1</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-29
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>Openstack最近看的有点乱套了，openstack组件都是利用sqlalchemy来操作数据库的，赶上这个机会就看看了。</p>
+<p><a href="http://docs.sqlalchemy.org/en/rel_1_0/orm/tutorial.html" target="_blank" rel="noopener">官方文档</a></p>
+<p>SQLAlchemy是ORM框架的一种，可以将Python中的类和数据库中的表进行映射，并将类的实例和表数据库表中的数据进行对应。 这样一个抽象的数据库表我们就可以很方便的通过一个类来记录和操作了。</p>
+          <div class="read-more">
+            <a href="/2015/10/29/sqlalchemy-1/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/26/transfer-volume/">Transfer Volume(volume过户)</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-26
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>原文：<a href="http://docs.openstack.org/user-guide/common/cli_manage_volumes.html" target="_blank" rel="noopener">Transfer a Volume</a></p>
+<h1 id="Transfer-a-volume"><a href="#Transfer-a-volume" class="headerlink" title="Transfer a volume"></a>Transfer a volume</h1><p>这个功能可以使volume在不同的租户间转移。</p>
+<p>通过<code>cinder transfer*</code>等命令可以完成volume的过户。对于volume的发送方，需要创建一个transfer，然后将transfer的id和authorization key发送给接收方。接收方得到id和key之后就能通过命令完成volume的过户。</p>
+          <div class="read-more">
+            <a href="/2015/10/26/transfer-volume/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/26/image-volume-cache/">image-volume cache</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-26
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>原文： <a href="http://docs.openstack.org/admin-guide-cloud/blockstorage_image_volume_cache.html" target="_blank" rel="noopener">Image-Volume cache</a></p>
+<p>Openstack块存储有一个可选的功能，镜像缓存，可以提升从镜像创建卷的性能。这个改进依赖很多因素，主要看存储的后端克隆卷的速度有多快。</p>
+<p>当一个卷第一次从镜像创建的时候，块存储的内部租户也会创建一个image-volume缓存。之后如果再请求从这个image创建volume的话就直接clone这个缓存，不需要再下载镜像的内容然后复制数据到卷里了。</p>
+          <div class="read-more">
+            <a href="/2015/10/26/image-volume-cache/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/20/Shell-again/">Shell--再来一遍-3</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-20
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p>说实话这个部分是我最迷惑的，看来还是用的少啊。但是既然是引用，也就表示是特殊的，和不引用的不一样，搞清楚不一样的地方应该就好多了，下面看看具体情况。</p>
+          <div class="read-more">
+            <a href="/2015/10/20/Shell-again/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/16/ostf/">OSTF without fuel on openstack - 1</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-16
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>最近弄了一阵子OSTF，小记一下。</p>
+<h1 id="OSTF-是什么"><a href="#OSTF-是什么" class="headerlink" title="OSTF 是什么"></a>OSTF 是什么</h1><p>openstack的庞大就不多说了，小可也刚刚摸出点门道，觉得晕的，自己开始能搭起来一个环境，看到虚机跑起来了就已经拜谢六丁六甲了，但是千里之堤溃于蚁穴，这样庞大复杂的系统想不出问题是不可能的，而对于我们平时搭建和基本的使用来说，有些问题是不容易发现的，这时候需要进行系统的和业务逻辑相关的测试来保证系统的正常运行。</p>
+          <div class="read-more">
+            <a href="/2015/10/16/ostf/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/09/vim-conf/">vim常用配置</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-09
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/工具/">工具</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>本人不是IDE党，不是vim党，emacs也木用过，对于编辑器没有特别偏好，觉得只要符合自己的习惯，能提高自己的效率就是好的。</p>
+<p>vim一直在用，没有深入研究过，一个工具而已，不过最近经常虚拟机里面用，每次如果从头配置都比较麻烦，所以整理的时候就都放脚本里了，省着一点点弄，忒麻烦……</p>
+          <div class="read-more">
+            <a href="/2015/10/09/vim-conf/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/03/Shell-again/">Shell--再来一遍-2</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-03
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <h1 id="3-变量和参数"><a href="#3-变量和参数" class="headerlink" title="3.变量和参数"></a>3.变量和参数</h1><h2 id="变量的赋值"><a href="#变量的赋值" class="headerlink" title="变量的赋值"></a>变量的赋值</h2><p>$var、var，区别好这两个，就基本能正常使用变量了，var只是变量的名字，好比一个人的名字，狗蛋啊、狗剩啊……$var才是这个变量的值，实际上$var只是<strong>${var}</strong>的简化方式，有的地方写成$var会不好理解，就要写成${var}的形式了。</p>
+          <div class="read-more">
+            <a href="/2015/10/03/Shell-again/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/02/Shell-again/">Shell--再来一遍-1</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-02
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>Linux用了好几年了，没有很熟练，也没有深入内核，平时工作发现shell还是很实用，现在重新的系统来一遍，吼吼……：）</p>
+<p>主要看看<a href="http://manual.51yip.com/shell/" target="_blank" rel="noopener">ABS</a>然后多做练习是必须的</p>
+          <div class="read-more">
+            <a href="/2015/10/02/Shell-again/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/02/GoSublime-Setting/">Sublime Text中GoSublime的设置</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-02
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/工具/">工具</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>由于不是土豪，下个破解的Sublime Text，配置下GoSublime，把env设置在了“Setting Default”里面，结果总是失败，后来发现下载的破解版别人已经在“Setting User”里面设置过了，系统是先读取这个了，所以更改下User里面的配置就可以了。</p>
+          <div class="read-more">
+            <a href="/2015/10/02/GoSublime-Setting/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/01/create-nodejs-app-on-rancher/">通过Mongo, Docker和Rancher创建Node.js应用集群</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-01
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>自从Rancher的Beta版本发布的几周以来，平台新的调度和服务发现的功能让我略嗨。为了帮助大家理解这些功能，今天我将展示如何利用这些功能部署一个且实现了HA的Node.js应用集群。我会用<a href="https://github.com/sdelements/lets-chat" target="_blank" rel="noopener">Let’s Chat</a>作为示例程序，这是一个八错的开源的聊天工具，有点像Slack。Rancher的首席架构师Darren Shepherd在上次的Rancher Meetup上展示了一点Let’s Chat，如果有兴趣可以看一下<a href="http://rancher.com/recorded-july-online-meetup-implementing-docker-as-a-service/" target="_blank" rel="noopener">会议记录</a>，但是今天我主要介绍的是部署的一些细节。Let’s Chat 是一个自托管的聊天应用，比较适用于小团队，支持很多功能比如：聊天室，通知，警报，XMPP（<a href="http://baike.baidu.com/link?url=TunroNALJg1pEY_itiAvp1BKshwytPW4zC6ShZaIe8EBHb-_aernJV1n1AbQPpRk4Ot4bgos8QXicwTLqaeara" target="_blank" rel="noopener">可扩展通讯和表示协议</a>）聊天，并且还支持多种认证方式。可以从Let’s Chat的<a href="https://github.com/sdelements/lets-chat" target="_blank" rel="noopener">github主页</a>上得到更多的信息。</p>
+          <div class="read-more">
+            <a href="/2015/10/01/create-nodejs-app-on-rancher/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/2/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">上一页</span>
+      </a>
+    
+    
+      <a class="next" href="/page/4/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:cheneydc@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://plus.google.com/u/0/+CheneyDong" class="iconfont icon-google" title="google"></a>
+        
+      
+    
+      
+        
+          <a href="https://github.com/cheneydc" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Cheney Dong</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="VDI之ovirt"/>
+
+
+
+
+  <meta name="keywords" content="ovirt, VDI, 种葱得葱" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="种葱得葱">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="http://cheneydc.me/2016/03/01/ovirt-over-all/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> VDI之ovirt - 种葱得葱 </title>
+  <link rel="stylesheet" href="/css/prism.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">种葱得葱</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">种葱得葱</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          VDI之ovirt
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-03-01
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Neutron-in-ovirt"><span class="toc-text">Neutron in ovirt</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cinder-in-ovirt"><span class="toc-text">Cinder in ovirt</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ovirt-HA"><span class="toc-text">ovirt HA</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>最早接触虚拟化的东西是08、09左右上学玩虚拟机，搭个环境弄下ubuntu什么的，后来学习编程，虚拟机天天跑，那时候觉得挺神奇的，点一点就在我的电脑里弄出来一个机器了，但是性能比较差，图形界面一般是不敢开的;后来到红帽也是意外的很，做了虚拟化相关的测试，接触了libvirt、kvm之类的，从技术上对虚拟化有了些了解，然后接触了RHEV，如果说从一个用户角度去看的话，这是让我惊艳的地方了。</p>
+<a id="more"></a>
+<p>RHEV是红帽的虚拟化管理平台，社区相应的是ovirt，在体验了迁移的效果后我表示很happy，通过spice使用windows虚机的效果也不错，脑洞放大点的话，以后每个人就不需要电脑了，如果突破了显示和能源的显示，只需要一个小小的终端，随时随地都可以访问自己远程的机器（主机 or 手机也没有分别），计算资源统一管理，从环保角度看也是不错的。</p>
+<p>这个YY不是不可能的，但是当时接触的ovirt功能还是比较单一的，对于资源的调度和管理相对于云平台要弱势很多，最近又看了下ovirt，发现ovirt也是加了些好玩的东西啊。ovirt可以加入外部服务这个功能可以弥补N多弱点，比如ovirt可以直接加入openstack的neutron服务，如果没有虚拟网络，ovirt上的虚机就会占用IP资源，加入neutron，虚机可以使用虚机网络，对于隔离和管理都很方便了;加入cinder后，ovirt的卷也可以通过cinder进行管理，也可以很方便的使用ceph存储。</p>
+<h1 id="Neutron-in-ovirt"><a href="#Neutron-in-ovirt" class="headerlink" title="Neutron in ovirt"></a>Neutron in ovirt</h1><p>Neutron在openstack中提供网络即服务的组建，ovirt加入neutron服务，正可以弥补在对于虚机网络的配置和管理功能的缺陷，目前ovirt3.5版本后加入了这个功能，官方有非常详细的文档<a href="http://www.ovirt.org/develop/release-management/features/cloud/neutronvirtualappliance/" target="_blank" rel="noopener">http://www.ovirt.org/develop/release-management/features/cloud/neutronvirtualappliance/</a>,也可以<a href="http://7xqb88.com1.z0.glb.clouddn.com/Features_NeutronVirtualAppliance.pdf" target="_blank" rel="noopener">点击这里下载</a>。文档非常详细，整体的网络拓扑：</p>
+<p><img src="http://7xqb88.com1.z0.glb.clouddn.com/20160301-ovirt-over-all-1.png" alt="neutron appliance拓扑图"></p>
+<p>这里ovirt提供了一个集成了keystone以及neutron服务的镜像，用这个镜像启动虚机(neutron appliance )就可以直接提供neutron服务，主机两块网卡分别eth0、eth1,eth0相当于管理网络也可以提供外部网络，eth1走数据网络，用于虚机之间的通信。另外提一点，镜像应该用的是红帽RDO搭建的服务，基于I版本的。</p>
+<p>不足之处，ovirt管理界面中只提供了子网的建立，如果要顺利使用需要通过命令行手动进行路由的配置。不过后面应该会集成进来的吧。</p>
+<h1 id="Cinder-in-ovirt"><a href="#Cinder-in-ovirt" class="headerlink" title="Cinder in ovirt"></a>Cinder in ovirt</h1><p>cinder在openstack中提供块存储服务，对于卷和快照的管理也很方便，支持N多种后端，如果想在ovirt中使用ceph存储，通过接入cinder服务的方式简单的不得了啊，不过此功能在ovirt3.6开始支持。官方文档是好东西，不过ovirt最近网站更新改版了，好多格式没法看啊，幸好之前留了pdf，可以<a href="http://7xqb88.com1.z0.glb.clouddn.com/Features_Cinder Integration.pdf" target="_blank" rel="noopener">点击这里下载</a>。</p>
+<p>添加cinder服务方便，如果ceph配置认证的话还需要配置key，这个可以在UI直接操作了。</p>
+<h1 id="ovirt-HA"><a href="#ovirt-HA" class="headerlink" title="ovirt HA"></a>ovirt HA</h1><p>ovirt-engine是ovirt的核心服务了，关键服务的HA功能也是一个产品的可靠保证，ovirt提供了ovirt-host-engine-setup的工具，进行HA部署，ovirt的HA是虚机层的HA，工具会先启动一个虚拟环境，在这个虚拟环境里安装一个虚机，把ovirt-engine装到虚机里面，然后服务再管理这个主机，用同样的工具将其他主机添加到服务中，如果ovirt-engine被检测挂了，会在其他主机启动这个虚机，所以恢复服务时间稍微长了一些，如果做到了服务层的HA就好了。具体的部署也请看文档，<a href="http://7xqb88.com1.z0.glb.clouddn.com/Features_Self Hosted Engine.pdf" target="_blank" rel="noopener">点击这里下载</a></p>
+<p>“云”的发展快的吓人啊，不过从公有云到私有云到混合云，其实更多的在追求的是“简”，大道至简啊，消除差异化，提供标准统一，稳定的平台和服务。将来openstack与VDI可能也会渐渐的打破界限，甚至融为一体，但是从目前ovirt的效果来看，性能以及稳定性是更首要的问题。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://cheneydc.me">Cheney Dong</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://cheneydc.me/2016/03/01/ovirt-over-all/">http://cheneydc.me/2016/03/01/ovirt-over-all/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/ovirt/">ovirt</a>
+            
+              <a href="/tags/VDI/">VDI</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/03/19/mistral-study/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Mistral小记</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/02/13/spring-festival/">
+        <span class="next-text nav-default">2016年春节随笔(一)</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:cheneydc@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://plus.google.com/u/0/+CheneyDong" class="iconfont icon-google" title="google"></a>
+        
+      
+    
+      
+        
+          <a href="https://github.com/cheneydc" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Cheney Dong</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://cheneydc.me/2016/03/01/ovirt-over-all/';
+        this.page.identifier = '2016/03/01/ovirt-over-all/';
+        this.page.title = 'VDI之ovirt';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//cheneydc.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>

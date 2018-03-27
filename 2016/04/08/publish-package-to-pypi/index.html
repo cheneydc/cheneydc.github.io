@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="提交package到pypi"/>
+
+
+
+
+  <meta name="keywords" content="python, pypi, pip, 种葱得葱" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="种葱得葱">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="http://cheneydc.me/2016/04/08/publish-package-to-pypi/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> 提交package到pypi - 种葱得葱 </title>
+  <link rel="stylesheet" href="/css/prism.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">种葱得葱</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">种葱得葱</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          提交package到pypi
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-04-08
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        <p>小博客写写就烦了啊，虽然github免费啊，但是图片什么的整理好麻烦，又不想用太复杂的框架了，所以干脆附件了图片了都放七牛上了，当图床用了，不过每次都登录到上面再上传很麻烦啊，索性写了个小工具，上传然后返回链接，so方便啊，用的话<a href="https://github.com/cheneydc/qnupload" target="_blank" rel="noopener">点这里</a>。</p>
+<a id="more"></a>
+<p>后来加工了下，可以方便的支持多个bucket的操作，也可以支持目录以及多个文件的上传，尽量简单，慢慢完善，工具不多说了。写完了一个，发布出去是最好的选择了，如果有别人也用到了那就更棒了。<br>之前一直也没有发布过模块，感觉应该挺复杂的，不管了一点点来吧，发布python包可以有多种方法，distutils，setuptools等，鉴于setuptools可以算是前者的增强版，就用这个吧。<br>首先整理下自己代码的目录结构：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">▶ tree qnupload </span><br><span class="line">qnupload</span><br><span class="line">├── etc</span><br><span class="line">│   └── qnupload</span><br><span class="line">│       └── qnupload.conf</span><br><span class="line">├── LICENSE</span><br><span class="line">├── MANIFEST.in</span><br><span class="line">├── README.rst</span><br><span class="line">├── setup.py</span><br><span class="line">└── src</span><br><span class="line">    └── qnupload</span><br><span class="line">        ├── __init__.py</span><br><span class="line">        └── qnupload.py</span><br></pre></td></tr></table></figure>
+<p>首先对自己的源码选择好license，写好自述文件（README）,MANIFEST.in用来指定包额外需要的文件，这里我用来包含配置文件的目录etc。最主要的是包的根目录下的安装脚本setup.py了。<br>具体setup.py中的参数可以参考<a href="https://packaging.python.org/en/latest/distributing/#setup-args" target="_blank" rel="noopener">这里</a>，和<a href="https://pythonhosted.org/setuptools/setuptools.html" target="_blank" rel="noopener">这里</a>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- encoding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> setuptools <span class="keyword">import</span> setup, find_packages</span><br><span class="line"></span><br><span class="line">VERSION = <span class="string">'1.2.3'</span></span><br><span class="line"></span><br><span class="line">setup(</span><br><span class="line">      <span class="comment"># 指定包名称</span></span><br><span class="line">      name = <span class="string">'qnupload'</span>,</span><br><span class="line">      </span><br><span class="line">      <span class="comment"># 版本号</span></span><br><span class="line">      version = VERSION,</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 包的基本描述，如果需要详细描述，可以在long_description中详细介绍</span></span><br><span class="line">      description = <span class="string">'Tool to upload file to Qiniu cloud'</span>，</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 包的关键字</span></span><br><span class="line">      keywords = <span class="string">'python qiniu upload cli'</span>,</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 作者信息</span></span><br><span class="line">      author = <span class="string">'cheneydc'</span>,</span><br><span class="line">      author_email = <span class="string">'cheneydc@gmail.com'</span>,</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 包的主页</span></span><br><span class="line">      url = <span class="string">'https://github.com/cheneydc/qnupload'</span>,</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 指定LICENSE</span></span><br><span class="line">      license=<span class="string">'MIT'</span>,</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 指定必要的包的目录，详细请查看[文档](https://docs.python.org/2/distutils/setupscript.html#listing-whole-packages)</span></span><br><span class="line">      package_dir = &#123;<span class="string">''</span>:<span class="string">'src'</span>&#125;,</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 通过find_packages可以方便的查找包，支持两个策略,include和exclude </span></span><br><span class="line">      <span class="comment"># 详细请参考[文档](https://pythonhosted.org/setuptools/setuptools.html#using-find-packages)</span></span><br><span class="line">      packages=find_packages(<span class="string">'src'</span>),</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 这个可以包含所有在包中找到的数据文件，前提是文件在MANIFILEST.in中指定</span></span><br><span class="line">      include_package_data=<span class="keyword">True</span>,</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 我的包是一个命令行工具，这里指定工具名称与其对应的模块代码，安装包后会自动生成相应的执行文件</span></span><br><span class="line">      entry_points=&#123;</span><br><span class="line">          <span class="string">'console_scripts'</span>:[</span><br><span class="line">              <span class="string">'qnupload = qnupload.qnupload:main'</span>,</span><br><span class="line">          ]</span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 依赖</span></span><br><span class="line">      install_requires=[</span><br><span class="line">          <span class="string">'qiniu'</span>,</span><br><span class="line">      ],</span><br><span class="line">      data_files=[</span><br><span class="line">          (<span class="string">'/etc/qnupload'</span>, [<span class="string">'etc/qnupload/qnupload.conf'</span>]),    </span><br><span class="line">      ],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>setup.py完成就可以在本地安装测试下了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+<p>如果想上传包到pypi的话，现在<a href="https://pypi.python.org/pypi" target="_blank" rel="noopener">pypi</a>上进行注册（有一个测试服务器<a href="https://testpypi.python.org/pypi" target="_blank" rel="noopener">testpypi</a>，如果使用的话需要单独进行注册）</p>
+<p>在本地的～目录下建立<code>.pypirc</code>文件，主要填写注册服务器的用户名以及密码进行验证：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[distutils]</span><br><span class="line">index-servers =</span><br><span class="line">  pypi</span><br><span class="line">  pypitest</span><br><span class="line"></span><br><span class="line">[pypi]</span><br><span class="line">repository=https://pypi.python.org/pypi</span><br><span class="line">username=username</span><br><span class="line">password=password</span><br><span class="line"></span><br><span class="line">[pypitest]</span><br><span class="line">repository=https://testpypi.python.org/pypi</span><br><span class="line">username=username</span><br><span class="line">password=password</span><br></pre></td></tr></table></figure>
+<p>进行提交：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo python setup.py register -r pypi    </span><br><span class="line">sudo python setup.py sdist upload -r pypi</span><br></pre></td></tr></table></figure>
+<p>这样就将自己的包提交到pypi上了，可以通过easy_instal和pip进行安装啦。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://cheneydc.me">Cheney Dong</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://cheneydc.me/2016/04/08/publish-package-to-pypi/">http://cheneydc.me/2016/04/08/publish-package-to-pypi/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/python/">python</a>
+            
+              <a href="/tags/pypi/">pypi</a>
+            
+              <a href="/tags/pip/">pip</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/04/15/keystone-v3-hierarchical-multitenancy/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Keystone_V3子项目概念梳理</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/03/19/mistral-study/">
+        <span class="next-text nav-default">Mistral小记</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:cheneydc@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://plus.google.com/u/0/+CheneyDong" class="iconfont icon-google" title="google"></a>
+        
+      
+    
+      
+        
+          <a href="https://github.com/cheneydc" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Cheney Dong</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://cheneydc.me/2016/04/08/publish-package-to-pypi/';
+        this.page.identifier = '2016/04/08/publish-package-to-pypi/';
+        this.page.title = '提交package到pypi';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//cheneydc.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>

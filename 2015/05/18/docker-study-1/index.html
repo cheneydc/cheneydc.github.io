@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="docker学习（1）"/>
+
+
+
+
+  <meta name="keywords" content="docker, 种葱得葱" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="种葱得葱">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="http://cheneydc.me/2015/05/18/docker-study-1/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> docker学习（1） - 种葱得葱 </title>
+  <link rel="stylesheet" href="/css/prism.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">种葱得葱</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">种葱得葱</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          docker学习（1）
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-05-18
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Docker-简介-《The-Docker-Book》"><span class="toc-text">1. Docker 简介 《The Docker Book》</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Docker组件"><span class="toc-text">2. Docker组件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-1-Docker-Server-Client"><span class="toc-text">2.1. Docker Server/Client</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-2-Docker-Image"><span class="toc-text">2.2. Docker Image</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-3-Docker-Registry"><span class="toc-text">2.3. Docker Registry</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-4-Docker-containers"><span class="toc-text">2.4. Docker containers</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Docker-的技术组件"><span class="toc-text">3. Docker 的技术组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-安装Docker"><span class="toc-text">4. 安装Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-检查环境"><span class="toc-text">4.1. 检查环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-安装"><span class="toc-text">4.2. 安装</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <h3 id="1-Docker-简介-《The-Docker-Book》"><a href="#1-Docker-简介-《The-Docker-Book》" class="headerlink" title="1. Docker 简介 《The Docker Book》"></a>1. Docker 简介 <em>《The Docker Book》</em></h3><p>Docker 是一个能够把开发的应用程序自动部署到容器的开源引擎。由 Docker 公司的团队编写。Docker在虚拟化的容器执行环境中增加了一个应用程序部署引擎。该引擎的目标就是提供一个轻量、快速的环境，能够运行开发者的程序，并方便高效地将程序从开发者的电脑部署到测试环境，然后再部署到生产环境。Docker上手非常快，用户只需要几分钟，就可以把自己的程序”Docker”化。</p>
+<p>开发人员关心容器中的应用程序，而运维只需要考虑如何管理docker。</p>
+<hr>
+<a id="more"></a>
+<h3 id="2-Docker组件"><a href="#2-Docker组件" class="headerlink" title="2. Docker组件"></a>2. Docker组件</h3><ul>
+<li>Docker Server/Client</li>
+<li>Docker image</li>
+<li>Registry</li>
+<li>Docker Containers</li>
+</ul>
+<h1 id="2-1-Docker-Server-Client"><a href="#2-1-Docker-Server-Client" class="headerlink" title="2.1. Docker Server/Client"></a>2.1. Docker Server/Client</h1><p>Docker是一个C/S架构的程序。Client只向Server或者守护进程发出请求，Server或者守护进程完成工作并返回结果。</p>
+<h1 id="2-2-Docker-Image"><a href="#2-2-Docker-Image" class="headerlink" title="2.2. Docker Image"></a>2.2. Docker Image</h1><p>Image 是构建Docker的基础。用户基于Image来运行自己的容器。Image也是Docker生命周期的”构建”部分。Image是基于联合文件系统的一种层式的结构，由一系列的指令一步一步构建出来的。例如：</p>
+<ul>
+<li>添加一个文件</li>
+<li>执行一个命令</li>
+<li>打开一个终端</li>
+</ul>
+<p>可以把Image当作容器的”源代码”。</p>
+<p><code>这部分不是很理解，感觉像一个安装脚本，最后执行产生的结果是所需要的，后面操作慢慢看...</code></p>
+<h1 id="2-3-Docker-Registry"><a href="#2-3-Docker-Registry" class="headerlink" title="2.3. Docker Registry"></a>2.3. Docker Registry</h1><p>Docker 用 Registry 来保存用户构建的Image。Registry分为公有（Docker Hub）和私有两种。</p>
+<p><code>应该和git仓库比较像</code></p>
+<h1 id="2-4-Docker-containers"><a href="#2-4-Docker-containers" class="headerlink" title="2.4. Docker containers"></a>2.4. Docker containers</h1><p>Docker 可以帮你构建和部署容器，你只需要把自己的应用程序或者服务打包放进容器。刚刚提到，容器是基于Image启动的，容器中可以运行一个或者多个进程。Image相当于Docker生命周期的构建或者打包阶段，Containers相当于启动或者执行阶段。</p>
+<p>总结起来，Docker container就是：</p>
+<ul>
+<li>一个镜像格式</li>
+<li>一系列标准的操作</li>
+<li>一个执行环境</li>
+</ul>
+<p>Docker借鉴了标准集装箱的概念。标准集装箱将货物运往世界各地，Docker将这个模型运用到设计哲学中，不同的是，集装箱运输货物，Docker运输软件。</p>
+<p>和集装箱一样，Docker在执行操作的时候，不关心容器中的是什么，是数据库还是web服务器，还是别的应用程序。所有的容器都按照相同的方式将内容”装载”进去。</p>
+<hr>
+<h2 id="3-Docker-的技术组件"><a href="#3-Docker-的技术组件" class="headerlink" title="3. Docker 的技术组件"></a>3. Docker 的技术组件</h2><p>Docker 可以运行于任何安装了现代Linux内核的x64主机上。Docker开销较低，主要包括一下几个部分：</p>
+<p>一个原生的Linux容器格式，Docker中成为<strong><em>libcontainer</em></strong>，或者很流行的容器平台<strong><em><a href="http://lxc.sourceforge.net" target="_blank" rel="noopener">lxc</a></em></strong>。libcontainer格式现在是Docker容器的默认格式。</p>
+<ul>
+<li>文件系统隔离： 每个容器都有自己的root文件系统</li>
+<li>进程隔离： 每个容器都运行在自己的进程环境中</li>
+<li>网络隔离： 容器间的虚拟网络接口和IP地址是分开的</li>
+<li>资源隔离和分组： 使用<strong><em><a href="http://en.wikipedia.org/wiki/Cgroups" target="_blank" rel="noopener">cgroups</a></em></strong>将CPU和内存之类的资源独立分配给每个Docker容器</li>
+<li><strong><em><a href="http://en.wikipedia.org/wiki/Copy-on-write" target="_blank" rel="noopener">写时复制</a></em></strong>： 文件系统都是通过写时复制创建的，这就意味着文件系统是分层的、快速的，而且占用的磁盘空间更小</li>
+<li>日志： 容器产生的STUOUT、STDERR和STDIN这些IO流都会被收集并入日志，用来进行日志分析和故障排错</li>
+<li>交互式shell： 用户可以创建一个伪tty终端，将其连接到STDIN，为容器提供一个交互式的shell</li>
+</ul>
+<hr>
+<h2 id="4-安装Docker"><a href="#4-安装Docker" class="headerlink" title="4. 安装Docker"></a>4. 安装Docker</h2><p>先决条件：  </p>
+<ul>
+<li>64位</li>
+<li>3.8版本以上的kernel，2.6.x也能运行，但是有很大不同</li>
+<li><p>内核必须支持一种适合的存储驱动，例如：</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Device_manager" target="_blank" rel="noopener">Device manager</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Aufs" target="_blank" rel="noopener">AUFS</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Virtual_file_system" target="_blank" rel="noopener">vfs</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Btrfs" target="_blank" rel="noopener">btrfs</a></li>
+<li>默认通常是Device Mapper</li>
+</ul>
+</li>
+<li><p>kernel支持并开启cgroups和namespace功能</p>
+</li>
+</ul>
+<h3 id="4-1-检查环境"><a href="#4-1-检查环境" class="headerlink" title="4.1. 检查环境"></a>4.1. 检查环境</h3><ul>
+<li>检查内核</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ uname -a</span><br></pre></td></tr></table></figure>
+<ul>
+<li>检查是否安装Device Mapper</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l /sys/class/misc/device-mapper</span><br><span class="line">lrwxrwxrwx 1 root root 0  5月 18 20:26 /sys/class/misc/device-mapper -&gt; ../../devices/virtual/misc/device-mapper</span><br></pre></td></tr></table></figure>
+<p>也可以  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo grep device-mapper /proc/devices</span><br></pre></td></tr></table></figure>
+<p>如果没有出现相关信息，可以尝试加载dm_mod模块</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo modprobe dm_mod</span><br></pre></td></tr></table></figure>
+<ul>
+<li>cgroup 和 namespace 从2.6以后的版本就集成在kernel了</li>
+</ul>
+<h3 id="4-2-安装"><a href="#4-2-安装" class="headerlink" title="4.2. 安装"></a>4.2. 安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ sh -c <span class="string">"echo deb [https://get.docker.io/ubuntu](https://get.docker.io/ubuntu) docker main &gt; /etc/apt/sources.list.d/docker.list"</span> </span><br><span class="line">$ curl -s [https://get.docker.io/gpg](https://get.docker.io/gpg) | sudo apt-key add - </span><br><span class="line">$ sudo apt-get update $ sudo apt-get install lxc-docker </span><br><span class="line">$ sudo docker info </span><br><span class="line">Containers: 0 </span><br><span class="line">Images: 2 </span><br><span class="line">Storage Driver: aufs  </span><br><span class="line">Root Dir: /var/lib/docker/aufs  </span><br><span class="line">Backing Filesystem: extfs  </span><br><span class="line">Dirs: 2  </span><br><span class="line">Dirperm1 Supported: <span class="literal">true</span> </span><br><span class="line">Execution Driver: native-0.2 </span><br><span class="line">Kernel Version: 3.16.0-37-generic </span><br><span class="line">Operating System: Ubuntu Kylin 14.10 </span><br><span class="line">CPUs: 4 </span><br><span class="line">Total Memory: 5.63 GiB </span><br><span class="line">Name: codong </span><br><span class="line">ID: WTRJ:5GFG:QWBJ:VKF2:KB4S:UQAE:UGPS:YDIR:L6DI:DRAE:BTRU:AMVG </span><br><span class="line">WARNING: No swap <span class="built_in">limit</span> support</span><br></pre></td></tr></table></figure>
+<p>如果使用ufw，需要更改其策略，默认ufw会丢弃所有转发的数据包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/default/ufw</span><br></pre></td></tr></table></figure>
+<p>将</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEFAULT_FORWARD_POLICY=&apos;DROP&apos;</span><br></pre></td></tr></table></figure>
+<p>替换成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEFAULT_FORWARD_POLICY=&apos;ACCEPT&apos;</span><br></pre></td></tr></table></figure>
+<p>重新加载UFW</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ufw reload</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://cheneydc.me">Cheney Dong</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://cheneydc.me/2015/05/18/docker-study-1/">http://cheneydc.me/2015/05/18/docker-study-1/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/docker/">docker</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/10/01/create-nodejs-app-on-rancher/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">通过Mongo, Docker和Rancher创建Node.js应用集群</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/05/16/devstack-deploy-openstack/">
+        <span class="next-text nav-default">devstack部署openstack</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:cheneydc@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://plus.google.com/u/0/+CheneyDong" class="iconfont icon-google" title="google"></a>
+        
+      
+    
+      
+        
+          <a href="https://github.com/cheneydc" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Cheney Dong</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://cheneydc.me/2015/05/18/docker-study-1/';
+        this.page.identifier = '2015/05/18/docker-study-1/';
+        this.page.title = 'docker学习（1）';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//cheneydc.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>
