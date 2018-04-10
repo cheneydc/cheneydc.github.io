@@ -216,6 +216,56 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2015/11/04/amqp-rpc/">openstack中的AMQP & RPC</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-11-04
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>开始的时候我只是想要了解下opensatck中的消息队列如何工作的，消息从哪来怎样分发，到哪去。网上搜寻了写资料，看的似懂非懂，转天我发现已然成了浆糊，一般通信协议就那么回事，和咱打电话聊聊天差不多，不过晕就晕在概念太多，没分清层次，那就捋捋概念伐……</p>
+          <div class="read-more">
+            <a href="/2015/11/04/amqp-rpc/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2015/10/29/sqlalchemy-1/">SQLalchemmy - 1</a>
         
       </h1>
@@ -252,6 +302,53 @@
           <div class="read-more">
             <a href="/2015/10/29/sqlalchemy-1/" class="read-more-link">阅读更多</a>
           </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/29/sqlalchemy-2/">SQLalchemmy - 2</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-29
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>这个就用点记点了。</p>
+<h1 id="func"><a href="#func" class="headerlink" title="func"></a>func</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = session.query(User.id, User.name)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.all()</span><br><span class="line">[(<span class="number">1</span>, <span class="string">u'aaa'</span>), (<span class="number">2</span>, <span class="string">u'ccc'</span>), (<span class="number">3</span>, <span class="string">u'ed'</span>), (<span class="number">4</span>, <span class="string">u'zxwer'</span>), (<span class="number">5</span>, <span class="string">u'fake'</span>), (<span class="number">6</span>, <span class="string">u'dc'</span>), (<span class="number">7</span>, <span class="string">u'dc'</span>), (<span class="number">8</span>, <span class="string">u'dc'</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1 = session.query(func.sum(User.id))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1.all()</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">24</span>,<span class="number">312</span> INFO sqlalchemy.engine.base.Engine SELECT sum(users.id) AS sum_1</span><br><span class="line">FROM users</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">24</span>,<span class="number">312</span> INFO sqlalchemy.engine.base.Engine ()</span><br><span class="line">[(<span class="number">36</span>,)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1 = session.query(func.sum(User.id*<span class="number">2</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1.all()</span><br><span class="line">2015-11-11 22:06:55,466 INFO sqlalchemy.engine.base.Engine SELECT sum(users.id * ?) AS sum_1</span><br><span class="line">FROM users</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">55</span>,<span class="number">466</span> INFO sqlalchemy.engine.base.Engine (<span class="number">2</span>,)</span><br><span class="line">[(<span class="number">72</span>,)]</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
         
       
     </div>
@@ -608,106 +705,6 @@
 <p>主要看看<a href="http://manual.51yip.com/shell/" target="_blank" rel="noopener">ABS</a>然后多做练习是必须的</p>
           <div class="read-more">
             <a href="/2015/10/02/Shell-again/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2015/10/02/GoSublime-Setting/">Sublime Text中GoSublime的设置</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-10-02
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/工具/">工具</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>由于不是土豪，下个破解的Sublime Text，配置下GoSublime，把env设置在了“Setting Default”里面，结果总是失败，后来发现下载的破解版别人已经在“Setting User”里面设置过了，系统是先读取这个了，所以更改下User里面的配置就可以了。</p>
-          <div class="read-more">
-            <a href="/2015/10/02/GoSublime-Setting/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2015/10/01/create-nodejs-app-on-rancher/">通过Mongo, Docker和Rancher创建Node.js应用集群</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-10-01
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>自从Rancher的Beta版本发布的几周以来，平台新的调度和服务发现的功能让我略嗨。为了帮助大家理解这些功能，今天我将展示如何利用这些功能部署一个且实现了HA的Node.js应用集群。我会用<a href="https://github.com/sdelements/lets-chat" target="_blank" rel="noopener">Let’s Chat</a>作为示例程序，这是一个八错的开源的聊天工具，有点像Slack。Rancher的首席架构师Darren Shepherd在上次的Rancher Meetup上展示了一点Let’s Chat，如果有兴趣可以看一下<a href="http://rancher.com/recorded-july-online-meetup-implementing-docker-as-a-service/" target="_blank" rel="noopener">会议记录</a>，但是今天我主要介绍的是部署的一些细节。Let’s Chat 是一个自托管的聊天应用，比较适用于小团队，支持很多功能比如：聊天室，通知，警报，XMPP（<a href="http://baike.baidu.com/link?url=TunroNALJg1pEY_itiAvp1BKshwytPW4zC6ShZaIe8EBHb-_aernJV1n1AbQPpRk4Ot4bgos8QXicwTLqaeara" target="_blank" rel="noopener">可扩展通讯和表示协议</a>）聊天，并且还支持多种认证方式。可以从Let’s Chat的<a href="https://github.com/sdelements/lets-chat" target="_blank" rel="noopener">github主页</a>上得到更多的信息。</p>
-          <div class="read-more">
-            <a href="/2015/10/01/create-nodejs-app-on-rancher/" class="read-more-link">阅读更多</a>
           </div>
         
       
