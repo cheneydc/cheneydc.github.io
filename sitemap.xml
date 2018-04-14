@@ -4,7 +4,7 @@
   <url>
     <loc>http://cheneydc.me/2018/03/24/deploy-minikube-on-windows/</loc>
     
-    <lastmod>2018-04-14T07:27:15.005Z</lastmod>
+    <lastmod>2018-04-14T08:12:09.215Z</lastmod>
     
   </url>
   
@@ -86,14 +86,14 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
+    <loc>http://cheneydc.me/2016/02/13/spring-festival/</loc>
     
     <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2016/02/13/spring-festival/</loc>
+    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
     
     <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     
@@ -107,13 +107,6 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
-    
-    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
     
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
@@ -122,6 +115,13 @@
   
   <url>
     <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
     
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     
@@ -163,13 +163,6 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/11/04/amqp-rpc/</loc>
-    
-    <lastmod>2018-03-25T11:58:56.106Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cheneydc.me/2015/11/09/oslo-config/</loc>
     
     <lastmod>2018-03-25T11:58:56.106Z</lastmod>
@@ -177,7 +170,14 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
+    <loc>http://cheneydc.me/2015/11/04/amqp-rpc/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.106Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
     
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     
@@ -191,7 +191,7 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
     
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     

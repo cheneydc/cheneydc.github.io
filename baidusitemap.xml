@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://cheneydc.me/2018/03/24/deploy-minikube-on-windows/</loc>
-    <lastmod>2018-04-14T07:27:15.005Z</lastmod>
+    <lastmod>2018-04-14T08:12:09.215Z</lastmod>
     <data>
         <display>
         <title>windows上用minikube部署k8s(1.9.0)</title>
@@ -221,6 +221,24 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2016/02/13/spring-festival/</loc>
+    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
+    <data>
+        <display>
+        <title>2016年春节随笔(一)</title>
+        <pubTime>2016-02-12T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="生活" url="http://cheneydc.me/categories/%E7%94%9F%E6%B4%BB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
     <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     <data>
@@ -241,24 +259,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2016/02/13/spring-festival/</loc>
-    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
-    <data>
-        <display>
-        <title>2016年春节随笔(一)</title>
-        <pubTime>2016-02-12T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="生活" url="http://cheneydc.me/categories/%E7%94%9F%E6%B4%BB/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/12/31/summary-this-year/</loc>
     <lastmod>2018-03-25T11:58:56.110Z</lastmod>
     <data>
@@ -270,30 +270,6 @@
            
              
               <breadCrumb title="生活" url="http://cheneydc.me/categories/%E7%94%9F%E6%B4%BB/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
-    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
-    <data>
-        <display>
-        <title>怎样加入freenode的openstack频道</title>
-        <pubTime>2015-12-16T16:00:00.000Z</pubTime>
-        
-        <tag>openstack</tag>
-         
-        <tag>irc</tag>
-         
-        <tag>community</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -330,9 +306,33 @@
         <title>Gitlab与jenkins集成</title>
         <pubTime>2015-12-17T16:00:00.000Z</pubTime>
         
+        <tag>gitlab</tag>
+         
         <tag>jenkins</tag>
          
-        <tag>gitlab</tag>
+         
+           
+             
+              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    <data>
+        <display>
+        <title>怎样加入freenode的openstack频道</title>
+        <pubTime>2015-12-16T16:00:00.000Z</pubTime>
+        
+        <tag>openstack</tag>
+         
+        <tag>irc</tag>
+         
+        <tag>community</tag>
          
          
            
@@ -439,24 +439,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/11/04/amqp-rpc/</loc>
-    <lastmod>2018-03-25T11:58:56.106Z</lastmod>
-    <data>
-        <display>
-        <title>openstack中的AMQP & RPC</title>
-        <pubTime>2015-11-03T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/11/09/oslo-config/</loc>
     <lastmod>2018-03-25T11:58:56.106Z</lastmod>
     <data>
@@ -479,13 +461,35 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
+    <loc>http://cheneydc.me/2015/11/04/amqp-rpc/</loc>
+    <lastmod>2018-03-25T11:58:56.106Z</lastmod>
+    <data>
+        <display>
+        <title>openstack中的AMQP & RPC</title>
+        <pubTime>2015-11-03T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
         <display>
-        <title>SQLalchemmy - 1</title>
-        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
+        <title>Transfer Volume(volume过户)</title>
+        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
         
+        <tag>openstack</tag>
+         
+        <tag>cinder</tag>
+         
          
            
              
@@ -515,17 +519,13 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
         <display>
-        <title>Transfer Volume(volume过户)</title>
-        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
+        <title>SQLalchemmy - 1</title>
+        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
         
-        <tag>openstack</tag>
-         
-        <tag>cinder</tag>
-         
          
            
              
