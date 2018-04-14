@@ -216,6 +216,54 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2016/01/14/forget-jenkins-admin-passwd/">忘了jenkins管理员密码了</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-01-14
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>好不容易配置好了jenkins，走的LDAP，然后脑残的设置了安全矩阵，进不去了吧…还好可以改配置文件救回来</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vim $JENKINS_HOME/config.xml</span></span><br><span class="line"></span><br><span class="line">  &lt;useSecurity&gt;<span class="literal">true</span>&lt;/useSecurity&gt;</span><br></pre></td></tr></table></figure>
+<p>把true改成false，然后重启jenkins就好了</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2015/12/31/summary-this-year/">写在15年最后一天</a>
         
       </h1>
@@ -651,57 +699,6 @@
           <p>pycharm不得不说是用的最顺手的一个IDE了，最近尝试了下pycharm的远程调试功能。</p>
           <div class="read-more">
             <a href="/2015/11/19/pycharm-remote-debug/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2015/11/09/oslo-config/">openstack中的oslo_config</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-11-09
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>oslo_config 主要处理用来读取配置项，配置项可以从命令行或者配置文件中读取。但从命令行中获取的配置型需要由<code>register_cli_opts</code>来注册。</p>
-<p>配置项都是由<a href="http://docs.openstack.org/developer/oslo.config/opts.html#oslo_config.cfg.Opt" target="_blank" rel="noopener">Opt</a>类或者其子类定义的。 配置项有多种类型：</p>
-          <div class="read-more">
-            <a href="/2015/11/09/oslo-config/" class="read-more-link">阅读更多</a>
           </div>
         
       
