@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://cheneydc.me/2018/03/24/deploy-minikube-on-windows/</loc>
+    
+    <lastmod>2018-04-14T07:27:15.005Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2018/04/13/best-white-noise/</loc>
+    
+    <lastmod>2018-04-13T16:12:58.540Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2018/04/10/noproxy/</loc>
+    
+    <lastmod>2018-04-10T13:13:08.463Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2018/03/30/prepare-coa/</loc>
+    
+    <lastmod>2018-04-09T15:01:42.237Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/about/index.html</loc>
+    
+    <lastmod>2018-04-09T14:55:49.498Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/tags/index.html</loc>
+    
+    <lastmod>2018-03-25T11:58:56.115Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/categories/index.html</loc>
+    
+    <lastmod>2018-03-25T11:58:56.114Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2018/03/14/network-knowledge/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.113Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2016/04/15/keystone-v3-hierarchical-multitenancy/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.112Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.112Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2016/03/19/mistral-study/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.112Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2016/03/01/ovirt-over-all/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2016/02/13/spring-festival/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/12/31/summary-this-year/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.110Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/11/20/python-stevedore/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.108Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/12/03/horizon-support-v3/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.108Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.108Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/11/20/python-eventlet/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.107Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/11/19/pycharm-remote-debug/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.107Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/11/04/amqp-rpc/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.106Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/11/09/oslo-config/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.106Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/26/image-volume-cache/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.104Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.104Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/16/ostf/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.104Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/09/vim-conf/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.103Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/03/Shell-again/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.103Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/02/Shell-again/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.102Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/02/GoSublime-Setting/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.102Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/01/create-nodejs-app-on-rancher/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.101Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/05/18/docker-study-1/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.100Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/05/16/devstack-deploy-openstack/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.100Z</lastmod>
+    
+  </url>
+  
+</urlset>

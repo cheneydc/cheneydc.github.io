@@ -240,7 +240,7 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备镜像"><span class="toc-text">准备镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装工具"><span class="toc-text">安装工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟化支持"><span class="toc-text">虚拟化支持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装kubectl"><span class="toc-text">安装kubectl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装minikube"><span class="toc-text">安装minikube</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始部署"><span class="toc-text">开始部署</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#后记"><span class="toc-text">后记</span></a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备镜像"><span class="toc-text">准备镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装工具"><span class="toc-text">安装工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟化支持"><span class="toc-text">虚拟化支持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装kubectl"><span class="toc-text">安装kubectl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装minikube"><span class="toc-text">安装minikube</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始部署"><span class="toc-text">开始部署</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#后记"><span class="toc-text">后记</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2018-04-14补充"><span class="toc-text">2018-04-14补充</span></a>
     </div>
   </div>
 
@@ -314,7 +314,10 @@
 <p>大功告成！</p>
 <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p>官方文档： <a href="https://kubernetes.io/docs/getting-started-guides/minikube/" target="_blank" rel="noopener">https://kubernetes.io/docs/getting-started-guides/minikube/</a></p>
 <h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>后续准备写个脚本把k8s相关镜像统一拉取到ali上，k8simage上的dockerfile按照标签与镜像标签统一，pullimages脚本可以自动拉取所有镜像并tag。</p>
-
+<hr>
+<h1 id="2018-04-14补充"><a href="#2018-04-14补充" class="headerlink" title="2018-04-14补充"></a>2018-04-14补充</h1><p>今天升级了minikube到0.26，结果重新部署新的cluster失败了，尝试清理所有的.minikube相关的文件，也没有成功，后来看日志发现minikube使用了kubeadm进行了部署，现在默认部署的是k8s集群0.10的版本，而之前用的是localkube进行的部署，查看以下minikube选项：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">minikube start --<span class="built_in">help</span></span><br><span class="line">...</span><br><span class="line">  -b, --bootstrapper string              The name of the cluster bootstrapper that will <span class="built_in">set</span> up the kubernetes cluster. (default <span class="string">"kubeadm"</span>)</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>可以看到部署引擎默认采用了kubeadm，那如果还想使用localkube进行部署的话可以手动用这个参数进行指定：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minikube start  --vm-driver virtualbox --extra-config=apiserver.Authorization.Mode=RBAC --bootstrapper localkube</span><br></pre></td></tr></table></figure>
       
     </div>
 
