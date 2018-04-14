@@ -221,24 +221,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2016/02/13/spring-festival/</loc>
-    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
-    <data>
-        <display>
-        <title>2016年春节随笔(一)</title>
-        <pubTime>2016-02-12T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="生活" url="http://cheneydc.me/categories/%E7%94%9F%E6%B4%BB/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
     <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     <data>
@@ -252,6 +234,24 @@
            
              
               <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2016/02/13/spring-festival/</loc>
+    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
+    <data>
+        <display>
+        <title>2016年春节随笔(一)</title>
+        <pubTime>2016-02-12T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="生活" url="http://cheneydc.me/categories/%E7%94%9F%E6%B4%BB/"/>
           
         </display>
     </data>
@@ -277,16 +277,18 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
+    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     <data>
         <display>
-        <title>Gitlab与jenkins集成</title>
-        <pubTime>2015-12-17T16:00:00.000Z</pubTime>
+        <title>怎样加入freenode的openstack频道</title>
+        <pubTime>2015-12-16T16:00:00.000Z</pubTime>
         
-        <tag>gitlab</tag>
+        <tag>openstack</tag>
          
-        <tag>jenkins</tag>
+        <tag>irc</tag>
+         
+        <tag>community</tag>
          
          
            
@@ -321,18 +323,16 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
+    <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     <data>
         <display>
-        <title>怎样加入freenode的openstack频道</title>
-        <pubTime>2015-12-16T16:00:00.000Z</pubTime>
+        <title>Gitlab与jenkins集成</title>
+        <pubTime>2015-12-17T16:00:00.000Z</pubTime>
         
-        <tag>openstack</tag>
+        <tag>jenkins</tag>
          
-        <tag>irc</tag>
-         
-        <tag>community</tag>
+        <tag>gitlab</tag>
          
          
            
@@ -363,24 +363,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
-    <lastmod>2018-03-25T11:58:56.108Z</lastmod>
-    <data>
-        <display>
-        <title>python - greenlet</title>
-        <pubTime>2015-11-19T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/12/03/horizon-support-v3/</loc>
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     <data>
@@ -392,6 +374,24 @@
          
         <tag>horizon</tag>
          
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
+    <lastmod>2018-03-25T11:58:56.108Z</lastmod>
+    <data>
+        <display>
+        <title>python - greenlet</title>
+        <pubTime>2015-11-19T16:00:00.000Z</pubTime>
+        
          
            
              
@@ -439,6 +439,24 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2015/11/04/amqp-rpc/</loc>
+    <lastmod>2018-03-25T11:58:56.106Z</lastmod>
+    <data>
+        <display>
+        <title>openstack中的AMQP & RPC</title>
+        <pubTime>2015-11-03T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2015/11/09/oslo-config/</loc>
     <lastmod>2018-03-25T11:58:56.106Z</lastmod>
     <data>
@@ -461,12 +479,12 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/11/04/amqp-rpc/</loc>
-    <lastmod>2018-03-25T11:58:56.106Z</lastmod>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
+    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
         <display>
-        <title>openstack中的AMQP & RPC</title>
-        <pubTime>2015-11-03T16:00:00.000Z</pubTime>
+        <title>SQLalchemmy - 1</title>
+        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
         
          
            
@@ -484,24 +502,6 @@
     <data>
         <display>
         <title>SQLalchemmy - 2</title>
-        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
-    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
-    <data>
-        <display>
-        <title>SQLalchemmy - 1</title>
         <pubTime>2015-10-28T16:00:00.000Z</pubTime>
         
          
@@ -537,16 +537,16 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
+    <loc>http://cheneydc.me/2015/10/26/image-volume-cache/</loc>
     <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     <data>
         <display>
-        <title>Shell--再来一遍-3</title>
-        <pubTime>2015-10-19T16:00:00.000Z</pubTime>
+        <title>image-volume cache</title>
+        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
         
-        <tag>linux</tag>
+        <tag>openstack</tag>
          
-        <tag>shell</tag>
+        <tag>cinder</tag>
          
          
            
@@ -559,16 +559,16 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/26/image-volume-cache/</loc>
+    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
     <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     <data>
         <display>
-        <title>image-volume cache</title>
-        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
+        <title>Shell--再来一遍-3</title>
+        <pubTime>2015-10-19T16:00:00.000Z</pubTime>
         
-        <tag>openstack</tag>
+        <tag>linux</tag>
          
-        <tag>cinder</tag>
+        <tag>shell</tag>
          
          
            
