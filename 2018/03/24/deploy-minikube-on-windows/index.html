@@ -320,6 +320,14 @@
 <p>后来看日志发现minikube使用了kubeadm进行了部署，现在默认部署的是k8s集群0.10的版本，而之前用的是localkube进行的部署，查看以下minikube选项：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">minikube start --<span class="built_in">help</span></span><br><span class="line">...</span><br><span class="line">  -b, --bootstrapper string              The name of the cluster bootstrapper that will <span class="built_in">set</span> up the kubernetes cluster. (default <span class="string">"kubeadm"</span>)</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
 <p>可以看到部署引擎默认采用了kubeadm，那如果还想使用localkube进行部署的话可以手动用这个参数进行指定：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minikube start  --vm-driver virtualbox --extra-config=apiserver.Authorization.Mode=RBAC --bootstrapper localkube</span><br></pre></td></tr></table></figure>
+<p>我这里start集群的时候开启了RBAC，这样部署的时候即使image都准备好也会有问题，参考这里：</p>
+<p><a href="https://github.com/kubernetes/minikube/issues/2510" target="_blank" rel="noopener">https://github.com/kubernetes/minikube/issues/2510</a></p>
+<p>dashboard和dns的pod出现如下错误：</p>
+<blockquote>
+<p>panic: secrets is forbidden: User “system:serviceaccount:kube-system:default” cannot create secrets in the namespace “kube-system”</p>
+</blockquote>
+<p>解决方法是执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create clusterrolebinding kube-system-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default</span><br></pre></td></tr></table></figure>
       
     </div>
 

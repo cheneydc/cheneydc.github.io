@@ -4,7 +4,7 @@
   <url>
     <loc>http://cheneydc.me/2018/03/24/deploy-minikube-on-windows/</loc>
     
-    <lastmod>2018-04-14T08:12:09.215Z</lastmod>
+    <lastmod>2018-04-14T09:52:39.397Z</lastmod>
     
   </url>
   
@@ -107,13 +107,6 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
-    
-    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
     
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
@@ -122,6 +115,13 @@
   
   <url>
     <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
     
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     
@@ -177,13 +177,6 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
-    
-    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
     
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
@@ -192,6 +185,13 @@
   
   <url>
     <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
     
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     
@@ -219,13 +219,6 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/09/vim-conf/</loc>
-    
-    <lastmod>2018-03-25T11:58:56.103Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cheneydc.me/2015/10/03/Shell-again/</loc>
     
     <lastmod>2018-03-25T11:58:56.103Z</lastmod>
@@ -233,14 +226,21 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/02/Shell-again/</loc>
+    <loc>http://cheneydc.me/2015/10/09/vim-conf/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.103Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/02/GoSublime-Setting/</loc>
     
     <lastmod>2018-03-25T11:58:56.102Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/02/GoSublime-Setting/</loc>
+    <loc>http://cheneydc.me/2015/10/02/Shell-again/</loc>
     
     <lastmod>2018-03-25T11:58:56.102Z</lastmod>
     
@@ -254,14 +254,14 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/05/18/docker-study-1/</loc>
+    <loc>http://cheneydc.me/2015/05/16/devstack-deploy-openstack/</loc>
     
     <lastmod>2018-03-25T11:58:56.100Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/05/16/devstack-deploy-openstack/</loc>
+    <loc>http://cheneydc.me/2015/05/18/docker-study-1/</loc>
     
     <lastmod>2018-03-25T11:58:56.100Z</lastmod>
     

@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://cheneydc.me/2018/03/24/deploy-minikube-on-windows/</loc>
-    <lastmod>2018-04-14T08:12:09.215Z</lastmod>
+    <lastmod>2018-04-14T09:52:39.397Z</lastmod>
     <data>
         <display>
         <title>windows上用minikube部署k8s(1.9.0)</title>
@@ -277,28 +277,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
-    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
-    <data>
-        <display>
-        <title>ubuntu配置shadowsocks</title>
-        <pubTime>2015-12-05T16:00:00.000Z</pubTime>
-        
-        <tag>tool</tag>
-         
-        <tag>shadowsocks</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     <data>
@@ -333,6 +311,28 @@
         <tag>irc</tag>
          
         <tag>community</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    <data>
+        <display>
+        <title>ubuntu配置shadowsocks</title>
+        <pubTime>2015-12-05T16:00:00.000Z</pubTime>
+        
+        <tag>tool</tag>
+         
+        <tag>shadowsocks</tag>
          
          
            
@@ -479,28 +479,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
-    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
-    <data>
-        <display>
-        <title>Transfer Volume(volume过户)</title>
-        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
-        
-        <tag>openstack</tag>
-         
-        <tag>cinder</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
@@ -526,6 +504,28 @@
         <title>SQLalchemmy - 1</title>
         <pubTime>2015-10-28T16:00:00.000Z</pubTime>
         
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
+    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
+    <data>
+        <display>
+        <title>Transfer Volume(volume过户)</title>
+        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
+        
+        <tag>openstack</tag>
+         
+        <tag>cinder</tag>
+         
          
            
              
@@ -603,28 +603,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/09/vim-conf/</loc>
-    <lastmod>2018-03-25T11:58:56.103Z</lastmod>
-    <data>
-        <display>
-        <title>vim常用配置</title>
-        <pubTime>2015-10-08T16:00:00.000Z</pubTime>
-        
-        <tag>tool</tag>
-         
-        <tag>vim</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/10/03/Shell-again/</loc>
     <lastmod>2018-03-25T11:58:56.103Z</lastmod>
     <data>
@@ -647,21 +625,21 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/02/Shell-again/</loc>
-    <lastmod>2018-03-25T11:58:56.102Z</lastmod>
+    <loc>http://cheneydc.me/2015/10/09/vim-conf/</loc>
+    <lastmod>2018-03-25T11:58:56.103Z</lastmod>
     <data>
         <display>
-        <title>Shell--再来一遍-1</title>
-        <pubTime>2015-10-01T16:00:00.000Z</pubTime>
+        <title>vim常用配置</title>
+        <pubTime>2015-10-08T16:00:00.000Z</pubTime>
         
-        <tag>linux</tag>
+        <tag>tool</tag>
          
-        <tag>shell</tag>
+        <tag>vim</tag>
          
          
            
              
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -691,6 +669,28 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2015/10/02/Shell-again/</loc>
+    <lastmod>2018-03-25T11:58:56.102Z</lastmod>
+    <data>
+        <display>
+        <title>Shell--再来一遍-1</title>
+        <pubTime>2015-10-01T16:00:00.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+        <tag>shell</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2015/10/01/create-nodejs-app-on-rancher/</loc>
     <lastmod>2018-03-25T11:58:56.101Z</lastmod>
     <data>
@@ -713,15 +713,13 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/05/18/docker-study-1/</loc>
+    <loc>http://cheneydc.me/2015/05/16/devstack-deploy-openstack/</loc>
     <lastmod>2018-03-25T11:58:56.100Z</lastmod>
     <data>
         <display>
-        <title>docker学习（1）</title>
-        <pubTime>2015-05-17T16:00:00.000Z</pubTime>
+        <title>devstack部署openstack</title>
+        <pubTime>2015-05-15T16:00:00.000Z</pubTime>
         
-        <tag>docker</tag>
-         
          
            
              
@@ -733,13 +731,15 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/05/16/devstack-deploy-openstack/</loc>
+    <loc>http://cheneydc.me/2015/05/18/docker-study-1/</loc>
     <lastmod>2018-03-25T11:58:56.100Z</lastmod>
     <data>
         <display>
-        <title>devstack部署openstack</title>
-        <pubTime>2015-05-15T16:00:00.000Z</pubTime>
+        <title>docker学习（1）</title>
+        <pubTime>2015-05-17T16:00:00.000Z</pubTime>
         
+        <tag>docker</tag>
+         
          
            
              
