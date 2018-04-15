@@ -216,6 +216,106 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2015/11/20/python-greenlet/">python - greenlet</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-11-20
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>greenlet，也就是协程，是<a href="http://www.stackless.com/" target="_blank" rel="noopener">Stackless</a>的副产物，是一个更加原始的微线程的概念，但是没有调度（摘自<a href="http://www.oschina.net/p/greenlet/" target="_blank" rel="noopener">http://www.oschina.net/p/greenlet/）</a>）。所以使用协程的话就需要自己处理调度问题。这样可以主动的在阻塞的时候可以让步给其他协程工作，提高CPU的利用率。</p>
+          <div class="read-more">
+            <a href="/2015/11/20/python-greenlet/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/11/19/pycharm-remote-debug/">pycharm 远程调试</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-11-19
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/工具/">工具</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>pycharm不得不说是用的最顺手的一个IDE了，最近尝试了下pycharm的远程调试功能。</p>
+          <div class="read-more">
+            <a href="/2015/11/19/pycharm-remote-debug/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2015/11/09/oslo-config/">openstack中的oslo_config</a>
         
       </h1>
@@ -416,58 +516,6 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2015/10/26/image-volume-cache/">image-volume cache</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-10-26
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>原文： <a href="http://docs.openstack.org/admin-guide-cloud/blockstorage_image_volume_cache.html" target="_blank" rel="noopener">Image-Volume cache</a></p>
-<p>Openstack块存储有一个可选的功能，镜像缓存，可以提升从镜像创建卷的性能。这个改进依赖很多因素，主要看存储的后端克隆卷的速度有多快。</p>
-<p>当一个卷第一次从镜像创建的时候，块存储的内部租户也会创建一个image-volume缓存。之后如果再请求从这个image创建volume的话就直接clone这个缓存，不需要再下载镜像的内容然后复制数据到卷里了。</p>
-          <div class="read-more">
-            <a href="/2015/10/26/image-volume-cache/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
           <a class="post-link" href="/2015/10/26/transfer-volume/">Transfer Volume(volume过户)</a>
         
       </h1>
@@ -503,6 +551,58 @@
 <p>通过<code>cinder transfer*</code>等命令可以完成volume的过户。对于volume的发送方，需要创建一个transfer，然后将transfer的id和authorization key发送给接收方。接收方得到id和key之后就能通过命令完成volume的过户。</p>
           <div class="read-more">
             <a href="/2015/10/26/transfer-volume/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/26/image-volume-cache/">image-volume cache</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-26
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>原文： <a href="http://docs.openstack.org/admin-guide-cloud/blockstorage_image_volume_cache.html" target="_blank" rel="noopener">Image-Volume cache</a></p>
+<p>Openstack块存储有一个可选的功能，镜像缓存，可以提升从镜像创建卷的性能。这个改进依赖很多因素，主要看存储的后端克隆卷的速度有多快。</p>
+<p>当一个卷第一次从镜像创建的时候，块存储的内部租户也会创建一个image-volume缓存。之后如果再请求从这个image创建volume的话就直接clone这个缓存，不需要再下载镜像的内容然后复制数据到卷里了。</p>
+          <div class="read-more">
+            <a href="/2015/10/26/image-volume-cache/" class="read-more-link">阅读更多</a>
           </div>
         
       
@@ -604,107 +704,6 @@
 <h1 id="OSTF-是什么"><a href="#OSTF-是什么" class="headerlink" title="OSTF 是什么"></a>OSTF 是什么</h1><p>openstack的庞大就不多说了，小可也刚刚摸出点门道，觉得晕的，自己开始能搭起来一个环境，看到虚机跑起来了就已经拜谢六丁六甲了，但是千里之堤溃于蚁穴，这样庞大复杂的系统想不出问题是不可能的，而对于我们平时搭建和基本的使用来说，有些问题是不容易发现的，这时候需要进行系统的和业务逻辑相关的测试来保证系统的正常运行。</p>
           <div class="read-more">
             <a href="/2015/10/16/ostf/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2015/10/09/vim-conf/">vim常用配置</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-10-09
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/工具/">工具</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>本人不是IDE党，不是vim党，emacs也木用过，对于编辑器没有特别偏好，觉得只要符合自己的习惯，能提高自己的效率就是好的。</p>
-<p>vim一直在用，没有深入研究过，一个工具而已，不过最近经常虚拟机里面用，每次如果从头配置都比较麻烦，所以整理的时候就都放脚本里了，省着一点点弄，忒麻烦……</p>
-          <div class="read-more">
-            <a href="/2015/10/09/vim-conf/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2015/10/03/Shell-again/">Shell--再来一遍-2</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-10-03
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <h1 id="3-变量和参数"><a href="#3-变量和参数" class="headerlink" title="3.变量和参数"></a>3.变量和参数</h1><h2 id="变量的赋值"><a href="#变量的赋值" class="headerlink" title="变量的赋值"></a>变量的赋值</h2><p>$var、var，区别好这两个，就基本能正常使用变量了，var只是变量的名字，好比一个人的名字，狗蛋啊、狗剩啊……$var才是这个变量的值，实际上$var只是<strong>${var}</strong>的简化方式，有的地方写成$var会不好理解，就要写成${var}的形式了。</p>
-          <div class="read-more">
-            <a href="/2015/10/03/Shell-again/" class="read-more-link">阅读更多</a>
           </div>
         
       

@@ -4,32 +4,8 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2018/03/24/deploy-minikube-on-windows/</loc>
-    <lastmod>2018-04-15T01:12:52.861Z</lastmod>
-    <data>
-        <display>
-        <title>windows上用minikube部署k8s(1.9.0)</title>
-        <pubTime>2018-03-23T23:43:24.000Z</pubTime>
-        
-        <tag>kubernetes</tag>
-         
-        <tag>minikube</tag>
-         
-        <tag>windows</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2018/04/13/best-white-noise/</loc>
-    <lastmod>2018-04-13T16:12:58.540Z</lastmod>
+    <lastmod>2018-04-15T13:52:59.061Z</lastmod>
     <data>
         <display>
         <title>工作常备白噪音</title>
@@ -52,6 +28,100 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2018/03/30/prepare-coa/</loc>
+    <lastmod>2018-04-15T13:52:57.509Z</lastmod>
+    <data>
+        <display>
+        <title>准备COA考试</title>
+        <pubTime>2018-03-30T14:33:55.000Z</pubTime>
+        
+        <tag>openstack</tag>
+         
+        <tag>coa</tag>
+         
+         
+           
+             
+              <breadCrumb title="openstack" url="http://cheneydc.me/categories/openstack/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2018/04/15/ingress-on-minikube/</loc>
+    <lastmod>2018-04-15T13:52:55.545Z</lastmod>
+    <data>
+        <display>
+        <title>k8s使用ingress暴漏服务</title>
+        <pubTime>2018-04-15T09:46:32.683Z</pubTime>
+        
+        <tag>kubernetes</tag>
+         
+        <tag>service</tag>
+         
+        <tag>ingress</tag>
+         
+         
+           
+             
+              <breadCrumb title="kubernetes" url="http://cheneydc.me/categories/kubernetes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2018/04/15/deploy-k8s-minikube-quick/</loc>
+    <lastmod>2018-04-15T13:52:51.698Z</lastmod>
+    <data>
+        <display>
+        <title>使用minikube快速部署k8s集群</title>
+        <pubTime>2018-04-15T12:04:00.000Z</pubTime>
+        
+        <tag>kubernetes</tag>
+         
+        <tag>minikube</tag>
+         
+        <tag>deploy</tag>
+         
+         
+           
+             
+              <breadCrumb title="kubernetes" url="http://cheneydc.me/categories/kubernetes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2018/03/24/deploy-minikube-on-windows/</loc>
+    <lastmod>2018-04-15T13:52:45.450Z</lastmod>
+    <data>
+        <display>
+        <title>windows上用minikube部署k8s(1.9.0)</title>
+        <pubTime>2018-03-23T23:43:24.000Z</pubTime>
+        
+        <tag>kubernetes</tag>
+         
+        <tag>minikube</tag>
+         
+        <tag>windows</tag>
+         
+         
+           
+             
+              <breadCrumb title="kubernetes" url="http://cheneydc.me/categories/kubernetes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2018/04/10/noproxy/</loc>
     <lastmod>2018-04-10T13:13:08.463Z</lastmod>
     <data>
@@ -62,28 +132,6 @@
         <tag>linux</tag>
          
         <tag>proxy</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2018/03/30/prepare-coa/</loc>
-    <lastmod>2018-04-09T15:01:42.237Z</lastmod>
-    <data>
-        <display>
-        <title>准备COA考试</title>
-        <pubTime>2018-03-30T14:33:55.000Z</pubTime>
-        
-        <tag>openstack</tag>
-         
-        <tag>coa</tag>
          
          
            
@@ -199,24 +247,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2016/02/13/spring-festival/</loc>
-    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
-    <data>
-        <display>
-        <title>2016年春节随笔(一)</title>
-        <pubTime>2016-02-12T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="生活" url="http://cheneydc.me/categories/%E7%94%9F%E6%B4%BB/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2016/03/01/ovirt-over-all/</loc>
     <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     <data>
@@ -232,6 +262,24 @@
            
              
               <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2016/02/13/spring-festival/</loc>
+    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
+    <data>
+        <display>
+        <title>2016年春节随笔(一)</title>
+        <pubTime>2016-02-12T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="生活" url="http://cheneydc.me/categories/%E7%94%9F%E6%B4%BB/"/>
           
         </display>
     </data>
@@ -277,16 +325,16 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
+    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     <data>
         <display>
-        <title>Gitlab与jenkins集成</title>
-        <pubTime>2015-12-17T16:00:00.000Z</pubTime>
+        <title>ubuntu配置shadowsocks</title>
+        <pubTime>2015-12-05T16:00:00.000Z</pubTime>
         
-        <tag>jenkins</tag>
+        <tag>tool</tag>
          
-        <tag>gitlab</tag>
+        <tag>shadowsocks</tag>
          
          
            
@@ -299,16 +347,16 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
+    <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     <data>
         <display>
-        <title>ubuntu配置shadowsocks</title>
-        <pubTime>2015-12-05T16:00:00.000Z</pubTime>
+        <title>Gitlab与jenkins集成</title>
+        <pubTime>2015-12-17T16:00:00.000Z</pubTime>
         
-        <tag>tool</tag>
+        <tag>gitlab</tag>
          
-        <tag>shadowsocks</tag>
+        <tag>jenkins</tag>
          
          
            
@@ -338,6 +386,28 @@
            
              
               <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/12/03/horizon-support-v3/</loc>
+    <lastmod>2018-03-25T11:58:56.108Z</lastmod>
+    <data>
+        <display>
+        <title>配置horizon支持keystone v3 api</title>
+        <pubTime>2015-12-02T16:00:00.000Z</pubTime>
+        
+        <tag>openstack</tag>
+         
+        <tag>horizon</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
           
         </display>
     </data>
@@ -381,17 +451,13 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/03/horizon-support-v3/</loc>
-    <lastmod>2018-03-25T11:58:56.108Z</lastmod>
+    <loc>http://cheneydc.me/2015/11/20/python-eventlet/</loc>
+    <lastmod>2018-03-25T11:58:56.107Z</lastmod>
     <data>
         <display>
-        <title>配置horizon支持keystone v3 api</title>
-        <pubTime>2015-12-02T16:00:00.000Z</pubTime>
+        <title>python - Eventlet</title>
+        <pubTime>2015-11-19T16:00:00.000Z</pubTime>
         
-        <tag>openstack</tag>
-         
-        <tag>horizon</tag>
-         
          
            
              
@@ -414,24 +480,6 @@
            
              
               <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2015/11/20/python-eventlet/</loc>
-    <lastmod>2018-03-25T11:58:56.107Z</lastmod>
-    <data>
-        <display>
-        <title>python - Eventlet</title>
-        <pubTime>2015-11-19T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
           
         </display>
     </data>
@@ -479,17 +527,13 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
         <display>
-        <title>Transfer Volume(volume过户)</title>
-        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
+        <title>SQLalchemmy - 2</title>
+        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
         
-        <tag>openstack</tag>
-         
-        <tag>cinder</tag>
-         
          
            
              
@@ -519,13 +563,17 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
+    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
         <display>
-        <title>SQLalchemmy - 2</title>
-        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
+        <title>Transfer Volume(volume过户)</title>
+        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
         
+        <tag>openstack</tag>
+         
+        <tag>cinder</tag>
+         
          
            
              
