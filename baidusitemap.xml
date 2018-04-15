@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://cheneydc.me/2018/03/24/deploy-minikube-on-windows/</loc>
-    <lastmod>2018-04-14T09:52:39.397Z</lastmod>
+    <lastmod>2018-04-15T01:12:52.861Z</lastmod>
     <data>
         <display>
         <title>windows上用minikube部署k8s(1.9.0)</title>
@@ -199,6 +199,24 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2016/02/13/spring-festival/</loc>
+    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
+    <data>
+        <display>
+        <title>2016年春节随笔(一)</title>
+        <pubTime>2016-02-12T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="生活" url="http://cheneydc.me/categories/%E7%94%9F%E6%B4%BB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2016/03/01/ovirt-over-all/</loc>
     <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     <data>
@@ -214,24 +232,6 @@
            
              
               <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2016/02/13/spring-festival/</loc>
-    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
-    <data>
-        <display>
-        <title>2016年春节随笔(一)</title>
-        <pubTime>2016-02-12T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="生活" url="http://cheneydc.me/categories/%E7%94%9F%E6%B4%BB/"/>
           
         </display>
     </data>
@@ -284,9 +284,31 @@
         <title>Gitlab与jenkins集成</title>
         <pubTime>2015-12-17T16:00:00.000Z</pubTime>
         
+        <tag>jenkins</tag>
+         
         <tag>gitlab</tag>
          
-        <tag>jenkins</tag>
+         
+           
+             
+              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    <data>
+        <display>
+        <title>ubuntu配置shadowsocks</title>
+        <pubTime>2015-12-05T16:00:00.000Z</pubTime>
+        
+        <tag>tool</tag>
+         
+        <tag>shadowsocks</tag>
          
          
            
@@ -323,21 +345,17 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
-    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
+    <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     <data>
         <display>
-        <title>ubuntu配置shadowsocks</title>
-        <pubTime>2015-12-05T16:00:00.000Z</pubTime>
+        <title>python - greenlet</title>
+        <pubTime>2015-11-19T16:00:00.000Z</pubTime>
         
-        <tag>tool</tag>
-         
-        <tag>shadowsocks</tag>
-         
          
            
              
-              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
           
         </display>
     </data>
@@ -385,17 +403,17 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
-    <lastmod>2018-03-25T11:58:56.108Z</lastmod>
+    <loc>http://cheneydc.me/2015/11/19/pycharm-remote-debug/</loc>
+    <lastmod>2018-03-25T11:58:56.107Z</lastmod>
     <data>
         <display>
-        <title>python - greenlet</title>
-        <pubTime>2015-11-19T16:00:00.000Z</pubTime>
+        <title>pycharm 远程调试</title>
+        <pubTime>2015-11-18T16:00:00.000Z</pubTime>
         
          
            
              
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -414,24 +432,6 @@
            
              
               <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2015/11/19/pycharm-remote-debug/</loc>
-    <lastmod>2018-03-25T11:58:56.107Z</lastmod>
-    <data>
-        <display>
-        <title>pycharm 远程调试</title>
-        <pubTime>2015-11-18T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -479,13 +479,17 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
+    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
         <display>
-        <title>SQLalchemmy - 2</title>
-        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
+        <title>Transfer Volume(volume过户)</title>
+        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
         
+        <tag>openstack</tag>
+         
+        <tag>cinder</tag>
+         
          
            
              
@@ -515,17 +519,13 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
         <display>
-        <title>Transfer Volume(volume过户)</title>
-        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
+        <title>SQLalchemmy - 2</title>
+        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
         
-        <tag>openstack</tag>
-         
-        <tag>cinder</tag>
-         
          
            
              
@@ -603,28 +603,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/03/Shell-again/</loc>
-    <lastmod>2018-03-25T11:58:56.103Z</lastmod>
-    <data>
-        <display>
-        <title>Shell--再来一遍-2</title>
-        <pubTime>2015-10-02T16:00:00.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-        <tag>shell</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/10/09/vim-conf/</loc>
     <lastmod>2018-03-25T11:58:56.103Z</lastmod>
     <data>
@@ -640,6 +618,28 @@
            
              
               <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/10/03/Shell-again/</loc>
+    <lastmod>2018-03-25T11:58:56.103Z</lastmod>
+    <data>
+        <display>
+        <title>Shell--再来一遍-2</title>
+        <pubTime>2015-10-02T16:00:00.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+        <tag>shell</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
           
         </display>
     </data>
@@ -713,13 +713,15 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/05/16/devstack-deploy-openstack/</loc>
+    <loc>http://cheneydc.me/2015/05/18/docker-study-1/</loc>
     <lastmod>2018-03-25T11:58:56.100Z</lastmod>
     <data>
         <display>
-        <title>devstack部署openstack</title>
-        <pubTime>2015-05-15T16:00:00.000Z</pubTime>
+        <title>docker学习（1）</title>
+        <pubTime>2015-05-17T16:00:00.000Z</pubTime>
         
+        <tag>docker</tag>
+         
          
            
              
@@ -731,15 +733,13 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/05/18/docker-study-1/</loc>
+    <loc>http://cheneydc.me/2015/05/16/devstack-deploy-openstack/</loc>
     <lastmod>2018-03-25T11:58:56.100Z</lastmod>
     <data>
         <display>
-        <title>docker学习（1）</title>
-        <pubTime>2015-05-17T16:00:00.000Z</pubTime>
+        <title>devstack部署openstack</title>
+        <pubTime>2015-05-15T16:00:00.000Z</pubTime>
         
-        <tag>docker</tag>
-         
          
            
              
