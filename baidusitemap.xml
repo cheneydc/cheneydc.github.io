@@ -211,6 +211,30 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
+    <lastmod>2018-03-25T11:58:56.112Z</lastmod>
+    <data>
+        <display>
+        <title>提交package到pypi</title>
+        <pubTime>2016-04-07T16:00:00.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>pypi</tag>
+         
+        <tag>pip</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2016/04/15/keystone-v3-hierarchical-multitenancy/</loc>
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
     <data>
@@ -227,30 +251,6 @@
         <tag>project</tag>
          
         <tag>concept</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
-    <lastmod>2018-03-25T11:58:56.112Z</lastmod>
-    <data>
-        <display>
-        <title>提交package到pypi</title>
-        <pubTime>2016-04-07T16:00:00.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>pypi</tag>
-         
-        <tag>pip</tag>
          
          
            
@@ -367,30 +367,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
-    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
-    <data>
-        <display>
-        <title>怎样加入freenode的openstack频道</title>
-        <pubTime>2015-12-16T16:00:00.000Z</pubTime>
-        
-        <tag>openstack</tag>
-         
-        <tag>irc</tag>
-         
-        <tag>community</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     <data>
@@ -423,6 +399,30 @@
         <tag>gitlab</tag>
          
         <tag>jenkins</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    <data>
+        <display>
+        <title>怎样加入freenode的openstack频道</title>
+        <pubTime>2015-12-16T16:00:00.000Z</pubTime>
+        
+        <tag>openstack</tag>
+         
+        <tag>irc</tag>
+         
+        <tag>community</tag>
          
          
            
@@ -551,28 +551,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
-    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
-    <data>
-        <display>
-        <title>Transfer Volume(volume过户)</title>
-        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
-        
-        <tag>openstack</tag>
-         
-        <tag>cinder</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
@@ -609,6 +587,28 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
+    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
+    <data>
+        <display>
+        <title>Transfer Volume(volume过户)</title>
+        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
+        
+        <tag>openstack</tag>
+         
+        <tag>cinder</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2015/10/26/image-volume-cache/</loc>
     <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     <data>
@@ -631,16 +631,16 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
+    <loc>http://cheneydc.me/2015/10/16/ostf/</loc>
     <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     <data>
         <display>
-        <title>Shell--再来一遍-3</title>
-        <pubTime>2015-10-19T16:00:00.000Z</pubTime>
+        <title>OSTF without fuel on openstack - 1</title>
+        <pubTime>2015-10-15T16:00:00.000Z</pubTime>
         
-        <tag>linux</tag>
+        <tag>ostf</tag>
          
-        <tag>shell</tag>
+        <tag>openstack</tag>
          
          
            
@@ -653,16 +653,16 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/16/ostf/</loc>
+    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
     <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     <data>
         <display>
-        <title>OSTF without fuel on openstack - 1</title>
-        <pubTime>2015-10-15T16:00:00.000Z</pubTime>
+        <title>Shell--再来一遍-3</title>
+        <pubTime>2015-10-19T16:00:00.000Z</pubTime>
         
-        <tag>ostf</tag>
+        <tag>linux</tag>
          
-        <tag>openstack</tag>
+        <tag>shell</tag>
          
          
            

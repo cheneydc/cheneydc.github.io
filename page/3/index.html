@@ -216,56 +216,6 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2015/11/20/python-greenlet/">python - greenlet</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-11-20
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>greenlet，也就是协程，是<a href="http://www.stackless.com/" target="_blank" rel="noopener">Stackless</a>的副产物，是一个更加原始的微线程的概念，但是没有调度（摘自<a href="http://www.oschina.net/p/greenlet/" target="_blank" rel="noopener">http://www.oschina.net/p/greenlet/）</a>）。所以使用协程的话就需要自己处理调度问题。这样可以主动的在阻塞的时候可以让步给其他协程工作，提高CPU的利用率。</p>
-          <div class="read-more">
-            <a href="/2015/11/20/python-greenlet/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
           <a class="post-link" href="/2015/11/20/python-eventlet/">python - Eventlet</a>
         
       </h1>
@@ -297,6 +247,54 @@
           <p>计划中</p>
 <p><a href="http://eventlet.net/" target="_blank" rel="noopener">文档</a></p>
 <p><a href="http://eventlet.net/doc/design_patterns.html#design-patterns" target="_blank" rel="noopener">参考</a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/11/20/python-stevedore/">python - stevedore</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-11-20
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>计划中</p>
+<p><a href="http://docs.openstack.org/developer/stevedore/" target="_blank" rel="noopener">文档</a></p>
+<p><a href="http://yansu.org/2013/06/07/learn-python-setuptools-in-detail.html" target="_blank" rel="noopener">http://yansu.org/2013/06/07/learn-python-setuptools-in-detail.html</a><br><a href="http://yansu.org/2013/06/09/learn-python-abc-module.html" target="_blank" rel="noopener">http://yansu.org/2013/06/09/learn-python-abc-module.html</a><br><a href="http://yansu.org/2013/06/09/learn-python-stevedore-module-in-detail.html" target="_blank" rel="noopener">http://yansu.org/2013/06/09/learn-python-stevedore-module-in-detail.html</a></p>
 
         
       
@@ -465,6 +463,53 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2015/10/29/sqlalchemy-2/">SQLalchemmy - 2</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-29
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>这个就用点记点了。</p>
+<h1 id="func"><a href="#func" class="headerlink" title="func"></a>func</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = session.query(User.id, User.name)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.all()</span><br><span class="line">[(<span class="number">1</span>, <span class="string">u'aaa'</span>), (<span class="number">2</span>, <span class="string">u'ccc'</span>), (<span class="number">3</span>, <span class="string">u'ed'</span>), (<span class="number">4</span>, <span class="string">u'zxwer'</span>), (<span class="number">5</span>, <span class="string">u'fake'</span>), (<span class="number">6</span>, <span class="string">u'dc'</span>), (<span class="number">7</span>, <span class="string">u'dc'</span>), (<span class="number">8</span>, <span class="string">u'dc'</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1 = session.query(func.sum(User.id))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1.all()</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">24</span>,<span class="number">312</span> INFO sqlalchemy.engine.base.Engine SELECT sum(users.id) AS sum_1</span><br><span class="line">FROM users</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">24</span>,<span class="number">312</span> INFO sqlalchemy.engine.base.Engine ()</span><br><span class="line">[(<span class="number">36</span>,)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1 = session.query(func.sum(User.id*<span class="number">2</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1.all()</span><br><span class="line">2015-11-11 22:06:55,466 INFO sqlalchemy.engine.base.Engine SELECT sum(users.id * ?) AS sum_1</span><br><span class="line">FROM users</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">55</span>,<span class="number">466</span> INFO sqlalchemy.engine.base.Engine (<span class="number">2</span>,)</span><br><span class="line">[(<span class="number">72</span>,)]</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2015/10/29/sqlalchemy-1/">SQLalchemmy - 1</a>
         
       </h1>
@@ -517,13 +562,13 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2015/10/29/sqlalchemy-2/">SQLalchemmy - 2</a>
+          <a class="post-link" href="/2015/10/26/transfer-volume/">Transfer Volume(volume过户)</a>
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2015-10-29
+          2015-10-26
         </span>
         
           <div class="post-category">
@@ -543,11 +588,16 @@
       
         
         
+          
+        
 
         
-          <p>这个就用点记点了。</p>
-<h1 id="func"><a href="#func" class="headerlink" title="func"></a>func</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = session.query(User.id, User.name)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.all()</span><br><span class="line">[(<span class="number">1</span>, <span class="string">u'aaa'</span>), (<span class="number">2</span>, <span class="string">u'ccc'</span>), (<span class="number">3</span>, <span class="string">u'ed'</span>), (<span class="number">4</span>, <span class="string">u'zxwer'</span>), (<span class="number">5</span>, <span class="string">u'fake'</span>), (<span class="number">6</span>, <span class="string">u'dc'</span>), (<span class="number">7</span>, <span class="string">u'dc'</span>), (<span class="number">8</span>, <span class="string">u'dc'</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1 = session.query(func.sum(User.id))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1.all()</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">24</span>,<span class="number">312</span> INFO sqlalchemy.engine.base.Engine SELECT sum(users.id) AS sum_1</span><br><span class="line">FROM users</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">24</span>,<span class="number">312</span> INFO sqlalchemy.engine.base.Engine ()</span><br><span class="line">[(<span class="number">36</span>,)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1 = session.query(func.sum(User.id*<span class="number">2</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1.all()</span><br><span class="line">2015-11-11 22:06:55,466 INFO sqlalchemy.engine.base.Engine SELECT sum(users.id * ?) AS sum_1</span><br><span class="line">FROM users</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">55</span>,<span class="number">466</span> INFO sqlalchemy.engine.base.Engine (<span class="number">2</span>,)</span><br><span class="line">[(<span class="number">72</span>,)]</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
-
+          <p>原文：<a href="http://docs.openstack.org/user-guide/common/cli_manage_volumes.html" target="_blank" rel="noopener">Transfer a Volume</a></p>
+<h1 id="Transfer-a-volume"><a href="#Transfer-a-volume" class="headerlink" title="Transfer a volume"></a>Transfer a volume</h1><p>这个功能可以使volume在不同的租户间转移。</p>
+<p>通过<code>cinder transfer*</code>等命令可以完成volume的过户。对于volume的发送方，需要创建一个transfer，然后将transfer的id和authorization key发送给接收方。接收方得到id和key之后就能通过命令完成volume的过户。</p>
+          <div class="read-more">
+            <a href="/2015/10/26/transfer-volume/" class="read-more-link">阅读更多</a>
+          </div>
         
       
     </div>
@@ -599,58 +649,6 @@
 <p>当一个卷第一次从镜像创建的时候，块存储的内部租户也会创建一个image-volume缓存。之后如果再请求从这个image创建volume的话就直接clone这个缓存，不需要再下载镜像的内容然后复制数据到卷里了。</p>
           <div class="read-more">
             <a href="/2015/10/26/image-volume-cache/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2015/10/26/transfer-volume/">Transfer Volume(volume过户)</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-10-26
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>原文：<a href="http://docs.openstack.org/user-guide/common/cli_manage_volumes.html" target="_blank" rel="noopener">Transfer a Volume</a></p>
-<h1 id="Transfer-a-volume"><a href="#Transfer-a-volume" class="headerlink" title="Transfer a volume"></a>Transfer a volume</h1><p>这个功能可以使volume在不同的租户间转移。</p>
-<p>通过<code>cinder transfer*</code>等命令可以完成volume的过户。对于volume的发送方，需要创建一个transfer，然后将transfer的id和authorization key发送给接收方。接收方得到id和key之后就能通过命令完成volume的过户。</p>
-          <div class="read-more">
-            <a href="/2015/10/26/transfer-volume/" class="read-more-link">阅读更多</a>
           </div>
         
       

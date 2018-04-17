@@ -86,14 +86,14 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2016/04/15/keystone-v3-hierarchical-multitenancy/</loc>
+    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
     
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
+    <loc>http://cheneydc.me/2016/04/15/keystone-v3-hierarchical-multitenancy/</loc>
     
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
     
@@ -135,13 +135,6 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
-    
-    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
     
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
@@ -150,6 +143,13 @@
   
   <url>
     <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
     
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     
@@ -198,13 +198,6 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
-    
-    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
     
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
@@ -219,6 +212,13 @@
   </url>
   
   <url>
+    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cheneydc.me/2015/10/26/image-volume-cache/</loc>
     
     <lastmod>2018-03-25T11:58:56.104Z</lastmod>
@@ -226,14 +226,14 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
+    <loc>http://cheneydc.me/2015/10/16/ostf/</loc>
     
     <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/16/ostf/</loc>
+    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
     
     <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     
