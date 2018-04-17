@@ -17,10 +17,12 @@
 
 
 
-  <meta name="description" content="Blog cheneydc"/>
+  <meta name="description" content="minikube集群上部署helm"/>
 
 
 
+
+  <meta name="keywords" content="kubernetes, tiller, helm, 种葱得葱" />
 
 
 
@@ -40,7 +42,7 @@
 
 
 
-<link rel="canonical" href="http://cheneydc.me/categories/技术/"/>
+<link rel="canonical" href="http://cheneydc.me/2018/04/17/install-helm-on-minikube/"/>
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
@@ -79,11 +81,7 @@
 
 
 
-    <title>
-  
-    技术 · 种葱得葱
-  
-</title>
+    <title> minikube集群上部署helm - 种葱得葱 </title>
   <link rel="stylesheet" href="/css/prism.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -214,183 +212,116 @@
           <div id="content" class="content">
             
   
-  <section id="archive" class="archive">
-    
-      
-        <div class="archive-title category">
-          <h2 class="archive-name">技术</h2>
-        </div>
-      
-    
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          minikube集群上部署helm
+        
+      </h1>
 
-    
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2018-04-10
-          
+      <div class="post-meta">
+        <span class="post-time">
+          2018-04-17
         </span>
-        <span class="archive-post-title">
-          <a href="/2018/04/10/noproxy/" class="archive-post-link">
-            配置noproxy
-          </a>
-        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/kubernetes/">kubernetes</a>
+            
+          </div>
+        
+        
       </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        <p>用minikube</p>
+
+      
+    </div>
+
     
       
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2018-03-14
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2018/03/14/network-knowledge/" class="archive-post-link">
-            网络知识
-          </a>
-        </span>
-      </div>
-    
       
 
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2016-04-15
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2016/04/15/keystone-v3-hierarchical-multitenancy/" class="archive-post-link">
-            Keystone_V3子项目概念梳理
-          </a>
-        </span>
-      </div>
-    
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://cheneydc.me">Cheney Dong</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://cheneydc.me/2018/04/17/install-helm-on-minikube/">http://cheneydc.me/2018/04/17/install-helm-on-minikube/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
       
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
 
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2016-04-08
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2016/04/08/publish-package-to-pypi/" class="archive-post-link">
-            提交package到pypi
-          </a>
-        </span>
-      </div>
-    
+
+
       
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2016-03-19
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2016/03/19/mistral-study/" class="archive-post-link">
-            Mistral小记
-          </a>
-        </span>
-      </div>
-    
       
+    
 
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2016-03-01
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2016/03/01/ovirt-over-all/" class="archive-post-link">
-            VDI之ovirt
-          </a>
-        </span>
-      </div>
     
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2016-01-14
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2016/01/14/forget-jenkins-admin-passwd/" class="archive-post-link">
-            忘了jenkins管理员密码了
-          </a>
-        </span>
-      </div>
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/kubernetes/">kubernetes</a>
+            
+              <a href="/tags/tiller/">tiller</a>
+            
+              <a href="/tags/helm/">helm</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
     
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2015-12-03
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2015/12/03/horizon-support-v3/" class="archive-post-link">
-            配置horizon支持keystone v3 api
-          </a>
-        </span>
-      </div>
-    
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2015-11-20
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2015/11/20/python-eventlet/" class="archive-post-link">
-            python - Eventlet
-          </a>
-        </span>
-      </div>
-    
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2015-11-20
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2015/11/20/python-stevedore/" class="archive-post-link">
-            python - stevedore
-          </a>
-        </span>
-      </div>
-    
-  </section>
-
-  
-  <nav class="pagination">
+      <a class="prev" href="/2018/04/17/ingress-on-minikube/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">k8s使用ingress暴漏服务</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
     
     
-      <a class="next" href="/categories/技术/page/2/">
-        <span class="next-text">下一页</span>
+      <a class="next" href="/2018/04/15/deploy-k8s-minikube-quick/">
+        <span class="next-text nav-default">使用minikube快速部署k8s集群</span>
+        <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
     
   </nav>
 
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
       </main>
@@ -481,9 +412,9 @@
   
   <script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = '';
-        this.page.identifier = 'categories/技术/index.html';
-        this.page.title = '';
+        this.page.url = 'http://cheneydc.me/2018/04/17/install-helm-on-minikube/';
+        this.page.identifier = '2018/04/17/install-helm-on-minikube/';
+        this.page.title = 'minikube集群上部署helm';
     };
     (function() {
     var d = document, s = d.createElement('script');

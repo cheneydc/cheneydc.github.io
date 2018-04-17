@@ -247,7 +247,7 @@
 
     <div class="post-content">
       
-        <p>k8s集群的部署其实不复杂，了解清晰集群的整体服务以后用kubeadm也好还是minikube，或者其他工具都会很清楚如何部署，但是没有科学上网很多事情就变得复杂了……之前的一篇（）里面已经讲了如何用ali的容器景象服务来进行镜像的海外构建再转回本地，不过手动操作有些复杂。所以还是自动化的东西舒服啊，不用科学上网，也不用把一堆镜像先弄下来:)</p>
+        <p>k8s集群的部署其实不复杂，了解清晰集群的整体服务以后用kubeadm也好还是minikube，或者其他工具都会很清楚如何部署，但是没有科学上网很多事情就变得复杂了……之前的一篇（<a href="/2018/03/24/deploy-minikube-on-windows/" title="点击这里查看这篇文章">点击这里查看这篇文章</a>）里面已经讲了如何用ali的容器景象服务来进行镜像的海外构建再转回本地，不过手动操作有些复杂。所以还是自动化的东西舒服啊，不用科学上网，也不用把一堆镜像先弄下来:)</p>
 <a id="more"></a>
 <h2 id="镜像中转"><a href="#镜像中转" class="headerlink" title="镜像中转"></a>镜像中转</h2><p>我自己手动操作了几次，由于镜像有些多，于是创建了一个github上的Organizations，把中转需要的一些镜像加到其中，所有镜像的tag也都再各自Dockerfile的repo中创建相应的tag来一一对应进行维护。</p>
 <p>中转的Dockerfile固定并且有了秩序以后，ali的容器镜像服务中也都创建相应的仓库，一一对应各个镜像，还好ali的一个仓库可以匹配多个构建规则，这样只需要将github中的Dockerfile的各个tag创建相应的规则即可：</p>
@@ -326,9 +326,15 @@
         
   <nav class="post-nav">
     
+      <a class="prev" href="/2018/04/17/install-helm-on-minikube/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">minikube集群上部署helm</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
     
-      <a class="next" href="/2018/04/15/ingress-on-minikube/">
-        <span class="next-text nav-default">k8s使用ingress暴漏服务</span>
+    
+      <a class="next" href="/2018/04/13/best-white-noise/">
+        <span class="next-text nav-default">工作常备白噪音</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>

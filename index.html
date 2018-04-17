@@ -216,6 +216,104 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2018/04/17/ingress-on-minikube/">k8s使用ingress暴漏服务</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-04-17
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/kubernetes/">kubernetes</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>docker中使用端口映射可以访问容器中的服务，k8s中的pod可以通过service的NodePort方式暴漏服务，然而端口不能够定制，对于生产环境中还需要自己配置反向代理来搞定。</p>
+<p>Ingress从官方的定义来看就是允许访问集群服务的规则的集合。可以通过配置提供服务外部可达的url，负载均衡，terminate SSL等等。用户对api server发起ingress资源的请求，ingress controller是负责来实现ingress规则的，通常是一个负载均衡器。</p>
+<p>通过一个简单的操作看看怎么使用ingress</p>
+          <div class="read-more">
+            <a href="/2018/04/17/ingress-on-minikube/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2018/04/17/install-helm-on-minikube/">minikube集群上部署helm</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-04-17
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/kubernetes/">kubernetes</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>用minikube</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2018/04/15/deploy-k8s-minikube-quick/">使用minikube快速部署k8s集群</a>
         
       </h1>
@@ -246,61 +344,9 @@
         
 
         
-          <p>k8s集群的部署其实不复杂，了解清晰集群的整体服务以后用kubeadm也好还是minikube，或者其他工具都会很清楚如何部署，但是没有科学上网很多事情就变得复杂了……之前的一篇（）里面已经讲了如何用ali的容器景象服务来进行镜像的海外构建再转回本地，不过手动操作有些复杂。所以还是自动化的东西舒服啊，不用科学上网，也不用把一堆镜像先弄下来:)</p>
+          <p>k8s集群的部署其实不复杂，了解清晰集群的整体服务以后用kubeadm也好还是minikube，或者其他工具都会很清楚如何部署，但是没有科学上网很多事情就变得复杂了……之前的一篇（<a href="/2018/03/24/deploy-minikube-on-windows/" title="点击这里查看这篇文章">点击这里查看这篇文章</a>）里面已经讲了如何用ali的容器景象服务来进行镜像的海外构建再转回本地，不过手动操作有些复杂。所以还是自动化的东西舒服啊，不用科学上网，也不用把一堆镜像先弄下来:)</p>
           <div class="read-more">
             <a href="/2018/04/15/deploy-k8s-minikube-quick/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2018/04/15/ingress-on-minikube/">k8s使用ingress暴漏服务</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2018-04-15
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/kubernetes/">kubernetes</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>docker中使用端口映射可以访问容器中的服务，k8s中的pod可以通过service的NodePort方式暴漏服务，然而端口不能够定制，对于生产环境中还需要自己配置反向代理来搞定。</p>
-<p>Ingress从官方的定义来看就是允许访问集群服务的规则的集合。可以通过配置提供服务外部可达的url，负载均衡，terminate SSL等等。用户对api server发起ingress资源的请求，ingress controller是负责来实现ingress规则的，通常是一个负载均衡器。</p>
-<p>通过一个简单的操作看看怎么使用ingress</p>
-          <div class="read-more">
-            <a href="/2018/04/15/ingress-on-minikube/" class="read-more-link">阅读更多</a>
           </div>
         
       
@@ -650,56 +696,6 @@
           <p>小博客写写就烦了啊，虽然github免费啊，但是图片什么的整理好麻烦，又不想用太复杂的框架了，所以干脆附件了图片了都放七牛上了，当图床用了，不过每次都登录到上面再上传很麻烦啊，索性写了个小工具，上传然后返回链接，so方便啊，用的话<a href="https://github.com/cheneydc/qnupload" target="_blank" rel="noopener">点这里</a>。</p>
           <div class="read-more">
             <a href="/2016/04/08/publish-package-to-pypi/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2016/03/19/mistral-study/">Mistral小记</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2016-03-19
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>组里开始是拿来当crontab来使用的，这也是我最早对mistral的印象，云环境下的很多新项目其实也就是传统服务器上的应用的一个迁移。Mistral可以当作crontab来使用，但是远不止这些，Mistral实际是workflow-as-a-service，提供云环境下的工作流服务。更像是crontab+ansible的东西。</p>
-          <div class="read-more">
-            <a href="/2016/03/19/mistral-study/" class="read-more-link">阅读更多</a>
           </div>
         
       

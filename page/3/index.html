@@ -266,6 +266,54 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2015/11/20/python-eventlet/">python - Eventlet</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-11-20
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>计划中</p>
+<p><a href="http://eventlet.net/" target="_blank" rel="noopener">文档</a></p>
+<p><a href="http://eventlet.net/doc/design_patterns.html#design-patterns" target="_blank" rel="noopener">参考</a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2015/11/19/pycharm-remote-debug/">pycharm 远程调试</a>
         
       </h1>
@@ -367,7 +415,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2015/11/04/amqp-rpc/">openstack中的AMQP & RPC</a>
+          <a class="post-link" href="/2015/11/04/amqp-rpc/">openstack中的AMQP &amp; RPC</a>
         
       </h1>
 
@@ -400,6 +448,58 @@
           <p>开始的时候我只是想要了解下opensatck中的消息队列如何工作的，消息从哪来怎样分发，到哪去。网上搜寻了写资料，看的似懂非懂，转天我发现已然成了浆糊，一般通信协议就那么回事，和咱打电话聊聊天差不多，不过晕就晕在概念太多，没分清层次，那就捋捋概念伐……</p>
           <div class="read-more">
             <a href="/2015/11/04/amqp-rpc/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/29/sqlalchemy-1/">SQLalchemmy - 1</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-29
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>Openstack最近看的有点乱套了，openstack组件都是利用sqlalchemy来操作数据库的，赶上这个机会就看看了。</p>
+<p><a href="http://docs.sqlalchemy.org/en/rel_1_0/orm/tutorial.html" target="_blank" rel="noopener">官方文档</a></p>
+<p>SQLAlchemy是ORM框架的一种，可以将Python中的类和数据库中的表进行映射，并将类的实例和表数据库表中的数据进行对应。 这样一个抽象的数据库表我们就可以很方便的通过一个类来记录和操作了。</p>
+          <div class="read-more">
+            <a href="/2015/10/29/sqlalchemy-1/" class="read-more-link">阅读更多</a>
           </div>
         
       
@@ -464,13 +564,13 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2015/10/29/sqlalchemy-1/">SQLalchemmy - 1</a>
+          <a class="post-link" href="/2015/10/26/image-volume-cache/">image-volume cache</a>
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2015-10-29
+          2015-10-26
         </span>
         
           <div class="post-category">
@@ -494,11 +594,11 @@
         
 
         
-          <p>Openstack最近看的有点乱套了，openstack组件都是利用sqlalchemy来操作数据库的，赶上这个机会就看看了。</p>
-<p><a href="http://docs.sqlalchemy.org/en/rel_1_0/orm/tutorial.html" target="_blank" rel="noopener">官方文档</a></p>
-<p>SQLAlchemy是ORM框架的一种，可以将Python中的类和数据库中的表进行映射，并将类的实例和表数据库表中的数据进行对应。 这样一个抽象的数据库表我们就可以很方便的通过一个类来记录和操作了。</p>
+          <p>原文： <a href="http://docs.openstack.org/admin-guide-cloud/blockstorage_image_volume_cache.html" target="_blank" rel="noopener">Image-Volume cache</a></p>
+<p>Openstack块存储有一个可选的功能，镜像缓存，可以提升从镜像创建卷的性能。这个改进依赖很多因素，主要看存储的后端克隆卷的速度有多快。</p>
+<p>当一个卷第一次从镜像创建的时候，块存储的内部租户也会创建一个image-volume缓存。之后如果再请求从这个image创建volume的话就直接clone这个缓存，不需要再下载镜像的内容然后复制数据到卷里了。</p>
           <div class="read-more">
-            <a href="/2015/10/29/sqlalchemy-1/" class="read-more-link">阅读更多</a>
+            <a href="/2015/10/26/image-volume-cache/" class="read-more-link">阅读更多</a>
           </div>
         
       
@@ -568,58 +668,6 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2015/10/26/image-volume-cache/">image-volume cache</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-10-26
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>原文： <a href="http://docs.openstack.org/admin-guide-cloud/blockstorage_image_volume_cache.html" target="_blank" rel="noopener">Image-Volume cache</a></p>
-<p>Openstack块存储有一个可选的功能，镜像缓存，可以提升从镜像创建卷的性能。这个改进依赖很多因素，主要看存储的后端克隆卷的速度有多快。</p>
-<p>当一个卷第一次从镜像创建的时候，块存储的内部租户也会创建一个image-volume缓存。之后如果再请求从这个image创建volume的话就直接clone这个缓存，不需要再下载镜像的内容然后复制数据到卷里了。</p>
-          <div class="read-more">
-            <a href="/2015/10/26/image-volume-cache/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
           <a class="post-link" href="/2015/10/20/Shell-again/">Shell--再来一遍-3</a>
         
       </h1>
@@ -653,57 +701,6 @@
           <h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p>说实话这个部分是我最迷惑的，看来还是用的少啊。但是既然是引用，也就表示是特殊的，和不引用的不一样，搞清楚不一样的地方应该就好多了，下面看看具体情况。</p>
           <div class="read-more">
             <a href="/2015/10/20/Shell-again/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2015/10/16/ostf/">OSTF without fuel on openstack - 1</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-10-16
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>最近弄了一阵子OSTF，小记一下。</p>
-<h1 id="OSTF-是什么"><a href="#OSTF-是什么" class="headerlink" title="OSTF 是什么"></a>OSTF 是什么</h1><p>openstack的庞大就不多说了，小可也刚刚摸出点门道，觉得晕的，自己开始能搭起来一个环境，看到虚机跑起来了就已经拜谢六丁六甲了，但是千里之堤溃于蚁穴，这样庞大复杂的系统想不出问题是不可能的，而对于我们平时搭建和基本的使用来说，有些问题是不容易发现的，这时候需要进行系统的和业务逻辑相关的测试来保证系统的正常运行。</p>
-          <div class="read-more">
-            <a href="/2015/10/16/ostf/" class="read-more-link">阅读更多</a>
           </div>
         
       

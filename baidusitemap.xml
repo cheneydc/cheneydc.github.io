@@ -4,6 +4,96 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2015/11/04/amqp-rpc/</loc>
+    <lastmod>2018-04-17T22:56:45.594Z</lastmod>
+    <data>
+        <display>
+        <title>openstack中的AMQP &amp; RPC</title>
+        <pubTime>2015-11-03T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2018/04/17/ingress-on-minikube/</loc>
+    <lastmod>2018-04-17T13:55:14.229Z</lastmod>
+    <data>
+        <display>
+        <title>k8s使用ingress暴漏服务</title>
+        <pubTime>2018-04-17T13:55:14.229Z</pubTime>
+        
+        <tag>kubernetes</tag>
+         
+        <tag>service</tag>
+         
+        <tag>ingress</tag>
+         
+         
+           
+             
+              <breadCrumb title="kubernetes" url="http://cheneydc.me/categories/kubernetes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2018/04/17/install-helm-on-minikube/</loc>
+    <lastmod>2018-04-17T13:38:01.422Z</lastmod>
+    <data>
+        <display>
+        <title>minikube集群上部署helm</title>
+        <pubTime>2018-04-17T13:38:01.307Z</pubTime>
+        
+        <tag>kubernetes</tag>
+         
+        <tag>tiller</tag>
+         
+        <tag>helm</tag>
+         
+         
+           
+             
+              <breadCrumb title="kubernetes" url="http://cheneydc.me/categories/kubernetes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2018/04/15/deploy-k8s-minikube-quick/</loc>
+    <lastmod>2018-04-15T13:56:05.942Z</lastmod>
+    <data>
+        <display>
+        <title>使用minikube快速部署k8s集群</title>
+        <pubTime>2018-04-15T12:04:00.000Z</pubTime>
+        
+        <tag>kubernetes</tag>
+         
+        <tag>minikube</tag>
+         
+        <tag>deploy</tag>
+         
+         
+           
+             
+              <breadCrumb title="kubernetes" url="http://cheneydc.me/categories/kubernetes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2018/04/13/best-white-noise/</loc>
     <lastmod>2018-04-15T13:52:59.061Z</lastmod>
     <data>
@@ -43,54 +133,6 @@
            
              
               <breadCrumb title="openstack" url="http://cheneydc.me/categories/openstack/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2018/04/15/ingress-on-minikube/</loc>
-    <lastmod>2018-04-15T13:52:55.545Z</lastmod>
-    <data>
-        <display>
-        <title>k8s使用ingress暴漏服务</title>
-        <pubTime>2018-04-15T09:46:32.683Z</pubTime>
-        
-        <tag>kubernetes</tag>
-         
-        <tag>service</tag>
-         
-        <tag>ingress</tag>
-         
-         
-           
-             
-              <breadCrumb title="kubernetes" url="http://cheneydc.me/categories/kubernetes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2018/04/15/deploy-k8s-minikube-quick/</loc>
-    <lastmod>2018-04-15T13:52:51.698Z</lastmod>
-    <data>
-        <display>
-        <title>使用minikube快速部署k8s集群</title>
-        <pubTime>2018-04-15T12:04:00.000Z</pubTime>
-        
-        <tag>kubernetes</tag>
-         
-        <tag>minikube</tag>
-         
-        <tag>deploy</tag>
-         
-         
-           
-             
-              <breadCrumb title="kubernetes" url="http://cheneydc.me/categories/kubernetes/"/>
           
         </display>
     </data>
@@ -325,6 +367,30 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    <data>
+        <display>
+        <title>怎样加入freenode的openstack频道</title>
+        <pubTime>2015-12-16T16:00:00.000Z</pubTime>
+        
+        <tag>openstack</tag>
+         
+        <tag>irc</tag>
+         
+        <tag>community</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     <data>
@@ -369,30 +435,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
-    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
-    <data>
-        <display>
-        <title>怎样加入freenode的openstack频道</title>
-        <pubTime>2015-12-16T16:00:00.000Z</pubTime>
-        
-        <tag>openstack</tag>
-         
-        <tag>irc</tag>
-         
-        <tag>community</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/12/03/horizon-support-v3/</loc>
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     <data>
@@ -415,11 +457,11 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
+    <loc>http://cheneydc.me/2015/11/20/python-stevedore/</loc>
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     <data>
         <display>
-        <title>python - greenlet</title>
+        <title>python - stevedore</title>
         <pubTime>2015-11-19T16:00:00.000Z</pubTime>
         
          
@@ -433,11 +475,11 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-stevedore/</loc>
+    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     <data>
         <display>
-        <title>python - stevedore</title>
+        <title>python - greenlet</title>
         <pubTime>2015-11-19T16:00:00.000Z</pubTime>
         
          
@@ -509,13 +551,17 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/11/04/amqp-rpc/</loc>
-    <lastmod>2018-03-25T11:58:56.106Z</lastmod>
+    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
+    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
         <display>
-        <title>openstack中的AMQP & RPC</title>
-        <pubTime>2015-11-03T16:00:00.000Z</pubTime>
+        <title>Transfer Volume(volume过户)</title>
+        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
         
+        <tag>openstack</tag>
+         
+        <tag>cinder</tag>
+         
          
            
              
@@ -552,28 +598,6 @@
         <title>SQLalchemmy - 1</title>
         <pubTime>2015-10-28T16:00:00.000Z</pubTime>
         
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
-    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
-    <data>
-        <display>
-        <title>Transfer Volume(volume过户)</title>
-        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
-        
-        <tag>openstack</tag>
-         
-        <tag>cinder</tag>
-         
          
            
              
@@ -695,28 +719,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/02/GoSublime-Setting/</loc>
-    <lastmod>2018-03-25T11:58:56.102Z</lastmod>
-    <data>
-        <display>
-        <title>Sublime Text中GoSublime的设置</title>
-        <pubTime>2015-10-01T16:00:00.000Z</pubTime>
-        
-        <tag>tool</tag>
-         
-        <tag>sublime</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/10/02/Shell-again/</loc>
     <lastmod>2018-03-25T11:58:56.102Z</lastmod>
     <data>
@@ -732,6 +734,28 @@
            
              
               <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/10/02/GoSublime-Setting/</loc>
+    <lastmod>2018-03-25T11:58:56.102Z</lastmod>
+    <data>
+        <display>
+        <title>Sublime Text中GoSublime的设置</title>
+        <pubTime>2015-10-01T16:00:00.000Z</pubTime>
+        
+        <tag>tool</tag>
+         
+        <tag>sublime</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
