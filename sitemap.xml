@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cheneydc.me/2018/03/24/deploy-minikube-on-windows/</loc>
+    
+    <lastmod>2018-04-19T23:03:22.075Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cheneydc.me/2015/11/04/amqp-rpc/</loc>
     
     <lastmod>2018-04-17T22:56:45.594Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>http://cheneydc.me/2018/03/30/prepare-coa/</loc>
     
     <lastmod>2018-04-15T13:52:57.509Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cheneydc.me/2018/03/24/deploy-minikube-on-windows/</loc>
-    
-    <lastmod>2018-04-15T13:52:45.450Z</lastmod>
     
   </url>
   
@@ -79,7 +79,7 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2016/03/19/mistral-study/</loc>
+    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
     
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
     
@@ -93,7 +93,7 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
+    <loc>http://cheneydc.me/2016/03/19/mistral-study/</loc>
     
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
     
@@ -128,6 +128,13 @@
   </url>
   
   <url>
+    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
     
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
@@ -142,14 +149,7 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
-    
-    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
+    <loc>http://cheneydc.me/2015/12/03/horizon-support-v3/</loc>
     
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     
@@ -163,7 +163,7 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/12/03/horizon-support-v3/</loc>
+    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
     
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     
@@ -191,13 +191,6 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
-    
-    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
     
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
@@ -206,6 +199,13 @@
   
   <url>
     <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
     
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     

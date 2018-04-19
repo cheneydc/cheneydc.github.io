@@ -516,58 +516,6 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2015/10/26/transfer-volume/">Transfer Volume(volume过户)</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-10-26
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>原文：<a href="http://docs.openstack.org/user-guide/common/cli_manage_volumes.html" target="_blank" rel="noopener">Transfer a Volume</a></p>
-<h1 id="Transfer-a-volume"><a href="#Transfer-a-volume" class="headerlink" title="Transfer a volume"></a>Transfer a volume</h1><p>这个功能可以使volume在不同的租户间转移。</p>
-<p>通过<code>cinder transfer*</code>等命令可以完成volume的过户。对于volume的发送方，需要创建一个transfer，然后将transfer的id和authorization key发送给接收方。接收方得到id和key之后就能通过命令完成volume的过户。</p>
-          <div class="read-more">
-            <a href="/2015/10/26/transfer-volume/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
           <a class="post-link" href="/2015/10/26/image-volume-cache/">image-volume cache</a>
         
       </h1>
@@ -603,6 +551,58 @@
 <p>当一个卷第一次从镜像创建的时候，块存储的内部租户也会创建一个image-volume缓存。之后如果再请求从这个image创建volume的话就直接clone这个缓存，不需要再下载镜像的内容然后复制数据到卷里了。</p>
           <div class="read-more">
             <a href="/2015/10/26/image-volume-cache/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/26/transfer-volume/">Transfer Volume(volume过户)</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-26
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>原文：<a href="http://docs.openstack.org/user-guide/common/cli_manage_volumes.html" target="_blank" rel="noopener">Transfer a Volume</a></p>
+<h1 id="Transfer-a-volume"><a href="#Transfer-a-volume" class="headerlink" title="Transfer a volume"></a>Transfer a volume</h1><p>这个功能可以使volume在不同的租户间转移。</p>
+<p>通过<code>cinder transfer*</code>等命令可以完成volume的过户。对于volume的发送方，需要创建一个transfer，然后将transfer的id和authorization key发送给接收方。接收方得到id和key之后就能通过命令完成volume的过户。</p>
+          <div class="read-more">
+            <a href="/2015/10/26/transfer-volume/" class="read-more-link">阅读更多</a>
           </div>
         
       
