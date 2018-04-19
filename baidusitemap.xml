@@ -3,6 +3,7 @@
 
 
     
+    
   <url>
     <loc>http://cheneydc.me/2018/03/24/deploy-minikube-on-windows/</loc>
     <lastmod>2018-04-19T23:03:22.075Z</lastmod>
@@ -160,7 +161,6 @@
     </data>
     </url>
 
-    
     
     
     
@@ -343,30 +343,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
-    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
-    <data>
-        <display>
-        <title>怎样加入freenode的openstack频道</title>
-        <pubTime>2015-12-16T16:00:00.000Z</pubTime>
-        
-        <tag>openstack</tag>
-         
-        <tag>irc</tag>
-         
-        <tag>community</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     <data>
@@ -399,6 +375,30 @@
         <tag>gitlab</tag>
          
         <tag>jenkins</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    <data>
+        <display>
+        <title>怎样加入freenode的openstack频道</title>
+        <pubTime>2015-12-16T16:00:00.000Z</pubTime>
+        
+        <tag>openstack</tag>
+         
+        <tag>irc</tag>
+         
+        <tag>community</tag>
          
          
            
@@ -527,6 +527,24 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
+    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
+    <data>
+        <display>
+        <title>SQLalchemmy - 2</title>
+        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
@@ -556,24 +574,6 @@
          
         <tag>cinder</tag>
          
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
-    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
-    <data>
-        <display>
-        <title>SQLalchemmy - 2</title>
-        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
-        
          
            
              

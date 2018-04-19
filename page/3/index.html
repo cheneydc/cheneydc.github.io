@@ -216,7 +216,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2015/11/20/python-greenlet/">python - greenlet</a>
+          <a class="post-link" href="/2015/11/20/python-eventlet/">python - Eventlet</a>
         
       </h1>
 
@@ -242,14 +242,12 @@
       
         
         
-          
-        
 
         
-          <p>greenlet，也就是协程，是<a href="http://www.stackless.com/" target="_blank" rel="noopener">Stackless</a>的副产物，是一个更加原始的微线程的概念，但是没有调度（摘自<a href="http://www.oschina.net/p/greenlet/" target="_blank" rel="noopener">http://www.oschina.net/p/greenlet/）</a>）。所以使用协程的话就需要自己处理调度问题。这样可以主动的在阻塞的时候可以让步给其他协程工作，提高CPU的利用率。</p>
-          <div class="read-more">
-            <a href="/2015/11/20/python-greenlet/" class="read-more-link">阅读更多</a>
-          </div>
+          <p>计划中</p>
+<p><a href="http://eventlet.net/" target="_blank" rel="noopener">文档</a></p>
+<p><a href="http://eventlet.net/doc/design_patterns.html#design-patterns" target="_blank" rel="noopener">参考</a></p>
+
         
       
     </div>
@@ -516,58 +514,6 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2015/10/26/image-volume-cache/">image-volume cache</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-10-26
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>原文： <a href="http://docs.openstack.org/admin-guide-cloud/blockstorage_image_volume_cache.html" target="_blank" rel="noopener">Image-Volume cache</a></p>
-<p>Openstack块存储有一个可选的功能，镜像缓存，可以提升从镜像创建卷的性能。这个改进依赖很多因素，主要看存储的后端克隆卷的速度有多快。</p>
-<p>当一个卷第一次从镜像创建的时候，块存储的内部租户也会创建一个image-volume缓存。之后如果再请求从这个image创建volume的话就直接clone这个缓存，不需要再下载镜像的内容然后复制数据到卷里了。</p>
-          <div class="read-more">
-            <a href="/2015/10/26/image-volume-cache/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
           <a class="post-link" href="/2015/10/26/transfer-volume/">Transfer Volume(volume过户)</a>
         
       </h1>
@@ -603,6 +549,58 @@
 <p>通过<code>cinder transfer*</code>等命令可以完成volume的过户。对于volume的发送方，需要创建一个transfer，然后将transfer的id和authorization key发送给接收方。接收方得到id和key之后就能通过命令完成volume的过户。</p>
           <div class="read-more">
             <a href="/2015/10/26/transfer-volume/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/26/image-volume-cache/">image-volume cache</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-26
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>原文： <a href="http://docs.openstack.org/admin-guide-cloud/blockstorage_image_volume_cache.html" target="_blank" rel="noopener">Image-Volume cache</a></p>
+<p>Openstack块存储有一个可选的功能，镜像缓存，可以提升从镜像创建卷的性能。这个改进依赖很多因素，主要看存储的后端克隆卷的速度有多快。</p>
+<p>当一个卷第一次从镜像创建的时候，块存储的内部租户也会创建一个image-volume缓存。之后如果再请求从这个image创建volume的话就直接clone这个缓存，不需要再下载镜像的内容然后复制数据到卷里了。</p>
+          <div class="read-more">
+            <a href="/2015/10/26/image-volume-cache/" class="read-more-link">阅读更多</a>
           </div>
         
       
