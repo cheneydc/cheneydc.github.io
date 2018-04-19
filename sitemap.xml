@@ -16,13 +16,6 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2018/04/17/install-helm-on-minikube/</loc>
-    
-    <lastmod>2018-04-17T13:38:01.422Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cheneydc.me/2018/04/15/deploy-k8s-minikube-quick/</loc>
     
     <lastmod>2018-04-15T13:56:05.942Z</lastmod>
@@ -86,7 +79,7 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
+    <loc>http://cheneydc.me/2016/03/19/mistral-study/</loc>
     
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
     
@@ -100,7 +93,7 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2016/03/19/mistral-study/</loc>
+    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
     
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
     
@@ -156,7 +149,7 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/12/03/horizon-support-v3/</loc>
+    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
     
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     
@@ -170,7 +163,7 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
+    <loc>http://cheneydc.me/2015/12/03/horizon-support-v3/</loc>
     
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     
@@ -226,14 +219,14 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/16/ostf/</loc>
+    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
     
     <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
+    <loc>http://cheneydc.me/2015/10/16/ostf/</loc>
     
     <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     

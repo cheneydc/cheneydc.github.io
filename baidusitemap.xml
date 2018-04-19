@@ -46,30 +46,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2018/04/17/install-helm-on-minikube/</loc>
-    <lastmod>2018-04-17T13:38:01.422Z</lastmod>
-    <data>
-        <display>
-        <title>minikube集群上部署helm</title>
-        <pubTime>2018-04-17T13:38:01.307Z</pubTime>
-        
-        <tag>kubernetes</tag>
-         
-        <tag>tiller</tag>
-         
-        <tag>helm</tag>
-         
-         
-           
-             
-              <breadCrumb title="kubernetes" url="http://cheneydc.me/categories/kubernetes/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2018/04/15/deploy-k8s-minikube-quick/</loc>
     <lastmod>2018-04-15T13:56:05.942Z</lastmod>
     <data>
@@ -211,18 +187,20 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
+    <loc>http://cheneydc.me/2016/03/19/mistral-study/</loc>
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
     <data>
         <display>
-        <title>提交package到pypi</title>
-        <pubTime>2016-04-07T16:00:00.000Z</pubTime>
+        <title>Mistral小记</title>
+        <pubTime>2016-03-18T16:00:00.000Z</pubTime>
         
-        <tag>python</tag>
+        <tag>openstack</tag>
          
-        <tag>pypi</tag>
+        <tag>workflow</tag>
          
-        <tag>pip</tag>
+        <tag>mistral</tag>
+         
+        <tag>cron</tag>
          
          
            
@@ -263,20 +241,18 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2016/03/19/mistral-study/</loc>
+    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
     <data>
         <display>
-        <title>Mistral小记</title>
-        <pubTime>2016-03-18T16:00:00.000Z</pubTime>
+        <title>提交package到pypi</title>
+        <pubTime>2016-04-07T16:00:00.000Z</pubTime>
         
-        <tag>openstack</tag>
+        <tag>python</tag>
          
-        <tag>workflow</tag>
+        <tag>pypi</tag>
          
-        <tag>mistral</tag>
-         
-        <tag>cron</tag>
+        <tag>pip</tag>
          
          
            
@@ -435,17 +411,13 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/03/horizon-support-v3/</loc>
+    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     <data>
         <display>
-        <title>配置horizon支持keystone v3 api</title>
-        <pubTime>2015-12-02T16:00:00.000Z</pubTime>
+        <title>python - greenlet</title>
+        <pubTime>2015-11-19T16:00:00.000Z</pubTime>
         
-        <tag>openstack</tag>
-         
-        <tag>horizon</tag>
-         
          
            
              
@@ -475,13 +447,17 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
+    <loc>http://cheneydc.me/2015/12/03/horizon-support-v3/</loc>
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     <data>
         <display>
-        <title>python - greenlet</title>
-        <pubTime>2015-11-19T16:00:00.000Z</pubTime>
+        <title>配置horizon支持keystone v3 api</title>
+        <pubTime>2015-12-02T16:00:00.000Z</pubTime>
         
+        <tag>openstack</tag>
+         
+        <tag>horizon</tag>
+         
          
            
              
@@ -631,16 +607,16 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/16/ostf/</loc>
+    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
     <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     <data>
         <display>
-        <title>OSTF without fuel on openstack - 1</title>
-        <pubTime>2015-10-15T16:00:00.000Z</pubTime>
+        <title>Shell--再来一遍-3</title>
+        <pubTime>2015-10-19T16:00:00.000Z</pubTime>
         
-        <tag>ostf</tag>
+        <tag>linux</tag>
          
-        <tag>openstack</tag>
+        <tag>shell</tag>
          
          
            
@@ -653,16 +629,16 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
+    <loc>http://cheneydc.me/2015/10/16/ostf/</loc>
     <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     <data>
         <display>
-        <title>Shell--再来一遍-3</title>
-        <pubTime>2015-10-19T16:00:00.000Z</pubTime>
+        <title>OSTF without fuel on openstack - 1</title>
+        <pubTime>2015-10-15T16:00:00.000Z</pubTime>
         
-        <tag>linux</tag>
+        <tag>ostf</tag>
          
-        <tag>shell</tag>
+        <tag>openstack</tag>
          
          
            
