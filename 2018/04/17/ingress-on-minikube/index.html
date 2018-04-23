@@ -17,7 +17,7 @@
 
 
 
-  <meta name="description" content="k8s使用ingress暴漏服务"/>
+  <meta name="description" content="k8s使用ingress暴露服务"/>
 
 
 
@@ -81,7 +81,7 @@
 
 
 
-    <title> k8s使用ingress暴漏服务 - 种葱得葱 </title>
+    <title> k8s使用ingress暴露服务 - 种葱得葱 </title>
   <link rel="stylesheet" href="/css/prism.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -216,7 +216,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          k8s使用ingress暴漏服务
+          k8s使用ingress暴露服务
         
       </h1>
 
@@ -247,7 +247,7 @@
 
     <div class="post-content">
       
-        <p>docker中使用端口映射可以访问容器中的服务，k8s中的pod可以通过service的NodePort方式暴漏服务，然而端口不能够定制，对于生产环境中还需要自己配置反向代理来搞定。</p>
+        <p>docker中使用端口映射可以访问容器中的服务，k8s中的pod可以通过service的NodePort方式暴露服务，然而端口不能够定制，对于生产环境中还需要自己配置反向代理来搞定。</p>
 <p>Ingress从官方的定义来看就是允许访问集群服务的规则的集合。可以通过配置提供服务外部可达的url，负载均衡，terminate SSL等等。用户对api server发起ingress资源的请求，ingress controller是负责来实现ingress规则的，通常是一个负载均衡器。</p>
 <p>通过一个简单的操作看看怎么使用ingress</p>
 <a id="more"></a>
@@ -440,7 +440,7 @@
     var disqus_config = function () {
         this.page.url = 'http://cheneydc.me/2018/04/17/ingress-on-minikube/';
         this.page.identifier = '2018/04/17/ingress-on-minikube/';
-        this.page.title = 'k8s使用ingress暴漏服务';
+        this.page.title = 'k8s使用ingress暴露服务';
     };
     (function() {
     var d = document, s = d.createElement('script');
