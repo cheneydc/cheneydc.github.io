@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2018/05/01/install-helm-on-minikube/</loc>
+    <lastmod>2018-05-01T08:27:21.949Z</lastmod>
+    <data>
+        <display>
+        <title>minikube集群上部署helm</title>
+        <pubTime>2018-05-01T08:27:21.948Z</pubTime>
+        
+        <tag>kubernetes</tag>
+         
+        <tag>helm</tag>
+         
+        <tag>tiller</tag>
+         
+         
+           
+             
+              <breadCrumb title="kubernetes" url="http://cheneydc.me/categories/kubernetes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2018/04/17/ingress-on-minikube/</loc>
     <lastmod>2018-04-23T22:33:11.345Z</lastmod>
     <data>
@@ -36,9 +60,9 @@
         <title>windows上用minikube部署k8s(1.9.0)</title>
         <pubTime>2018-03-23T23:43:24.000Z</pubTime>
         
-        <tag>kubernetes</tag>
-         
         <tag>minikube</tag>
+         
+        <tag>kubernetes</tag>
          
         <tag>windows</tag>
          
@@ -78,11 +102,11 @@
         <title>使用minikube快速部署k8s集群</title>
         <pubTime>2018-04-15T12:04:00.000Z</pubTime>
         
-        <tag>kubernetes</tag>
-         
         <tag>minikube</tag>
          
         <tag>deploy</tag>
+         
+        <tag>kubernetes</tag>
          
          
            
@@ -265,17 +289,19 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2016/02/13/spring-festival/</loc>
+    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
     <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     <data>
         <display>
-        <title>2016年春节随笔(一)</title>
-        <pubTime>2016-02-12T16:00:00.000Z</pubTime>
+        <title>忘了jenkins管理员密码了</title>
+        <pubTime>2016-01-13T16:00:00.000Z</pubTime>
         
+        <tag>jenkins</tag>
+         
          
            
              
-              <breadCrumb title="生活" url="http://cheneydc.me/categories/%E7%94%9F%E6%B4%BB/"/>
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
           
         </display>
     </data>
@@ -305,19 +331,17 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
+    <loc>http://cheneydc.me/2016/02/13/spring-festival/</loc>
     <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     <data>
         <display>
-        <title>忘了jenkins管理员密码了</title>
-        <pubTime>2016-01-13T16:00:00.000Z</pubTime>
+        <title>2016年春节随笔(一)</title>
+        <pubTime>2016-02-12T16:00:00.000Z</pubTime>
         
-        <tag>jenkins</tag>
-         
          
            
              
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+              <breadCrumb title="生活" url="http://cheneydc.me/categories/%E7%94%9F%E6%B4%BB/"/>
           
         </display>
     </data>
@@ -365,18 +389,16 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
+    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     <data>
         <display>
-        <title>怎样加入freenode的openstack频道</title>
-        <pubTime>2015-12-16T16:00:00.000Z</pubTime>
+        <title>ubuntu配置shadowsocks</title>
+        <pubTime>2015-12-05T16:00:00.000Z</pubTime>
         
-        <tag>openstack</tag>
+        <tag>tool</tag>
          
-        <tag>irc</tag>
-         
-        <tag>community</tag>
+        <tag>shadowsocks</tag>
          
          
            
@@ -389,16 +411,18 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
+    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     <data>
         <display>
-        <title>ubuntu配置shadowsocks</title>
-        <pubTime>2015-12-05T16:00:00.000Z</pubTime>
+        <title>怎样加入freenode的openstack频道</title>
+        <pubTime>2015-12-16T16:00:00.000Z</pubTime>
         
-        <tag>tool</tag>
+        <tag>openstack</tag>
          
-        <tag>shadowsocks</tag>
+        <tag>irc</tag>
+         
+        <tag>community</tag>
          
          
            
@@ -469,24 +493,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-eventlet/</loc>
-    <lastmod>2018-03-25T11:58:56.107Z</lastmod>
-    <data>
-        <display>
-        <title>python - Eventlet</title>
-        <pubTime>2015-11-19T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/11/19/pycharm-remote-debug/</loc>
     <lastmod>2018-03-25T11:58:56.107Z</lastmod>
     <data>
@@ -498,6 +504,24 @@
            
              
               <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/11/20/python-eventlet/</loc>
+    <lastmod>2018-03-25T11:58:56.107Z</lastmod>
+    <data>
+        <display>
+        <title>python - Eventlet</title>
+        <pubTime>2015-11-19T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
           
         </display>
     </data>
@@ -695,28 +719,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/02/GoSublime-Setting/</loc>
-    <lastmod>2018-03-25T11:58:56.102Z</lastmod>
-    <data>
-        <display>
-        <title>Sublime Text中GoSublime的设置</title>
-        <pubTime>2015-10-01T16:00:00.000Z</pubTime>
-        
-        <tag>tool</tag>
-         
-        <tag>sublime</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/10/02/Shell-again/</loc>
     <lastmod>2018-03-25T11:58:56.102Z</lastmod>
     <data>
@@ -732,6 +734,28 @@
            
              
               <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/10/02/GoSublime-Setting/</loc>
+    <lastmod>2018-03-25T11:58:56.102Z</lastmod>
+    <data>
+        <display>
+        <title>Sublime Text中GoSublime的设置</title>
+        <pubTime>2015-10-01T16:00:00.000Z</pubTime>
+        
+        <tag>tool</tag>
+         
+        <tag>sublime</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>

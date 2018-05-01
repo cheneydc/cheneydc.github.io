@@ -17,10 +17,12 @@
 
 
 
-  <meta name="description" content="python - Eventlet"/>
+  <meta name="description" content="minikube集群上部署helm"/>
 
 
 
+
+  <meta name="keywords" content="kubernetes, helm, tiller, 种葱得葱" />
 
 
 
@@ -40,7 +42,7 @@
 
 
 
-<link rel="canonical" href="http://cheneydc.me/2015/11/20/python-eventlet/"/>
+<link rel="canonical" href="http://cheneydc.me/2018/05/01/install-helm-on-minikube/"/>
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
@@ -79,7 +81,7 @@
 
 
 
-    <title> python - Eventlet - 种葱得葱 </title>
+    <title> minikube集群上部署helm - 种葱得葱 </title>
   <link rel="stylesheet" href="/css/prism.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -214,18 +216,18 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          python - Eventlet
+          minikube集群上部署helm
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2015-11-20
+          2018-05-01
         </span>
         
           <div class="post-category">
             
-              <a href="/categories/技术/">技术</a>
+              <a href="/categories/kubernetes/">kubernetes</a>
             
           </div>
         
@@ -235,12 +237,57 @@
 
     
     
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Helm"><span class="toc-text">Helm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tiller"><span class="toc-text">Tiller</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-helm-client"><span class="toc-text">Install helm client</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Tiller"><span class="toc-text">安装Tiller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证"><span class="toc-text">验证</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
 
     <div class="post-content">
       
-        <p>计划中</p>
-<p><a href="http://eventlet.net/" target="_blank" rel="noopener">文档</a></p>
-<p><a href="http://eventlet.net/doc/design_patterns.html#design-patterns" target="_blank" rel="noopener">参考</a></p>
+        <p>Helm是Kubernetes中的包（chart）管理工具，通过helm可以：</p>
+<ul>
+<li>查找最受欢迎的char</li>
+<li>把自己的应用以chart的形式分享出去</li>
+<li>为自己的应用创建可复制形式的构建</li>
+<li>更便捷的管理k8s的mainfest</li>
+<li>版本管理</li>
+</ul>
+<p>Helm与k8s的关系可以类比成apt和ubuntu，或者yum与centos的关系，Helm是C/S架构的</p>
+<ul>
+<li>client: Helm</li>
+<li>Server: Tiller</li>
+</ul>
+<a id="more"></a>
+<h2 id="Helm"><a href="#Helm" class="headerlink" title="Helm"></a>Helm</h2><p>Helm是终端用户使用的命令行工具，负责：</p>
+<ul>
+<li>本地的chart开发</li>
+<li>管理repo（仓库）</li>
+<li>与tiller通信<ul>
+<li>发送将要安装的chart</li>
+<li>请求release信息</li>
+<li>请求升级release或卸载</li>
+</ul>
+</li>
+</ul>
+<h2 id="Tiller"><a href="#Tiller" class="headerlink" title="Tiller"></a>Tiller</h2><p>Tiller是运行在k8s集群内的server，与helm互动通信，并与k8s api通信：</p>
+<ul>
+<li>响应helm的请求</li>
+<li>将chart根据相应配置构建release</li>
+<li>将chart安装到k8s中，并跟踪后续的release</li>
+<li>与k8s互动升级或卸载chart</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>官方文档： <a href="https://github.com/kubernetes/helm/blob/master/docs/install.md" target="_blank" rel="noopener">https://github.com/kubernetes/helm/blob/master/docs/install.md</a></p>
+<p>我的minikube依旧是0.26.0，k8s版本是1.10.0，helm建议用2.8.2的版本，其他几个版本试了下都有些问题。</p>
+<h3 id="Install-helm-client"><a href="#Install-helm-client" class="headerlink" title="Install helm client"></a>Install helm client</h3><p>首先安装helm的客户端:<br>下载地址： <a href="https://github.com/kubernetes/helm/releases/tag/v2.8.2" target="_blank" rel="noopener">https://github.com/kubernetes/helm/releases/tag/v2.8.2</a><br>下载的就是helm的可执行文件了，所以不管linux还是windows，添加到PATH环境变量就可以用了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxvf helm-v2.8.2-linux-amd64.tar.gz</span><br><span class="line">$ mv linux-amd64/helm /usr/<span class="built_in">local</span>/bin/helm</span><br></pre></td></tr></table></figure>
+<h3 id="安装Tiller"><a href="#安装Tiller" class="headerlink" title="安装Tiller"></a>安装Tiller</h3><p>执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ helm init</span><br></pre></td></tr></table></figure></p>
+<p>就可以完成安装了，会在k8s集群中创建一个<code>tiller-deploy</code>的deployment，启动tiller的服务。当然会用的tiller的镜像，tiller镜像如果拉取不到可以事先在minikube的vm中拉取，方法和之前其他镜像的方法一样，在ali的容器镜像服务中中转，也可以直接用我下面的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull registry.cn-hangzhou.aliyuncs.com/dck8s/tiller:v2.8.2</span><br><span class="line">$ docker tag registry.cn-hangzhou.aliyuncs.com/dck8s/tiller:v2.8.2 gcr.io/kubernetes-helm/tiller:v2.8.2</span><br></pre></td></tr></table></figure></p>
+<p>也可以使用国内的helm repo进行安装，比如使用ali的repo：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ helm init --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts</span><br></pre></td></tr></table></figure></p>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>Tiller启动后执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ helm version</span><br><span class="line">Client: &amp;version.Version&#123;SemVer:<span class="string">"v2.8.2"</span>, GitCommit:<span class="string">"a80231648a1473929271764b920a8e346f6de844"</span>, GitTreeState:<span class="string">"clean"</span>&#125;</span><br><span class="line">Server: &amp;version.Version&#123;SemVer:<span class="string">"v2.8.2"</span>, GitCommit:<span class="string">"a80231648a1473929271764b920a8e346f6de844"</span>, GitTreeState:<span class="string">"clean"</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到客户端和服务端的版本信息，执行helm ls以及helm repo list，分别查看当前的release以及repo，没有报错那helm基本就运行正常了。后面可以使用helm来安装chart了：）</p>
 
       
     </div>
@@ -256,7 +303,7 @@
     </p>
     <p class="copyright-item">
       <span>原文链接: </span>
-      <a href="http://cheneydc.me/2015/11/20/python-eventlet/">http://cheneydc.me/2015/11/20/python-eventlet/</a>
+      <a href="http://cheneydc.me/2018/05/01/install-helm-on-minikube/">http://cheneydc.me/2018/05/01/install-helm-on-minikube/</a>
     </p>
     <p class="copyright-item">
       <span>许可协议: </span>
@@ -274,19 +321,23 @@
     
       <footer class="post-footer">
         
+          <div class="post-tags">
+            
+              <a href="/tags/kubernetes/">kubernetes</a>
+            
+              <a href="/tags/helm/">helm</a>
+            
+              <a href="/tags/tiller/">tiller</a>
+            
+          </div>
+        
         
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2015/11/20/python-stevedore/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">python - stevedore</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
     
-    
-      <a class="next" href="/2015/11/19/pycharm-remote-debug/">
-        <span class="next-text nav-default">pycharm 远程调试</span>
+      <a class="next" href="/2018/04/17/ingress-on-minikube/">
+        <span class="next-text nav-default">k8s使用ingress暴露服务</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
@@ -402,9 +453,9 @@
   
   <script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'http://cheneydc.me/2015/11/20/python-eventlet/';
-        this.page.identifier = '2015/11/20/python-eventlet/';
-        this.page.title = 'python - Eventlet';
+        this.page.url = 'http://cheneydc.me/2018/05/01/install-helm-on-minikube/';
+        this.page.identifier = '2018/05/01/install-helm-on-minikube/';
+        this.page.title = 'minikube集群上部署helm';
     };
     (function() {
     var d = document, s = d.createElement('script');
