@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cheneydc.me/2018/05/01/save-the-k420/</loc>
+    
+    <lastmod>2018-05-01T12:35:31.281Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cheneydc.me/2018/05/01/install-helm-on-minikube/</loc>
     
-    <lastmod>2018-05-01T08:27:21.949Z</lastmod>
+    <lastmod>2018-05-01T08:39:52.768Z</lastmod>
     
   </url>
   
@@ -86,14 +93,14 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2016/04/15/keystone-v3-hierarchical-multitenancy/</loc>
+    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
     
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
+    <loc>http://cheneydc.me/2016/04/15/keystone-v3-hierarchical-multitenancy/</loc>
     
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
     
@@ -103,13 +110,6 @@
     <loc>http://cheneydc.me/2016/03/19/mistral-study/</loc>
     
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
-    
-    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     
   </url>
   
@@ -128,16 +128,16 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/12/31/summary-this-year/</loc>
+    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
     
-    <lastmod>2018-03-25T11:58:56.110Z</lastmod>
+    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
+    <loc>http://cheneydc.me/2015/12/31/summary-this-year/</loc>
     
-    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    <lastmod>2018-03-25T11:58:56.110Z</lastmod>
     
   </url>
   
@@ -156,14 +156,14 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/12/03/horizon-support-v3/</loc>
+    <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
     
-    <lastmod>2018-03-25T11:58:56.108Z</lastmod>
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
+    <loc>http://cheneydc.me/2015/12/03/horizon-support-v3/</loc>
     
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     
@@ -177,14 +177,21 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/11/19/pycharm-remote-debug/</loc>
+    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.108Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/11/20/python-eventlet/</loc>
     
     <lastmod>2018-03-25T11:58:56.107Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-eventlet/</loc>
+    <loc>http://cheneydc.me/2015/11/19/pycharm-remote-debug/</loc>
     
     <lastmod>2018-03-25T11:58:56.107Z</lastmod>
     
@@ -205,14 +212,14 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
     
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
     
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     
@@ -275,14 +282,14 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/05/18/docker-study-1/</loc>
+    <loc>http://cheneydc.me/2015/05/16/devstack-deploy-openstack/</loc>
     
     <lastmod>2018-03-25T11:58:56.100Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/05/16/devstack-deploy-openstack/</loc>
+    <loc>http://cheneydc.me/2015/05/18/docker-study-1/</loc>
     
     <lastmod>2018-03-25T11:58:56.100Z</lastmod>
     

@@ -4,12 +4,38 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2018/05/01/save-the-k420/</loc>
+    <lastmod>2018-05-01T12:35:31.281Z</lastmod>
+    <data>
+        <display>
+        <title>拯救k420</title>
+        <pubTime>2018-05-01T08:39:00.000Z</pubTime>
+        
+        <tag>music</tag>
+         
+        <tag>akg</tag>
+         
+        <tag>k420</tag>
+         
+        <tag>diy</tag>
+         
+         
+           
+             
+              <breadCrumb title="瞎搞" url="http://cheneydc.me/categories/%E7%9E%8E%E6%90%9E/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2018/05/01/install-helm-on-minikube/</loc>
-    <lastmod>2018-05-01T08:27:21.949Z</lastmod>
+    <lastmod>2018-05-01T08:39:52.768Z</lastmod>
     <data>
         <display>
         <title>minikube集群上部署helm</title>
-        <pubTime>2018-05-01T08:27:21.948Z</pubTime>
+        <pubTime>2018-05-01T08:29:00.000Z</pubTime>
         
         <tag>kubernetes</tag>
          
@@ -60,9 +86,9 @@
         <title>windows上用minikube部署k8s(1.9.0)</title>
         <pubTime>2018-03-23T23:43:24.000Z</pubTime>
         
-        <tag>minikube</tag>
-         
         <tag>kubernetes</tag>
+         
+        <tag>minikube</tag>
          
         <tag>windows</tag>
          
@@ -102,11 +128,11 @@
         <title>使用minikube快速部署k8s集群</title>
         <pubTime>2018-04-15T12:04:00.000Z</pubTime>
         
+        <tag>kubernetes</tag>
+         
         <tag>minikube</tag>
          
         <tag>deploy</tag>
-         
-        <tag>kubernetes</tag>
          
          
            
@@ -211,6 +237,30 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
+    <lastmod>2018-03-25T11:58:56.112Z</lastmod>
+    <data>
+        <display>
+        <title>提交package到pypi</title>
+        <pubTime>2016-04-07T16:00:00.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>pypi</tag>
+         
+        <tag>pip</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2016/04/15/keystone-v3-hierarchical-multitenancy/</loc>
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
     <data>
@@ -239,30 +289,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
-    <lastmod>2018-03-25T11:58:56.112Z</lastmod>
-    <data>
-        <display>
-        <title>提交package到pypi</title>
-        <pubTime>2016-04-07T16:00:00.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>pypi</tag>
-         
-        <tag>pip</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2016/03/19/mistral-study/</loc>
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
     <data>
@@ -277,26 +303,6 @@
         <tag>mistral</tag>
          
         <tag>cron</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
-    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
-    <data>
-        <display>
-        <title>忘了jenkins管理员密码了</title>
-        <pubTime>2016-01-13T16:00:00.000Z</pubTime>
-        
-        <tag>jenkins</tag>
          
          
            
@@ -349,6 +355,26 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
+    <lastmod>2018-03-25T11:58:56.111Z</lastmod>
+    <data>
+        <display>
+        <title>忘了jenkins管理员密码了</title>
+        <pubTime>2016-01-13T16:00:00.000Z</pubTime>
+        
+        <tag>jenkins</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2015/12/31/summary-this-year/</loc>
     <lastmod>2018-03-25T11:58:56.110Z</lastmod>
     <data>
@@ -360,28 +386,6 @@
            
              
               <breadCrumb title="生活" url="http://cheneydc.me/categories/%E7%94%9F%E6%B4%BB/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
-    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
-    <data>
-        <display>
-        <title>Gitlab与jenkins集成</title>
-        <pubTime>2015-12-17T16:00:00.000Z</pubTime>
-        
-        <tag>jenkins</tag>
-         
-        <tag>gitlab</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -435,6 +439,28 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
+    <lastmod>2018-03-25T11:58:56.109Z</lastmod>
+    <data>
+        <display>
+        <title>Gitlab与jenkins集成</title>
+        <pubTime>2015-12-17T16:00:00.000Z</pubTime>
+        
+        <tag>gitlab</tag>
+         
+        <tag>jenkins</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2015/12/03/horizon-support-v3/</loc>
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     <data>
@@ -446,24 +472,6 @@
          
         <tag>horizon</tag>
          
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
-    <lastmod>2018-03-25T11:58:56.108Z</lastmod>
-    <data>
-        <display>
-        <title>python - greenlet</title>
-        <pubTime>2015-11-19T16:00:00.000Z</pubTime>
-        
          
            
              
@@ -493,17 +501,17 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/11/19/pycharm-remote-debug/</loc>
-    <lastmod>2018-03-25T11:58:56.107Z</lastmod>
+    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
+    <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     <data>
         <display>
-        <title>pycharm 远程调试</title>
-        <pubTime>2015-11-18T16:00:00.000Z</pubTime>
+        <title>python - greenlet</title>
+        <pubTime>2015-11-19T16:00:00.000Z</pubTime>
         
          
            
              
-              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
           
         </display>
     </data>
@@ -522,6 +530,24 @@
            
              
               <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/11/19/pycharm-remote-debug/</loc>
+    <lastmod>2018-03-25T11:58:56.107Z</lastmod>
+    <data>
+        <display>
+        <title>pycharm 远程调试</title>
+        <pubTime>2015-11-18T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -573,11 +599,11 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
         <display>
-        <title>SQLalchemmy - 2</title>
+        <title>SQLalchemmy - 1</title>
         <pubTime>2015-10-28T16:00:00.000Z</pubTime>
         
          
@@ -591,11 +617,11 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
         <display>
-        <title>SQLalchemmy - 1</title>
+        <title>SQLalchemmy - 2</title>
         <pubTime>2015-10-28T16:00:00.000Z</pubTime>
         
          
@@ -785,15 +811,13 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/05/18/docker-study-1/</loc>
+    <loc>http://cheneydc.me/2015/05/16/devstack-deploy-openstack/</loc>
     <lastmod>2018-03-25T11:58:56.100Z</lastmod>
     <data>
         <display>
-        <title>docker学习（1）</title>
-        <pubTime>2015-05-17T16:00:00.000Z</pubTime>
+        <title>devstack部署openstack</title>
+        <pubTime>2015-05-15T16:00:00.000Z</pubTime>
         
-        <tag>docker</tag>
-         
          
            
              
@@ -805,13 +829,15 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/05/16/devstack-deploy-openstack/</loc>
+    <loc>http://cheneydc.me/2015/05/18/docker-study-1/</loc>
     <lastmod>2018-03-25T11:58:56.100Z</lastmod>
     <data>
         <display>
-        <title>devstack部署openstack</title>
-        <pubTime>2015-05-15T16:00:00.000Z</pubTime>
+        <title>docker学习（1）</title>
+        <pubTime>2015-05-17T16:00:00.000Z</pubTime>
         
+        <tag>docker</tag>
+         
          
            
              
