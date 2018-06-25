@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://cheneydc.me/2018/06/25/kolla-for-openstack/</loc>
-    <lastmod>2018-06-25T01:32:21.729Z</lastmod>
+    <lastmod>2018-06-25T01:38:49.355Z</lastmod>
     <data>
         <display>
         <title>Openstack部署利器-Kolla回顾</title>
@@ -383,14 +383,16 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
+    <loc>http://cheneydc.me/2016/03/01/ovirt-over-all/</loc>
     <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     <data>
         <display>
-        <title>忘了jenkins管理员密码了</title>
-        <pubTime>2016-01-13T16:00:00.000Z</pubTime>
+        <title>VDI之ovirt</title>
+        <pubTime>2016-02-29T16:00:00.000Z</pubTime>
         
-        <tag>jenkins</tag>
+        <tag>ovirt</tag>
+         
+        <tag>VDI</tag>
          
          
            
@@ -421,16 +423,14 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2016/03/01/ovirt-over-all/</loc>
+    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
     <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     <data>
         <display>
-        <title>VDI之ovirt</title>
-        <pubTime>2016-02-29T16:00:00.000Z</pubTime>
+        <title>忘了jenkins管理员密码了</title>
+        <pubTime>2016-01-13T16:00:00.000Z</pubTime>
         
-        <tag>ovirt</tag>
-         
-        <tag>VDI</tag>
+        <tag>jenkins</tag>
          
          
            
@@ -468,9 +468,9 @@
         <title>Gitlab与jenkins集成</title>
         <pubTime>2015-12-17T16:00:00.000Z</pubTime>
         
-        <tag>jenkins</tag>
-         
         <tag>gitlab</tag>
+         
+        <tag>jenkins</tag>
          
          
            
@@ -551,11 +551,11 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
+    <loc>http://cheneydc.me/2015/11/20/python-stevedore/</loc>
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     <data>
         <display>
-        <title>python - greenlet</title>
+        <title>python - stevedore</title>
         <pubTime>2015-11-19T16:00:00.000Z</pubTime>
         
          
@@ -569,11 +569,11 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-stevedore/</loc>
+    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     <data>
         <display>
-        <title>python - stevedore</title>
+        <title>python - greenlet</title>
         <pubTime>2015-11-19T16:00:00.000Z</pubTime>
         
          
@@ -663,6 +663,24 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
+    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
+    <data>
+        <display>
+        <title>SQLalchemmy - 1</title>
+        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
@@ -685,13 +703,17 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
-    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
+    <loc>http://cheneydc.me/2015/10/26/image-volume-cache/</loc>
+    <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     <data>
         <display>
-        <title>SQLalchemmy - 1</title>
-        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
+        <title>image-volume cache</title>
+        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
         
+        <tag>openstack</tag>
+         
+        <tag>cinder</tag>
+         
          
            
              
@@ -713,28 +735,6 @@
         <tag>linux</tag>
          
         <tag>shell</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2015/10/26/image-volume-cache/</loc>
-    <lastmod>2018-03-25T11:58:56.104Z</lastmod>
-    <data>
-        <display>
-        <title>image-volume cache</title>
-        <pubTime>2015-10-25T16:00:00.000Z</pubTime>
-        
-        <tag>openstack</tag>
-         
-        <tag>cinder</tag>
          
          
            
@@ -813,28 +813,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/02/Shell-again/</loc>
-    <lastmod>2018-03-25T11:58:56.102Z</lastmod>
-    <data>
-        <display>
-        <title>Shell--再来一遍-1</title>
-        <pubTime>2015-10-01T16:00:00.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-        <tag>shell</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2015/10/02/GoSublime-Setting/</loc>
     <lastmod>2018-03-25T11:58:56.102Z</lastmod>
     <data>
@@ -850,6 +828,28 @@
            
              
               <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2015/10/02/Shell-again/</loc>
+    <lastmod>2018-03-25T11:58:56.102Z</lastmod>
+    <data>
+        <display>
+        <title>Shell--再来一遍-1</title>
+        <pubTime>2015-10-01T16:00:00.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+        <tag>shell</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
           
         </display>
     </data>

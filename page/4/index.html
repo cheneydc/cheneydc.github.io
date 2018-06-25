@@ -216,7 +216,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2015/10/29/sqlalchemy-2/">SQLalchemmy - 2</a>
+          <a class="post-link" href="/2015/10/29/sqlalchemy-1/">SQLalchemmy - 1</a>
         
       </h1>
 
@@ -242,11 +242,16 @@
       
         
         
+          
+        
 
         
-          <p>这个就用点记点了。</p>
-<h1 id="func"><a href="#func" class="headerlink" title="func"></a>func</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = session.query(User.id, User.name)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.all()</span><br><span class="line">[(<span class="number">1</span>, <span class="string">u'aaa'</span>), (<span class="number">2</span>, <span class="string">u'ccc'</span>), (<span class="number">3</span>, <span class="string">u'ed'</span>), (<span class="number">4</span>, <span class="string">u'zxwer'</span>), (<span class="number">5</span>, <span class="string">u'fake'</span>), (<span class="number">6</span>, <span class="string">u'dc'</span>), (<span class="number">7</span>, <span class="string">u'dc'</span>), (<span class="number">8</span>, <span class="string">u'dc'</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1 = session.query(func.sum(User.id))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1.all()</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">24</span>,<span class="number">312</span> INFO sqlalchemy.engine.base.Engine SELECT sum(users.id) AS sum_1</span><br><span class="line">FROM users</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">24</span>,<span class="number">312</span> INFO sqlalchemy.engine.base.Engine ()</span><br><span class="line">[(<span class="number">36</span>,)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1 = session.query(func.sum(User.id*<span class="number">2</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1.all()</span><br><span class="line">2015-11-11 22:06:55,466 INFO sqlalchemy.engine.base.Engine SELECT sum(users.id * ?) AS sum_1</span><br><span class="line">FROM users</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">55</span>,<span class="number">466</span> INFO sqlalchemy.engine.base.Engine (<span class="number">2</span>,)</span><br><span class="line">[(<span class="number">72</span>,)]</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
-
+          <p>Openstack最近看的有点乱套了，openstack组件都是利用sqlalchemy来操作数据库的，赶上这个机会就看看了。</p>
+<p><a href="http://docs.sqlalchemy.org/en/rel_1_0/orm/tutorial.html" target="_blank" rel="noopener">官方文档</a></p>
+<p>SQLAlchemy是ORM框架的一种，可以将Python中的类和数据库中的表进行映射，并将类的实例和表数据库表中的数据进行对应。 这样一个抽象的数据库表我们就可以很方便的通过一个类来记录和操作了。</p>
+          <div class="read-more">
+            <a href="/2015/10/29/sqlalchemy-1/" class="read-more-link">阅读更多</a>
+          </div>
         
       
     </div>
@@ -569,6 +574,56 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2015/10/02/GoSublime-Setting/">Sublime Text中GoSublime的设置</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-02
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/工具/">工具</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>由于不是土豪，下个破解的Sublime Text，配置下GoSublime，把env设置在了“Setting Default”里面，结果总是失败，后来发现下载的破解版别人已经在“Setting User”里面设置过了，系统是先读取这个了，所以更改下User里面的配置就可以了。</p>
+          <div class="read-more">
+            <a href="/2015/10/02/GoSublime-Setting/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2015/10/02/Shell-again/">Shell--再来一遍-1</a>
         
       </h1>
@@ -603,56 +658,6 @@
 <p>主要看看<a href="http://manual.51yip.com/shell/" target="_blank" rel="noopener">ABS</a>然后多做练习是必须的</p>
           <div class="read-more">
             <a href="/2015/10/02/Shell-again/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2015/10/02/GoSublime-Setting/">Sublime Text中GoSublime的设置</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-10-02
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/工具/">工具</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>由于不是土豪，下个破解的Sublime Text，配置下GoSublime，把env设置在了“Setting Default”里面，结果总是失败，后来发现下载的破解版别人已经在“Setting User”里面设置过了，系统是先读取这个了，所以更改下User里面的配置就可以了。</p>
-          <div class="read-more">
-            <a href="/2015/10/02/GoSublime-Setting/" class="read-more-link">阅读更多</a>
           </div>
         
       

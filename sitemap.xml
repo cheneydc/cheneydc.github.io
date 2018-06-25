@@ -4,7 +4,7 @@
   <url>
     <loc>http://cheneydc.me/2018/06/25/kolla-for-openstack/</loc>
     
-    <lastmod>2018-06-25T01:32:21.729Z</lastmod>
+    <lastmod>2018-06-25T01:38:49.355Z</lastmod>
     
   </url>
   
@@ -142,7 +142,7 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
+    <loc>http://cheneydc.me/2016/03/01/ovirt-over-all/</loc>
     
     <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     
@@ -156,7 +156,7 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2016/03/01/ovirt-over-all/</loc>
+    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
     
     <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     
@@ -198,14 +198,14 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
+    <loc>http://cheneydc.me/2015/11/20/python-stevedore/</loc>
     
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-stevedore/</loc>
+    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
     
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     
@@ -240,13 +240,6 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
-    
-    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cheneydc.me/2015/10/29/sqlalchemy-1/</loc>
     
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
@@ -254,14 +247,21 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
+    <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
+    
+    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cheneydc.me/2015/10/26/image-volume-cache/</loc>
     
     <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/26/image-volume-cache/</loc>
+    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
     
     <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     
@@ -289,14 +289,14 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/02/Shell-again/</loc>
+    <loc>http://cheneydc.me/2015/10/02/GoSublime-Setting/</loc>
     
     <lastmod>2018-03-25T11:58:56.102Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/02/GoSublime-Setting/</loc>
+    <loc>http://cheneydc.me/2015/10/02/Shell-again/</loc>
     
     <lastmod>2018-03-25T11:58:56.102Z</lastmod>
     
