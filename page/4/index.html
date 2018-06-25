@@ -216,6 +216,157 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2015/10/29/sqlalchemy-2/">SQLalchemmy - 2</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-29
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>这个就用点记点了。</p>
+<h1 id="func"><a href="#func" class="headerlink" title="func"></a>func</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = session.query(User.id, User.name)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.all()</span><br><span class="line">[(<span class="number">1</span>, <span class="string">u'aaa'</span>), (<span class="number">2</span>, <span class="string">u'ccc'</span>), (<span class="number">3</span>, <span class="string">u'ed'</span>), (<span class="number">4</span>, <span class="string">u'zxwer'</span>), (<span class="number">5</span>, <span class="string">u'fake'</span>), (<span class="number">6</span>, <span class="string">u'dc'</span>), (<span class="number">7</span>, <span class="string">u'dc'</span>), (<span class="number">8</span>, <span class="string">u'dc'</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1 = session.query(func.sum(User.id))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1.all()</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">24</span>,<span class="number">312</span> INFO sqlalchemy.engine.base.Engine SELECT sum(users.id) AS sum_1</span><br><span class="line">FROM users</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">24</span>,<span class="number">312</span> INFO sqlalchemy.engine.base.Engine ()</span><br><span class="line">[(<span class="number">36</span>,)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1 = session.query(func.sum(User.id*<span class="number">2</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q1.all()</span><br><span class="line">2015-11-11 22:06:55,466 INFO sqlalchemy.engine.base.Engine SELECT sum(users.id * ?) AS sum_1</span><br><span class="line">FROM users</span><br><span class="line"><span class="number">2015</span><span class="number">-11</span><span class="number">-11</span> <span class="number">22</span>:<span class="number">06</span>:<span class="number">55</span>,<span class="number">466</span> INFO sqlalchemy.engine.base.Engine (<span class="number">2</span>,)</span><br><span class="line">[(<span class="number">72</span>,)]</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/26/transfer-volume/">Transfer Volume(volume过户)</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-26
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>原文：<a href="http://docs.openstack.org/user-guide/common/cli_manage_volumes.html" target="_blank" rel="noopener">Transfer a Volume</a></p>
+<h1 id="Transfer-a-volume"><a href="#Transfer-a-volume" class="headerlink" title="Transfer a volume"></a>Transfer a volume</h1><p>这个功能可以使volume在不同的租户间转移。</p>
+<p>通过<code>cinder transfer*</code>等命令可以完成volume的过户。对于volume的发送方，需要创建一个transfer，然后将transfer的id和authorization key发送给接收方。接收方得到id和key之后就能通过命令完成volume的过户。</p>
+          <div class="read-more">
+            <a href="/2015/10/26/transfer-volume/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/10/26/image-volume-cache/">image-volume cache</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-10-26
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>原文： <a href="http://docs.openstack.org/admin-guide-cloud/blockstorage_image_volume_cache.html" target="_blank" rel="noopener">Image-Volume cache</a></p>
+<p>Openstack块存储有一个可选的功能，镜像缓存，可以提升从镜像创建卷的性能。这个改进依赖很多因素，主要看存储的后端克隆卷的速度有多快。</p>
+<p>当一个卷第一次从镜像创建的时候，块存储的内部租户也会创建一个image-volume缓存。之后如果再请求从这个image创建volume的话就直接clone这个缓存，不需要再下载镜像的内容然后复制数据到卷里了。</p>
+          <div class="read-more">
+            <a href="/2015/10/26/image-volume-cache/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2015/10/20/Shell-again/">Shell--再来一遍-3</a>
         
       </h1>
@@ -564,111 +715,6 @@
   </article>
 
     
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2015/05/18/docker-study-1/">docker学习（1）</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-05-18
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <h3 id="1-Docker-简介-《The-Docker-Book》"><a href="#1-Docker-简介-《The-Docker-Book》" class="headerlink" title="1. Docker 简介 《The Docker Book》"></a>1. Docker 简介 <em>《The Docker Book》</em></h3><p>Docker 是一个能够把开发的应用程序自动部署到容器的开源引擎。由 Docker 公司的团队编写。Docker在虚拟化的容器执行环境中增加了一个应用程序部署引擎。该引擎的目标就是提供一个轻量、快速的环境，能够运行开发者的程序，并方便高效地将程序从开发者的电脑部署到测试环境，然后再部署到生产环境。Docker上手非常快，用户只需要几分钟，就可以把自己的程序”Docker”化。</p>
-<p>开发人员关心容器中的应用程序，而运维只需要考虑如何管理docker。</p>
-<hr>
-          <div class="read-more">
-            <a href="/2015/05/18/docker-study-1/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2015/05/16/devstack-deploy-openstack/">devstack部署openstack</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-05-16
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>前一阵工作需要，熟悉了下openstack，环境有限，决定采用all in one方式利用devstack进行部署.</p>
-<p><em>环境:</em></p>
-<p><code>ubuntu-14.04-server-amd64</code></p>
-<h1 id="1-Get-devstack"><a href="#1-Get-devstack" class="headerlink" title="1. Get devstack"></a>1. Get devstack</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://git.openstack.org/openstack-dev/devstack</span><br></pre></td></tr></table></figure>
-          <div class="read-more">
-            <a href="/2015/05/16/devstack-deploy-openstack/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
   </section>
 
   
@@ -679,6 +725,11 @@
         <span class="prev-text">上一页</span>
       </a>
     
+    
+      <a class="next" href="/page/5/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
 

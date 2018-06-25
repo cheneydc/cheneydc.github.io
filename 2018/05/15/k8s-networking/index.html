@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="访问k8s中的服务"/>
+
+
+
+
+  <meta name="keywords" content="kubernetes, service, 种葱得葱" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="种葱得葱">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="http://cheneydc.me/2018/05/15/k8s-networking/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> 访问k8s中的服务 - 种葱得葱 </title>
+  <link rel="stylesheet" href="/css/prism.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">种葱得葱</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">种葱得葱</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          访问k8s中的服务
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-05-15
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/kubernetes/">kubernetes</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Pod"><span class="toc-text">Pod</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pod-Network"><span class="toc-text">Pod Network</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Service"><span class="toc-text">Service</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Service-Network-amp-kube-proxy"><span class="toc-text">Service Network &amp; kube-proxy</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NodePort"><span class="toc-text">NodePort</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LoadBlancer"><span class="toc-text">LoadBlancer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ingress"><span class="toc-text">Ingress</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>k8s接触一段了，似懂非懂的时候来了，自己喜欢直接上手先搂的那种，然后回头在来看的话很多疑问会迎刃而解，目前对k8s网络方面的知识有些凌乱，就此整理，以下问题待解决：</p>
+<ul>
+<li>pod ip、cluster ip如何实现</li>
+<li>k8s中的服务如何暴露</li>
+</ul>
+<a id="more"></a>
+<p>这主要是一个概念、原理的梳理过程，其中的代码以及图均参考其他技术文章，主要翻译了</p>
+<ul>
+<li><a href="https://medium.com/google-cloud/understanding-kubernetes-networking-pods-7117dd28727" target="_blank" rel="noopener">Understanding kubernetes networking: pods</a></li>
+<li><a href="https://medium.com/google-cloud/understanding-kubernetes-networking-services-f0cb48e4cc82" target="_blank" rel="noopener">Understanding kubernetes networking: service</a></li>
+<li><a href="https://medium.com/@betz.mark/understanding-kubernetes-networking-ingress-1bc341c84078" target="_blank" rel="noopener">Understanding kubernetes networking: ingress</a></li>
+</ul>
+<p>这三篇文章很好，不过自己水平有限，可能有的地方不准，便于自己理解，也有修改和省略，如果有幸你看到了这里，建议看原文：）<br>其中也参考了其他的技术文章，在文末有一一列出.</p>
+<h2 id="Pod"><a href="#Pod" class="headerlink" title="Pod"></a>Pod</h2><p>Pod是k8s中的一个逻辑概念，一个pod中包含了一个或一组容器，一个pod中的容器运行在一个host上，并且容器共享网络栈以及其他资源，比如volumes。pod是k8s中构建应用的基础单位了。<br>Pod中的容器怎样共享网络栈以及volume等资源的呢？我们创建一个pod试试看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl run busybox0 --image=busybox --<span class="built_in">command</span> -- sleep 3600</span><br><span class="line">deployment <span class="string">"busybox0"</span> created</span><br><span class="line">$ kubectl get pods --all-namespaces</span><br><span class="line">...</span><br><span class="line">default       busybox0-7665ddff5d-xsxfv                             1/1       Running   0          51s</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>在pod运行的主机上查看启动的容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps -a | grep busybox0-7665ddff5d-xsxfv</span><br><span class="line">a0b7d191219e        busybox                                              <span class="string">"sleep 3600"</span>             52 seconds ago       Up 51 seconds                                                                                   k8s_busybox0_busybox0-7665ddff5d-xsxfv_default_2d9b8bdf-5421-11e8-b5a8-080027f2276d_0</span><br><span class="line">c58246abffae        k8s.gcr.io/pause-amd64:3.1                           <span class="string">"/pause"</span>                 About a minute ago   Up 59 seconds                                                                                   k8s_POD_busybox0-7665ddff5d-xsxfv_default_2d9b8bdf-5421-11e8-b5a8-080027f2276d_0</span><br></pre></td></tr></table></figure>
+<p>发现除了运行应用的容器以外还有一个pause容器，这个和pod的网络有什么关系呢？回忆（谷歌）了下，docker网络模式有：</p>
+<ul>
+<li>none</li>
+<li>host</li>
+<li>bridge</li>
+<li>container</li>
+<li>user-defined</li>
+</ul>
+<p>这里之前用的最多的就是host和bridge了，其他没怎么了解过，实际上每个容器都有自己的网络命名空间，通过container的网络模式可以使几个容器共享一个容器的网络命名空间，那我们刚才的pause就是用来为pod中的其他容器提供网络命名空间以及共享volume等资源的容器，通过这样一种方式，一个pod从外部来看就是一个整体了，内部的容器共享一个网络命名空间或通过localhost就能够通信。</p>
+<h1 id="Pod-Network"><a href="#Pod-Network" class="headerlink" title="Pod Network"></a>Pod Network</h1><p>Kubernetes另外一个很爽的地方就是无论pod在集群的哪个节点上，都能够互相通信访问。<br>抛开k8s，先以两个普通的容器环境为例：<br><img src="https://image.prntscr.com/image/URM635zmQZCcW4w6LnmtcQ.png" alt=""></p>
+<p>两个node分别是10.100.0.2,10.100.0.3，两个node通过eth0通信，默认网关10.100.0.1。<br>先看左边的node，docker0网桥连接eth0与veth0，veth0是pause容器创建的，在一个pod内，共享给其他容器，如图，container1和container2以及pause容器共享veth0网络栈，网桥创建的时候本地路由表被设置为经过eth0，dest地址为172.17.0.2的包都会转发到docker0网桥上，通过网桥转发给veth0,也就到达了pod。<br>这个例子中选择了一个特例，可以发现右边的node与左边是一样的，默认情况下配置docker后，网桥等网络配置在各个主机上是一致的，即使不同，节点间也不知道其他节点中docker0网桥的分配状况，但如果包想要正确的发送过去，这点又是必须的。<br>kubernetes为了解决这个问题，首先，k8s为每一个节点上的bridge分配了一个全局的地址空间，然后各个节点的bridge从这个空间中分配地址。第二，k8s会在网关10.100.0.1添加相应的路由表，明确到达各个节点的bridge的包该如何路由。这样通过virtual network interface，bridge以及路由表的组合叫做overlay network。k8s就是通过这样的overlay网络使各个节点的pod互相通信。<br>k8s中overlay网络的情况如下图：<br><img src="https://image.prntscr.com/image/RrY4ulsFTkuKPvUY4yX6rA.png" alt=""><br>这里将docker0改成了cbr0（custom bridge），在k8s环境中这是一个与默认的docker节点不同的地方，这个例子中节点的bridge地址空间为10.0.0.0/14。</p>
+<h1 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h1><p>Pod本身是并不是一个持久的资源，因此直接使用pod的ip是不合理的，那怎么访问pod呢，最基本的方法就是通过反向代理或者load balance了,不过使用proxy的话要满足几个条件：</p>
+<ul>
+<li>持久的</li>
+<li>能够知道需要转发的server的列表</li>
+<li>能够知道server的健康状况，并能够相应请求</li>
+</ul>
+<p>k8s通过service的方式来实现。<br>service如何来实现的，我们先通过deployment创建两个pod：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">service-test</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">2</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    matchLabels:</span></span><br><span class="line"><span class="attr">      app:</span> <span class="string">service_test_pod</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">service_test_pod</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">simple-http</span></span><br><span class="line"><span class="attr">        image:</span> <span class="attr">python:2.7</span></span><br><span class="line"><span class="attr">        imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line"><span class="attr">        command:</span> <span class="string">["/bin/bash"]</span></span><br><span class="line"><span class="attr">        args:</span> <span class="string">["-c",</span> <span class="string">"echo \"&lt;p&gt;Hello from $(hostname)&lt;/p&gt;\" &gt; index.html; python -m SimpleHTTPServer 8080"</span><span class="string">]</span></span><br><span class="line"><span class="attr">        ports:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">http</span></span><br><span class="line"><span class="attr">          containerPort:</span> <span class="number">8080</span></span><br></pre></td></tr></table></figure>
+<p>两个pod都启动了一个简单的http server，通过8080端口来返回hostname，通过kubectl可以查看pod的状态以及ip：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f <span class="built_in">test</span>-deployment.yaml</span><br><span class="line">deployment <span class="string">"service-test"</span> created</span><br><span class="line">$ kubectl get pods</span><br><span class="line">service-test-6ffd9ddbbf-kf4j2    1/1    Running    0    15s</span><br><span class="line">service-test-6ffd9ddbbf-qs2j6    1/1    Running    0    15s</span><br><span class="line">$ kubectl get pods --selector=app=service_test_pod -o jsonpath=<span class="string">'&#123;.items[*].status.podIP&#125;'</span></span><br><span class="line">10.0.1.2 10.0.2.2</span><br></pre></td></tr></table></figure>
+<p>可以创建一个简单的客户端发出请求进行测试，client的pod如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">service-test-client1</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  restartPolicy:</span> <span class="string">Never</span></span><br><span class="line"><span class="attr">  containers:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">test-client1</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">alpine</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">["/bin/sh"]</span></span><br><span class="line"><span class="attr">    args:</span> <span class="string">["-c",</span> <span class="string">"echo 'GET / HTTP/1.1\r\n\r\n' | nc 10.0.2.2 8080"</span><span class="string">]</span></span><br></pre></td></tr></table></figure>
+<p>创建这个pod并查看输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl logs service-test-client1</span><br><span class="line">HTTP/1.0 200 OK</span><br><span class="line">&lt;!-- blah --&gt;</span><br><span class="line">&lt;p&gt;Hello from service-test-6ffd9ddbbf-kf4j2&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>可以正常返回结果，这里我们只用client访问了俩个pod中的一个，但是如果这个server pod恰好挂了，重启了，server pod的ip就很可能会改变，client就不能通过原来的ip获取响应了，而这种状况在实际环境中会经常遇到的。所以如果有一个方法能保证server端的服务ip不变就好了，这就是service的功能啦。</p>
+<p>通过k8s中的service，可以将请求转发给一组pod。service与pod的匹配是通过selector选择相应的label的pod方式实现的。先创建一个service：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">service-test</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">service_test_pod</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - port:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">    targetPort:</span> <span class="string">http</span></span><br></pre></td></tr></table></figure>
+<p>当service创建以后，可以看到service会分配一个ip在80端口接受请求。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get service service-test</span><br><span class="line">NAME           CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE</span><br><span class="line">service-test   10.3.241.152   &lt;none&gt;        80/TCP    11s</span><br></pre></td></tr></table></figure>
+<p>client pod可以通过service的ip来直接访问。也可以直接使用service的name进行访问，k8s内部的dns会自动解析。我们将client端调整下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">service-test-client2</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  restartPolicy:</span> <span class="string">Never</span></span><br><span class="line"><span class="attr">  containers:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">test-client2</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">alpine</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">["/bin/sh"]</span></span><br><span class="line"><span class="attr">    args:</span> <span class="string">["-c",</span> <span class="string">"echo 'GET / HTTP/1.1\r\n\r\n' | nc service-test 80"</span><span class="string">]</span></span><br></pre></td></tr></table></figure>
+<p>client通过service的那么进行访问，创建后查看输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl logs service-test-client1</span><br><span class="line">HTTP/1.0 200 OK</span><br><span class="line">&lt;!-- blah --&gt;</span><br><span class="line">&lt;p&gt;Hello from service-test-6ffd9ddbbf-kf4j2&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>可以看到client通过service能够正常访问server端了。</p>
+<h1 id="Service-Network-amp-kube-proxy"><a href="#Service-Network-amp-kube-proxy" class="headerlink" title="Service Network &amp; kube-proxy"></a>Service Network &amp; kube-proxy</h1><p>上面可以看到创建service后分配了一个ip：<code>10.3.241.152</code>，但这个ip不是和pod一个网段的，对比一下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">thing        IP               network</span><br><span class="line">-----        --               -------</span><br><span class="line">pod1         10.0.1.2         10.0.0.0/14</span><br><span class="line">pod2         10.0.2.2         10.0.0.0/14</span><br><span class="line">service      10.3.241.152     10.3.240.0/20</span><br></pre></td></tr></table></figure></p>
+<p>service的ip也不是和node一个网段的，到这基本能够知道service的ip是一个独立的网络，暂且叫<code>service network</code>，这个service的ip叫做<code>ClusterIP</code>。通过ClusterIP,集群中的任何pod都能够访问到service。</p>
+<p>但与node本身的IP以及pod本身的IP，ClusterIP有很大的不同，从前面可以看到，pod的IP是分配在一个虚拟设备上的<code>vethx</code>上的，node的IP是分配到<code>ethx</code>，一个实际的网络设备的，包括网桥，这些ip都分配到一个设备上，无论是虚拟的还是物理的。但ClusterIP的不同之处在于通过ifconfig命令查看网络设备也好，或者查看路由表也罢，都没有service network的相关内容，从这个角度来看的话，service network是不存在的，至少没用网络设备与之对应。但从上面的操作看，我们的请求service IP最终确实到了server pod上，也有了正确的返回。</p>
+<p>以这个场景为例：<br><img src="https://image.prntscr.com/image/Nj8mCMEzSxGm6w99jkBVjA.png" alt=""></p>
+<p>首先从clinet pod发出请求，到达veth1，请求的ClusterIP在pod的network中是找不到目的地址的，这种状况设备会把包向上一级网关转发，通过cbr0网桥（网桥只是转发）到达node的eth0，实际上node network也是找不到ClusterIP目的地址的，其实这样推下去，到顶层的网关也找不到，不过从我们的操作结果来看，如图所示，最终包是到达了server端的，但包是怎样实现的呢？答案是kube-proxy。</p>
+<p>kube-proxy如何搞定这个事情的呢？如果从名字来看kube-proxy是一个<code>代理</code>功能的组件，但和haproxy等代理不同，一般代理会收到client请求然后转发到server端，这需要代理有一个interface监听client以及server的连接。例子中的环境有两个interface可以使用，一个是node的interface，一个是pod的interface。但是这两个都没有被使用（原作者猜测是因为设计的时候pod和node都不是长期稳定的特性，这样会导致路由表更加复杂，难以维护）。而且我们从上面的分析可以看到这两个interface也都没有使用，实际kube-proxy最终使用的是netfilter来实现的，linux kernel中这个模块叫netfilter，用户空间中就是iptables了。</p>
+<p><img src="https://image.prntscr.com/image/BVKMbWLSSVO0rJsjziY05A.png" alt=""></p>
+<p>如上图为例，kube-proxy本地打开了10400端口监听发送给service的请求，并插入了netfilter规则，将目标地址是service IP的包重新路由给kube-proxy，然后再将这个包转发给pod的8080端口。这样从client pod的请求就能够通过ClusterIP顺利到达server pod了。k8s的1.2以后，kube-proxy是在iptables模式下运行的。转发工作游netfilter来完成，kube-proxy基本上只是与其进行同步规则的功能，因此整个流程目前如下：</p>
+<p><img src="https://image.prntscr.com/image/wKb5PkqVS-OP2KU9pGI9gQ.png" alt=""></p>
+<p>不过kube-proxy只是用于集群内部的通信，如果想从外部访问集群的服务需要使用其他的方式了。</p>
+<h1 id="NodePort"><a href="#NodePort" class="headerlink" title="NodePort"></a>NodePort</h1><p>我们使用client发出请求到server端，其中产生的connection或者是request，在OSI模型中属于4层或者7层，而中间包的转发都是通过路由和netfilter完成的，这属于3层。所有的路由，netfilter在做路由选择的时候基本都是基于包的信息来做判断的，这个包是哪发来的，要到哪去。我们上面在两个node上创建了server pod，为server端创建了相应的service（ClusterIP：10.3.241.152），因此我们访问这个service的时候，只需要让每一个node的eth0接收到目的地址是ClusterIP的80端口的包即可，随后netfilter就会自动匹配规则进行转发，最终到达相应的server pod。</p>
+<p>如果外部的client想访问集群内部的service的时候，能够访问ClusterIP+port就应该可以了。但这里有一个问题，service的ClusterIP只能在集群内部访问到，外部无法获知service network的分配情况。当然可以通过iptables来添加规则，使得访问service的ClusterIP+port的流量转发到指定的node的eth0设备上，比如下图：<br><img src="https://image.prntscr.com/image/7l2guyc0SyyS9wDXzD2p7A.png" alt=""></p>
+<p>但这里面还是存在问题，node本身不是持久稳定的，如果node迁移了，或者集群scale up/down了，导致这个node不能提供服务了，路由会中断一段时间。及时node能够长期有效的提供服务，流量都走在一个node上也不是合理的方案。</p>
+<p>所以一个合理的方案应该是不会受集群内部单点服务状态的影响的。如果想把外部流量合理的分配到后端服务的话其实已经有很成熟的工具了，负载均衡器，其实后面说的k8s的ingress也正式使用了负载均衡器方式来实现的。</p>
+<p>使用load balancer将外部流量分发到集群中的节点上，需要LB有一个外部能够访问到的公共IP，并且保证LB能够将请求转发到node上；基于上面的分析我们可以知道不能轻易使用ClusterIP配置网关路由器到node的静态规则。所以目前能够使用的只有node的以太网接口eth0了，例子中也就是10.100.0.0/24.可以看到网关路由器已经知道了如何将包转到node上了，但如果我们是想将包正确的发到ClusterIP的80端口的，这通过node的eth0是做不到的。因为没有服务在node的ip上，如：10.100.0.3监听80端口，只能够匹配10.3.241.152:80.所以如果直接这样转发到node上是会失败的，如下图：</p>
+<p><img src="https://image.prntscr.com/image/-ek2jTVVQvS5PLwa-khSDg.png" alt=""></p>
+<p>目前我们面对的难题是：网关到达node的网络与netfilter转发的网络不是一个网络。这中间缺乏了一个桥梁，所以k8s使用NodePort来搞定。</p>
+<p>之前创建的service没有指定type，默认的type是ClusterIP。还有另外两个可以使用的type，一个就是NodePort，如：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">service-test</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">NodePort</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">service_test_pod</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - port:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">    targetPort:</span> <span class="string">http</span></span><br></pre></td></tr></table></figure>
+<p>使用Nodeport的时候，kube-proxy会在eth0上打开一个端口，默认在3000-32767之间，node上发到到这个端口的请求都会转发给对应的service。创建上面的service后可以看到分配的NodePort：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get svc service-test</span><br><span class="line">NAME           CLUSTER-IP     EXTERNAL-IP   PORT(S)           AGE</span><br><span class="line">service-test   10.3.241.152   &lt;none&gt;        80:32213/TCP      1m</span><br></pre></td></tr></table></figure>
+<h1 id="LoadBlancer"><a href="#LoadBlancer" class="headerlink" title="LoadBlancer"></a>LoadBlancer</h1><p>但是NodePort是非常有限的资源，不过这已经是一个非常基础的实现方式了。而且这个方案需要在前端加一个LB,所以我们继续向下看。<br>service的另一个type是LoadBalancer，这个type的service可以认为是一个NodePort加上一个ingress路径的组合。前提是k8s集群跑在GCP/AWS这样的支持API驱动的网络资源配置的环境。<br>创建如下service:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">service-test</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">LoadBalancer</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">service_test_pod</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - port:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">    targetPort:</span> <span class="string">http</span></span><br></pre></td></tr></table></figure>
+<p>原作者在GCP环境下进行的操作，查看一下service：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get svc service-test</span><br><span class="line">NAME      CLUSTER-IP      EXTERNAL-IP     PORT(S)          AGE</span><br><span class="line">openvpn   10.3.241.52     35.184.97.156   80:32213/TCP     5m</span><br></pre></td></tr></table></figure>
+<p>可以看到service申请到了一个external-ip，实际上在GCP中不只是申请了一个external-ip，而是一个完整的load-balancer，包括转发规则，代理，后端服务等。一旦分配external-ip以后，就可以使用这个ip来访问服务了。但是LoadBlancer的service不能够拦截https流量，不能根据virtual-host和path进行设置转发规则，也不能同时配置多个service。由于这些限制，所以在k8s1.2以后有了ingress。</p>
+<h1 id="Ingress"><a href="#Ingress" class="headerlink" title="Ingress"></a>Ingress</h1><p>上面我们分析得到LoadBalancer的服务有一些限制，所以才有了ingress。k8s中的Ingress由两部分组成，一个是ingress资源，一个是ingress controller，通过创建（或者说定义）ingress资源告诉controller，需要创建怎样的转发规则，而controller就会根据创建的ingress资源来实现相应的规则，达到我们的目的。</p>
+<p>创建一个ingress资源，如：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">my-ingress</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  rules:</span></span><br><span class="line"><span class="attr">  - host:</span> <span class="string">www.mysite.com</span></span><br><span class="line"><span class="attr">    http:</span></span><br><span class="line"><span class="attr">      paths:</span></span><br><span class="line"><span class="attr">      - backend:</span></span><br><span class="line"><span class="attr">          serviceName:</span> <span class="string">website</span></span><br><span class="line"><span class="attr">          servicePort:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">  - host:</span> <span class="string">forums.mysite.com</span></span><br><span class="line"><span class="attr">    http:</span></span><br><span class="line"><span class="attr">      paths:</span></span><br><span class="line"><span class="attr">      - path:</span></span><br><span class="line"><span class="attr">        backend:</span></span><br><span class="line"><span class="attr">          serviceName:</span> <span class="string">forums</span></span><br><span class="line"><span class="attr">          servicePort:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure></p>
+<p>这个ingress表明需要将<code>www.mysite.com</code>以及<code>forums.mysite.com</code>分别转发到k8s的service:<code>website</code>和<code>forums</code> 。</p>
+<p>但是单纯的ingress资源只是做了这样的一个定义，没有任何实际的操作，需要相应的ingress controller实现，理论上任何有反向代理功能的系统都能够作为ingress controller。最常用的就是nginx，下面的一个完整的nginx ingress controller的例子，例子中ingress controller使用了LoadBalancer service，如果环境不支持的话可以使用NodePort代替。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">ingress-nginx</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">LoadBalancer</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">ingress-nginx</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">http</span></span><br><span class="line"><span class="attr">    port:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">    targetPort:</span> <span class="string">http</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">https</span></span><br><span class="line"><span class="attr">    port:</span> <span class="number">443</span></span><br><span class="line"><span class="attr">    targetPort:</span> <span class="string">https</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">ingress-nginx</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">ingress-nginx</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      terminationGracePeriodSeconds:</span> <span class="number">60</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - image:</span> <span class="string">gcr.io/google_containers/nginx-ingress-controller:0.8.3</span></span><br><span class="line"><span class="attr">        name:</span> <span class="string">ingress-nginx</span></span><br><span class="line"><span class="attr">        imagePullPolicy:</span> <span class="string">Always</span></span><br><span class="line"><span class="attr">        ports:</span></span><br><span class="line"><span class="attr">          - name:</span> <span class="string">http</span></span><br><span class="line"><span class="attr">            containerPort:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">            protocol:</span> <span class="string">TCP</span></span><br><span class="line"><span class="attr">          - name:</span> <span class="string">https</span></span><br><span class="line"><span class="attr">            containerPort:</span> <span class="number">443</span></span><br><span class="line"><span class="attr">            protocol:</span> <span class="string">TCP</span></span><br><span class="line"><span class="attr">        livenessProbe:</span></span><br><span class="line"><span class="attr">          httpGet:</span></span><br><span class="line"><span class="attr">            path:</span> <span class="string">/healthz</span></span><br><span class="line"><span class="attr">            port:</span> <span class="number">10254</span></span><br><span class="line"><span class="attr">            scheme:</span> <span class="string">HTTP</span></span><br><span class="line"><span class="attr">          initialDelaySeconds:</span> <span class="number">30</span></span><br><span class="line"><span class="attr">          timeoutSeconds:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">        env:</span></span><br><span class="line"><span class="attr">          - name:</span> <span class="string">POD_NAME</span></span><br><span class="line"><span class="attr">            valueFrom:</span></span><br><span class="line"><span class="attr">              fieldRef:</span></span><br><span class="line"><span class="attr">                fieldPath:</span> <span class="string">metadata.name</span></span><br><span class="line"><span class="attr">          - name:</span> <span class="string">POD_NAMESPACE</span></span><br><span class="line"><span class="attr">            valueFrom:</span></span><br><span class="line"><span class="attr">              fieldRef:</span></span><br><span class="line"><span class="attr">                fieldPath:</span> <span class="string">metadata.namespace</span></span><br><span class="line"><span class="attr">        args:</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">/nginx-ingress-controller</span></span><br><span class="line"><span class="bullet">        -</span> <span class="bullet">--default-backend-service=$(POD_NAMESPACE)/nginx-default-backend</span></span><br></pre></td></tr></table></figure>
+<p>实际上ingress controller还需要一个default-backend，在所有转发规则不匹配的时候返回一个404的页面，这里不提了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Pod是k8s调度的基本单元，其本身是一个逻辑概念，通过pause容器将内部的容器统一为一个整体。</p>
+<p>k8s通过overlay网络实现pod间的通信。</p>
+<p>Service为一组容器提供统一的访问入口，是一种基本的服务代理方式。</p>
+<p>通过ClusterIP可以访问service，是由kube-proxy同步netfilter规则实现的。</p>
+<p>外部访问service有三种方式：</p>
+<ul>
+<li>NodePort</li>
+<li>LoadBalancer</li>
+<li>Ingress</li>
+</ul>
+<p>NodePort方式最为原始，会在每个node上打开一个端口，实现node的network到service network的转发。</p>
+<p>LoadBalancer需要运行环境支持API驱动的网络服务，如GCE，AWS。并且会为每一个服务配置一个LB（当然配套的得有一个公共IP）。</p>
+<p>Ingress最为灵活，在一个IP下能够暴露多个服务，可以够实现基于virtual host和path的多种方式的流量转发，也支持多种ingress controller。</p>
+<p>以上，总结完毕。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://medium.com/google-cloud/understanding-kubernetes-networking-pods-7117dd28727" target="_blank" rel="noopener">Understanding kubernetes networking: pods</a><br><a href="https://medium.com/google-cloud/understanding-kubernetes-networking-services-f0cb48e4cc82" target="_blank" rel="noopener">Understanding kubernetes networking: service</a><br><a href="https://medium.com/@betz.mark/understanding-kubernetes-networking-ingress-1bc341c84078" target="_blank" rel="noopener">Understanding kubernetes networking: ingress</a><br><a href="https://medium.com/@cashisclay/kubernetes-ingress-82aa960f658e" target="_blank" rel="noopener">Kubernetes Ingress</a><br><a href="https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0" target="_blank" rel="noopener">Kubernetes NodePort vs LoadBalancer vs Ingress? When should I use what?</a><br><a href="https://xuxinkun.github.io/2016/07/22/kubernetes-proxy/" target="_blank" rel="noopener">kubernetes入门之kube-proxy实现原理</a><br><a href="https://blog.csdn.net/Belug/article/details/75530627" target="_blank" rel="noopener">docker的五种网络模式总结</a><br><a href="https://o-my-chenjian.com/2017/10/17/The-Pause-Container-Of-Kubernetes/" target="_blank" rel="noopener">Kubernetes之Pause容器</a><br><a href="http://dockone.io/article/3211" target="_blank" rel="noopener">图解Kubernetes网络（一）</a></p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://cheneydc.me">Cheney Dong</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://cheneydc.me/2018/05/15/k8s-networking/">http://cheneydc.me/2018/05/15/k8s-networking/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/kubernetes/">kubernetes</a>
+            
+              <a href="/tags/service/">service</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/06/25/kolla-for-openstack/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Openstack部署利器-Kolla回顾</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/05/05/customize-the-pantheon-terminal-font/">
+        <span class="next-text nav-default">自定义pantheon-terminal字体</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:cheneydc@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://plus.google.com/u/0/+CheneyDong" class="iconfont icon-google" title="google"></a>
+        
+      
+    
+      
+        
+          <a href="https://github.com/cheneydc" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Cheney Dong</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://cheneydc.me/2018/05/15/k8s-networking/';
+        this.page.identifier = '2018/05/15/k8s-networking/';
+        this.page.title = '访问k8s中的服务';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//cheneydc.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>

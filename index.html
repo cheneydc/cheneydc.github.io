@@ -216,6 +216,157 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2018/06/25/kolla-for-openstack/">Openstack部署利器-Kolla回顾</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-06-25
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><img src="http://upload-images.jianshu.io/upload_images/46610-9647a7d0b8c9b10b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="优美的考拉^_^"></p>
+<h2 id="部署好累"><a href="#部署好累" class="headerlink" title="部署好累"></a>部署好累</h2><p>Openstack是一个非常庞大的项目，而且各个组件都是分布式的服务架构，一开始学习发现运行起来都是问题，想着各种办法部署，然而即使部署起来了也不一定配置正确，反复磨炼一阵能跑起来了，就不太关注部署了，研究代码，修改bug，不过等着上生产，发现最大的痛又是部署，代码反而没那么复杂了。<br>Openstack的组件众多，分布式的架构要求部署多节点，生产环境还要考虑各个服务的高可用，根据各个网络负载情况考虑是否独立各个服务网络，依赖基础服务众多，消息队列、数据库等，其中每一块感觉都是雷区啊，部署结束后升级也是非常大的难题，做足了方案也不一定敢动手啊，哈哈。<br>不过容器技术出来后解决了很多问题，而Kolla项目正式通过将Openstack中各个服务容器化的方式来进行部署的一个项目，通过容器的方式进行交付，这就大大简化了跨平台的问题，同时也使得升级成为了可能。</p>
+          <div class="read-more">
+            <a href="/2018/06/25/kolla-for-openstack/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2018/05/15/k8s-networking/">访问k8s中的服务</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-05-15
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/kubernetes/">kubernetes</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>k8s接触一段了，似懂非懂的时候来了，自己喜欢直接上手先搂的那种，然后回头在来看的话很多疑问会迎刃而解，目前对k8s网络方面的知识有些凌乱，就此整理，以下问题待解决：</p>
+<ul>
+<li>pod ip、cluster ip如何实现</li>
+<li>k8s中的服务如何暴露</li>
+</ul>
+          <div class="read-more">
+            <a href="/2018/05/15/k8s-networking/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2018/05/05/customize-the-pantheon-terminal-font/">自定义pantheon-terminal字体</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-05-05
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/工具/">工具</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>把工作机换成elementary OS有一段了，系统很简洁，用起来也很舒服，奈何屏幕太小，终端字体实在不能忍受，自带的pantheon terminal的字体没找到在哪里设置。elementary是基于ubuntu的一个发行版，桌面环境pantheon是基于gnome的，那通过dconf是可以搞定一切用户配置的。</p>
+<p>比如现在更改pantheon-terminal的字体：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gsettings <span class="built_in">set</span> org.pantheon.terminal.settings font <span class="string">'Roboto Mono Regular 13'</span></span><br></pre></td></tr></table></figure></p>
+<p>这就将终端字体设置为<code>Roboto Mono Regular</code>字体了，字体大小为13.<br>设置后关闭pantheon-terminal再重新打开，就已经生效了。</p>
+          <div class="read-more">
+            <a href="/2018/05/05/customize-the-pantheon-terminal-font/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2018/05/01/save-the-k420/">拯救k420</a>
         
       </h1>
@@ -561,157 +712,6 @@
           <p>有一段时间没有弄openstack了，算来算去弄openstack也差不多三年了，但是直接跳过去再弄个别的说不过去啊，看到openstack有了coa认证，就报了个名，培训嘛，对于咱们趟着坑走的人来说就算了，得硬气点儿不是，哈哈！不过毕竟是考试，还是得好好准备一下的。这里面我本地用devstack搭的N版环境，做一些基本的练习哈！</p>
           <div class="read-more">
             <a href="/2018/03/30/prepare-coa/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2018/03/24/deploy-minikube-on-windows/">windows上用minikube部署k8s(1.9.0)</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2018-03-24
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/kubernetes/">kubernetes</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>k8s上的部署官方给了几种方式，机器多可以用kubeadm，自己只有一个机器，可以用minikube来弄个单机的虚拟机环境进行学习。当然也有<a href="https://github.com/kubernetes-incubator/kubespray" target="_blank" rel="noopener">kubespray</a>可以搞定生产环境级别的k8s环境部署。最近葱苦于笔记本上没有环境使用只能先试试minikube了，最难能可贵的是minikube支持多种虚拟化方式，我windows的机器也可以试试啦！按照官方知道还是很便捷的，所有部署方式中，最麻烦的莫过于镜像啦，因为镜像在那头，我在这头……</p>
-          <div class="read-more">
-            <a href="/2018/03/24/deploy-minikube-on-windows/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2018/03/14/network-knowledge/">网络知识</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2018-03-14
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <h1 id="网络命名空间"><a href="#网络命名空间" class="headerlink" title="网络命名空间"></a>网络命名空间</h1><p>Net Namesapce，网络命名空间，不同netns的网络栈是完全隔离的，相互不能通信，命名空间内部可以有自己独立的路由表以及iptables。为了隔离出独立的协议栈，需要纳入命名空间的元素有进程、套接字、网络设备等。</p>
-          <div class="read-more">
-            <a href="/2018/03/14/network-knowledge/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2016/04/15/keystone-v3-hierarchical-multitenancy/">Keystone_V3子项目概念梳理</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2016-04-15
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>项目的层级化，或者说是嵌套化，可以在横向上缩小了资源的管理维度，以更贴合实际业务的形式进行了资源的隔离；子项目对自己的资源有了更高的自由度，父项目的管理就得到了大大的简化。</p>
-<p>Keystone V3 API支持子项目，下面从概念以及实际的业务逻辑看看子项目是什么样的。</p>
-          <div class="read-more">
-            <a href="/2016/04/15/keystone-v3-hierarchical-multitenancy/" class="read-more-link">阅读更多</a>
           </div>
         
       

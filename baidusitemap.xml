@@ -4,6 +4,75 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2018/06/25/kolla-for-openstack/</loc>
+    <lastmod>2018-06-25T01:32:21.729Z</lastmod>
+    <data>
+        <display>
+        <title>Openstack部署利器-Kolla回顾</title>
+        <pubTime>2018-06-25T01:27:15.000Z</pubTime>
+        
+        <tag>openstack</tag>
+         
+        <tag>deploy</tag>
+         
+        <tag>kolla</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2018/05/15/k8s-networking/</loc>
+    <lastmod>2018-06-25T01:28:03.888Z</lastmod>
+    <data>
+        <display>
+        <title>访问k8s中的服务</title>
+        <pubTime>2018-05-15T15:50:00.000Z</pubTime>
+        
+        <tag>kubernetes</tag>
+         
+        <tag>service</tag>
+         
+         
+           
+             
+              <breadCrumb title="kubernetes" url="http://cheneydc.me/categories/kubernetes/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+  <url>
+    <loc>http://cheneydc.me/2018/05/05/customize-the-pantheon-terminal-font/</loc>
+    <lastmod>2018-05-14T12:12:29.988Z</lastmod>
+    <data>
+        <display>
+        <title>自定义pantheon-terminal字体</title>
+        <pubTime>2018-05-05T00:02:50.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+        <tag>terminal</tag>
+         
+        <tag>font</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://cheneydc.me/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2018/05/01/save-the-k420/</loc>
     <lastmod>2018-05-01T12:35:31.281Z</lastmod>
     <data>
@@ -76,7 +145,6 @@
     </data>
     </url>
 
-    
     
   <url>
     <loc>http://cheneydc.me/2018/03/24/deploy-minikube-on-windows/</loc>
@@ -237,30 +305,6 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
-    <lastmod>2018-03-25T11:58:56.112Z</lastmod>
-    <data>
-        <display>
-        <title>提交package到pypi</title>
-        <pubTime>2016-04-07T16:00:00.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>pypi</tag>
-         
-        <tag>pip</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cheneydc.me/2016/04/15/keystone-v3-hierarchical-multitenancy/</loc>
     <lastmod>2018-03-25T11:58:56.112Z</lastmod>
     <data>
@@ -277,6 +321,30 @@
         <tag>project</tag>
          
         <tag>concept</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cheneydc.me/2016/04/08/publish-package-to-pypi/</loc>
+    <lastmod>2018-03-25T11:58:56.112Z</lastmod>
+    <data>
+        <display>
+        <title>提交package到pypi</title>
+        <pubTime>2016-04-07T16:00:00.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>pypi</tag>
+         
+        <tag>pip</tag>
          
          
            
@@ -315,16 +383,14 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2016/03/01/ovirt-over-all/</loc>
+    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
     <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     <data>
         <display>
-        <title>VDI之ovirt</title>
-        <pubTime>2016-02-29T16:00:00.000Z</pubTime>
+        <title>忘了jenkins管理员密码了</title>
+        <pubTime>2016-01-13T16:00:00.000Z</pubTime>
         
-        <tag>ovirt</tag>
-         
-        <tag>VDI</tag>
+        <tag>jenkins</tag>
          
          
            
@@ -355,14 +421,16 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2016/01/14/forget-jenkins-admin-passwd/</loc>
+    <loc>http://cheneydc.me/2016/03/01/ovirt-over-all/</loc>
     <lastmod>2018-03-25T11:58:56.111Z</lastmod>
     <data>
         <display>
-        <title>忘了jenkins管理员密码了</title>
-        <pubTime>2016-01-13T16:00:00.000Z</pubTime>
+        <title>VDI之ovirt</title>
+        <pubTime>2016-02-29T16:00:00.000Z</pubTime>
         
-        <tag>jenkins</tag>
+        <tag>ovirt</tag>
+         
+        <tag>VDI</tag>
          
          
            
@@ -393,16 +461,16 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
+    <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     <data>
         <display>
-        <title>ubuntu配置shadowsocks</title>
-        <pubTime>2015-12-05T16:00:00.000Z</pubTime>
+        <title>Gitlab与jenkins集成</title>
+        <pubTime>2015-12-17T16:00:00.000Z</pubTime>
         
-        <tag>tool</tag>
+        <tag>jenkins</tag>
          
-        <tag>shadowsocks</tag>
+        <tag>gitlab</tag>
          
          
            
@@ -439,16 +507,16 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/12/18/gitlab_jenkins/</loc>
+    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     <data>
         <display>
-        <title>Gitlab与jenkins集成</title>
-        <pubTime>2015-12-17T16:00:00.000Z</pubTime>
+        <title>ubuntu配置shadowsocks</title>
+        <pubTime>2015-12-05T16:00:00.000Z</pubTime>
         
-        <tag>gitlab</tag>
+        <tag>tool</tag>
          
-        <tag>jenkins</tag>
+        <tag>shadowsocks</tag>
          
          
            
@@ -483,11 +551,11 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-stevedore/</loc>
+    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     <data>
         <display>
-        <title>python - stevedore</title>
+        <title>python - greenlet</title>
         <pubTime>2015-11-19T16:00:00.000Z</pubTime>
         
          
@@ -501,11 +569,11 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/11/20/python-greenlet/</loc>
+    <loc>http://cheneydc.me/2015/11/20/python-stevedore/</loc>
     <lastmod>2018-03-25T11:58:56.108Z</lastmod>
     <data>
         <display>
-        <title>python - greenlet</title>
+        <title>python - stevedore</title>
         <pubTime>2015-11-19T16:00:00.000Z</pubTime>
         
          
@@ -577,6 +645,24 @@
 
     
   <url>
+    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
+    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
+    <data>
+        <display>
+        <title>SQLalchemmy - 2</title>
+        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cheneydc.me/2015/10/26/transfer-volume/</loc>
     <lastmod>2018-03-25T11:58:56.105Z</lastmod>
     <data>
@@ -617,13 +703,17 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/10/29/sqlalchemy-2/</loc>
-    <lastmod>2018-03-25T11:58:56.105Z</lastmod>
+    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
+    <lastmod>2018-03-25T11:58:56.104Z</lastmod>
     <data>
         <display>
-        <title>SQLalchemmy - 2</title>
-        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
+        <title>Shell--再来一遍-3</title>
+        <pubTime>2015-10-19T16:00:00.000Z</pubTime>
         
+        <tag>linux</tag>
+         
+        <tag>shell</tag>
+         
          
            
              
@@ -645,28 +735,6 @@
         <tag>openstack</tag>
          
         <tag>cinder</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="http://cheneydc.me/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cheneydc.me/2015/10/20/Shell-again/</loc>
-    <lastmod>2018-03-25T11:58:56.104Z</lastmod>
-    <data>
-        <display>
-        <title>Shell--再来一遍-3</title>
-        <pubTime>2015-10-19T16:00:00.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-        <tag>shell</tag>
          
          
            
@@ -811,13 +879,15 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/05/16/devstack-deploy-openstack/</loc>
+    <loc>http://cheneydc.me/2015/05/18/docker-study-1/</loc>
     <lastmod>2018-03-25T11:58:56.100Z</lastmod>
     <data>
         <display>
-        <title>devstack部署openstack</title>
-        <pubTime>2015-05-15T16:00:00.000Z</pubTime>
+        <title>docker学习（1）</title>
+        <pubTime>2015-05-17T16:00:00.000Z</pubTime>
         
+        <tag>docker</tag>
+         
          
            
              
@@ -829,15 +899,13 @@
 
     
   <url>
-    <loc>http://cheneydc.me/2015/05/18/docker-study-1/</loc>
+    <loc>http://cheneydc.me/2015/05/16/devstack-deploy-openstack/</loc>
     <lastmod>2018-03-25T11:58:56.100Z</lastmod>
     <data>
         <display>
-        <title>docker学习（1）</title>
-        <pubTime>2015-05-17T16:00:00.000Z</pubTime>
+        <title>devstack部署openstack</title>
+        <pubTime>2015-05-15T16:00:00.000Z</pubTime>
         
-        <tag>docker</tag>
-         
          
            
              

@@ -216,6 +216,157 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2018/03/24/deploy-minikube-on-windows/">windows上用minikube部署k8s(1.9.0)</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-03-24
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/kubernetes/">kubernetes</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>k8s上的部署官方给了几种方式，机器多可以用kubeadm，自己只有一个机器，可以用minikube来弄个单机的虚拟机环境进行学习。当然也有<a href="https://github.com/kubernetes-incubator/kubespray" target="_blank" rel="noopener">kubespray</a>可以搞定生产环境级别的k8s环境部署。最近葱苦于笔记本上没有环境使用只能先试试minikube了，最难能可贵的是minikube支持多种虚拟化方式，我windows的机器也可以试试啦！按照官方知道还是很便捷的，所有部署方式中，最麻烦的莫过于镜像啦，因为镜像在那头，我在这头……</p>
+          <div class="read-more">
+            <a href="/2018/03/24/deploy-minikube-on-windows/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2018/03/14/network-knowledge/">网络知识</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-03-14
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <h1 id="网络命名空间"><a href="#网络命名空间" class="headerlink" title="网络命名空间"></a>网络命名空间</h1><p>Net Namesapce，网络命名空间，不同netns的网络栈是完全隔离的，相互不能通信，命名空间内部可以有自己独立的路由表以及iptables。为了隔离出独立的协议栈，需要纳入命名空间的元素有进程、套接字、网络设备等。</p>
+          <div class="read-more">
+            <a href="/2018/03/14/network-knowledge/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2016/04/15/keystone-v3-hierarchical-multitenancy/">Keystone_V3子项目概念梳理</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-04-15
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>项目的层级化，或者说是嵌套化，可以在横向上缩小了资源的管理维度，以更贴合实际业务的形式进行了资源的隔离；子项目对自己的资源有了更高的自由度，父项目的管理就得到了大大的简化。</p>
+<p>Keystone V3 API支持子项目，下面从概念以及实际的业务逻辑看看子项目是什么样的。</p>
+          <div class="read-more">
+            <a href="/2016/04/15/keystone-v3-hierarchical-multitenancy/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2016/04/08/publish-package-to-pypi/">提交package到pypi</a>
         
       </h1>
@@ -545,163 +696,6 @@
           <p>熟悉了一下openstack社区的工作流程，初觉繁琐，用下来觉得异常清晰，CI虽然稳定欠佳，但是一些基本的单元测试等苦累之活可以交与它的。所以想着怎么把gitlab和jenkins集成一下。</p>
           <div class="read-more">
             <a href="/2015/12/18/gitlab_jenkins/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2015/12/17/how-work-on-freenode-openstack/">怎样加入freenode的openstack频道</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-12-17
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/工具/">工具</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>openstack相关开发有时候去irc里面与大神们直接交流是很方便有效的，进入频道很方便，下载个irc，ubuntu下面常用的就xchat了，也有windows的版本，不过记得貌似收费的啊。然后起好名字，临时上去的话名字无所谓啊，不过长期交流的话尽量保持名字不变，然后在freenode里面进行注册，这样很方便找人。</p>
-          <div class="read-more">
-            <a href="/2015/12/17/how-work-on-freenode-openstack/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2015/12/06/shadowsocks-on-ubuntu/">ubuntu配置shadowsocks</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-12-06
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/工具/">工具</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>用了ubuntu，不过得科学上网啊，研究配置下shadowsocks：</p>
-          <div class="read-more">
-            <a href="/2015/12/06/shadowsocks-on-ubuntu/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2015/12/03/horizon-support-v3/">配置horizon支持keystone v3 api</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-12-03
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/技术/">技术</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>From:<br><a href="https://docs.hpcloud.com/commercial/GA1/1.1commerical.services-identity-configure-v3.html" target="_blank" rel="noopener">https://docs.hpcloud.com/commercial/GA1/1.1commerical.services-identity-configure-v3.html</a></p>
-<p>To switch Horizon from Keystone v2 to Keystone v3:</p>
-<ol>
-<li><p>In each controller node, navigate to the local_settings.py file located in /opt/stack/venvs/openstack/lib/python2.7/site-packages/openstack_dashboard/local/local_settings.py</p>
-</li>
-<li><p>Edit the file as follows:</p>
-</li>
-</ol>
-          <div class="read-more">
-            <a href="/2015/12/03/horizon-support-v3/" class="read-more-link">阅读更多</a>
           </div>
         
       

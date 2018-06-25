@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Openstack部署利器-Kolla回顾"/>
+
+
+
+
+  <meta name="keywords" content="openstack, deploy, kolla, 种葱得葱" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="种葱得葱">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="http://cheneydc.me/2018/06/25/kolla-for-openstack/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> Openstack部署利器-Kolla回顾 - 种葱得葱 </title>
+  <link rel="stylesheet" href="/css/prism.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">种葱得葱</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">种葱得葱</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Openstack部署利器-Kolla回顾
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-06-25
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#部署好累"><span class="toc-text">部署好累</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kolla好么？"><span class="toc-text">Kolla好么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建镜像"><span class="toc-text">构建镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#镜像结构"><span class="toc-text">镜像结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-base"><span class="toc-text">1. base</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-openstack-base"><span class="toc-text">2. openstack-base</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-base"><span class="toc-text">3. \-base</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4"><span class="toc-text">4. \</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容器的启动"><span class="toc-text">容器的启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署过程"><span class="toc-text">部署过程</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/46610-9647a7d0b8c9b10b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="优美的考拉^_^"></p>
+<h2 id="部署好累"><a href="#部署好累" class="headerlink" title="部署好累"></a>部署好累</h2><p>Openstack是一个非常庞大的项目，而且各个组件都是分布式的服务架构，一开始学习发现运行起来都是问题，想着各种办法部署，然而即使部署起来了也不一定配置正确，反复磨炼一阵能跑起来了，就不太关注部署了，研究代码，修改bug，不过等着上生产，发现最大的痛又是部署，代码反而没那么复杂了。<br>Openstack的组件众多，分布式的架构要求部署多节点，生产环境还要考虑各个服务的高可用，根据各个网络负载情况考虑是否独立各个服务网络，依赖基础服务众多，消息队列、数据库等，其中每一块感觉都是雷区啊，部署结束后升级也是非常大的难题，做足了方案也不一定敢动手啊，哈哈。<br>不过容器技术出来后解决了很多问题，而Kolla项目正式通过将Openstack中各个服务容器化的方式来进行部署的一个项目，通过容器的方式进行交付，这就大大简化了跨平台的问题，同时也使得升级成为了可能。</p>
+<a id="more"></a>
+<h2 id="Kolla好么？"><a href="#Kolla好么？" class="headerlink" title="Kolla好么？"></a>Kolla好么？</h2><p>我认为Kolla是一个非常棒的项目了，不单单是因为它解决了部署的一些痛点，更重要的是Kolla的架构和实现方式，最直观的印象就是，Kolla非常简单，但是实现的很优雅。<br>Kolla的简洁和优并不是单纯因为用了容器，我认为Kolla使用使用的ansible才更让Kolla称得上是一个好项目</p>
+<ul>
+<li>第一，ansible是一套自动化运维工具，当然还有很多其他的工具，虽然没有用过，但是从ansible本身来说我觉得ansible够简单，依赖少，没有使用agent的方式，直接使用ssh进行下发</li>
+<li>第二，ansible的playbook方式以及role的架构，用过几次以后真的是太方便了，能够高度的定制化，而role的架构方式非常灵活，Kolla可以说把ansible的这点用到了极致，换句话说，只要熟悉了ansible的使用，Kolla的项目就等于说一览无遗了，这样简单又好用的才是真正的好项目啊。</li>
+</ul>
+<p>Kolla实际上是分为两大块的，一部分，Kolla提供了生产环境级别的镜像，涵盖了Openstack用到的各个服务，另一部分是自动化的部署，也就是上面说的ansible部分。最开始两个部分是在一个项目中的（也就是Kolla），从O版本开始将两个部分独立开来，<a href="https://github.com/openstack/kolla" target="_blank" rel="noopener">Kolla</a>项目用来构建所有服务的镜像，<a href="https://github.com/openstack/kolla-ansible" target="_blank" rel="noopener">Kolla-ansible</a>用来执行自动化部署。除此之外，kolla考虑容器的部署，容器的管理也被纳入项目中，因此有了<a href="https://github.com/openstack/kolla-kubernetes" target="_blank" rel="noopener">kolla-kubernetes</a>，通过k8s来管理整个部署的容器集群。</p>
+<h2 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h2><p>以<strong>O版</strong>本代码为例，<br>构建镜像的流程主要在kolla项目中，构建镜像通过kolla-build命令执行，入口在<br> kolla/kolla/image/build.py 中：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">978</span> <span class="function"><span class="keyword">def</span> <span class="title">run_build</span><span class="params">()</span>:</span></span><br><span class="line"><span class="number">979</span>     <span class="string">"""Build container images.</span></span><br><span class="line"><span class="string">980 </span></span><br><span class="line"><span class="string">981     :return: A 3-tuple containing bad, good, and unmatched container image</span></span><br><span class="line"><span class="string">982     status dicts, or None if no images were built.</span></span><br><span class="line"><span class="string">983     """</span></span><br><span class="line"><span class="number">984</span>     conf = cfg.ConfigOpts()</span><br><span class="line"><span class="number">985</span>     common_config.parse(conf, sys.argv[<span class="number">1</span>:], prog=<span class="string">'kolla-build'</span>)</span><br><span class="line"><span class="number">986</span>                                                                                                                                                                                        </span><br><span class="line"><span class="number">987</span>     <span class="keyword">if</span> conf.debug:</span><br><span class="line"><span class="number">988</span>         LOG.setLevel(logging.DEBUG)</span><br><span class="line"><span class="number">989</span> </span><br><span class="line"><span class="number">990</span>     kolla = KollaWorker(conf)</span><br><span class="line"><span class="number">991</span>     kolla.setup_working_dir()</span><br><span class="line"><span class="number">992</span>     kolla.find_dockerfiles()</span><br><span class="line"><span class="number">993</span>     kolla.create_dockerfiles()</span><br></pre></td></tr></table></figure></p>
+<p>最终的执行构建代码都是在上面这里，首先<code>kolla = KollaWorker(conf)</code>构建任务读取配置并初始化，随后设置setup_working_dir()来设置临时的工作目录，因为整个构建过程实际就是将各个服务的Dockerfile构建成相应的docker镜像，但是面对不同的平台和不同的配置，Kolla项目通过jinja2语法将Dockerfile进行了定制化，通过顶层的参数设置来下发到各个Dockerfile中，那么构建的时候生成真正的Dockerfile就在刚刚设置的工作目录中了，随后通过find_dockerfiles()找到临时目录中所有的Dockerfile模板，也就是Dockerfile.j2并通过create_dockerfiles()生成相应的Dockerfile。<br>主要流程其实就这么多，其他都是额外提供的功能啦，慢慢扩展开就可以了，不过构建镜像提供了非常多的选择，包括：</p>
+<ul>
+<li>安装各个服务的方式（binary 或 source）</li>
+<li>平台选择(ubuntu,centos 或 debina等)</li>
+<li>如果只需要输出Dockerfile不去构建的话</li>
+<li>可以通过参数<code>template-only</code>实现</li>
+<li>构建成功后推送到本地仓库（–registry  –push –tag –namespace 几个组合起来）</li>
+</ul>
+<p>功能非常多，具体的选项参数有哪些可以查看<code>kolla/kolla/common/config.py</code>模块。</p>
+<h2 id="镜像结构"><a href="#镜像结构" class="headerlink" title="镜像结构"></a>镜像结构</h2><p>那这么多的镜像怎样构成的呢？大体分为四层：</p>
+<ul>
+<li>base</li>
+<li>openstack-base</li>
+<li><service>-base</service></li>
+<li><service>
+
+
+</service></li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/46610-3303d4085e82f87e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Kolla镜像结构"></p>
+<h3 id="1-base"><a href="#1-base" class="headerlink" title="1. base"></a>1. base</h3><p>所有的Kolla项目基本上使用了同一个base镜像作为基础，所有的dockerfile模板在<code>kolla/docker</code>中，base镜像中主要定义了镜像中一些基础的内容，如：</p>
+<ul>
+<li>命令行提示符格式</li>
+<li>指定软件包源</li>
+<li>安装基础的软件</li>
+</ul>
+<p>所以如果需要定制以上内容就可以去更改base的Dockerfile模板了。</p>
+<h3 id="2-openstack-base"><a href="#2-openstack-base" class="headerlink" title="2. openstack-base"></a>2. openstack-base</h3><p>如果是Openstack的服务，都会以openstack_base作为基础镜像，当然openstack-base也是在base基础上构建的，内容比较少，主要是安装了openstack比较通用的基础组件以及软件包，比如oslo*和*client等内容。</p>
+<h3 id="3-base"><a href="#3-base" class="headerlink" title="3. \-base"></a>3. \<service\>-base</service\></h3><p>在openstack-base基础上就会构建各个服务组件的镜像了，以nova为例，nova本身有多个服务，如api、conductor、compute等，类似这样的服务，Kolla中又以openstack-base为基础做了一个<service>-base镜像，nova为例也就是nova-base镜像作为其他几个服务的基础镜像，主要处理几个服务通用的内容，安装通用的软件等。</service></p>
+<h3 id="4"><a href="#4" class="headerlink" title="4. \"></a>4. \<service\></service\></h3><p>最后是服务镜像本身，以<service>-base为基础镜像，进行服务的部署，配置等，并设定启动入口，以及服务必要的依赖。</service></p>
+<h2 id="容器的启动"><a href="#容器的启动" class="headerlink" title="容器的启动"></a>容器的启动</h2><p>虽然Kolla对所有的服务进行了容器化，但是并没有让他们各自放飞，所有的容器内部定义了基本相同的服务启动入口，这样不管什么样的服务，只要按照相同的规则和流程就可以统一的配置启动流程了。<br>在base镜像中就已经COPY了一个start.sh作为每一个容器的启动入口，并定义为kolla-start，脚本很短：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -o errexit</span><br><span class="line"></span><br><span class="line"><span class="comment"># Processing /var/lib/kolla/config_files/config.json as root.  This is necessary</span></span><br><span class="line"><span class="comment"># to permit certain files to be controlled by the root user which should</span></span><br><span class="line"><span class="comment"># not be writable by the dropped-privileged user, especially /run_command</span></span><br><span class="line">sudo -E kolla_set_configs</span><br><span class="line">CMD=$(cat /run_command)</span><br><span class="line">ARGS=<span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ ! <span class="string">"<span class="variable">$&#123;!KOLLA_SKIP_EXTEND_START[@]&#125;</span>"</span> ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="comment"># Run additional commands if present</span></span><br><span class="line">    . kolla_extend_start</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Running command: '<span class="variable">$&#123;CMD&#125;</span><span class="variable">$&#123;ARGS:+ $ARGS&#125;</span>'"</span></span><br><span class="line"><span class="built_in">exec</span> <span class="variable">$&#123;CMD&#125;</span> <span class="variable">$&#123;ARGS&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>kolla-start作为容器中服务启动的入口，实际执行的内容在<code>run_command</code>中，这个命令是由base中的<code>set_config.py</code>脚本根据读取的配置生成的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">332</span>     LOG.info(<span class="string">'Writing out command to execute'</span>)</span><br><span class="line"><span class="number">333</span>     LOG.debug(<span class="string">"Command is: %s"</span>, config[<span class="string">'command'</span>])</span><br><span class="line"><span class="number">334</span>     <span class="comment"># The value from the 'command' key will be written to '/run_command'</span></span><br><span class="line"><span class="number">335</span>     <span class="keyword">with</span> open(<span class="string">'/run_command'</span>, <span class="string">'w+'</span>) <span class="keyword">as</span> f:                                                                                                                                               </span><br><span class="line"><span class="number">336</span>         f.write(config[<span class="string">'command'</span>])</span><br></pre></td></tr></table></figure></p>
+<p>具体的配置则是在使用kolla-ansible部署服务的时候，每一个服务通过一个叫<code>config.json</code>的文件设置的，部署时，这个文件会挂载到容器中，这样容器会得到真正执行的内容以及相关的配置，以此正确的启动容器中的服务，这样也一定程度提供一种从外部修改或控制容器内部服务的方法，用的时候非常方便。</p>
+<h2 id="部署过程"><a href="#部署过程" class="headerlink" title="部署过程"></a>部署过程</h2><p>部署的部分是在kolla-ansible项目中，实际整个项目就是基于ansible的role架构展开的，项目封装了kolla-ansible命令行进行了额外功能的扩展，在项目中的<code>kolla-ansible/tools/kolla-ansible</code>这个地方定义了命令行，从里面可以看到所有参数，大部分内容就是原生的role，很简洁好用，如果看不懂的话就先去补补ansible的内容啦，所以没什么可以多说的了。<br>不过对于openstack的各个服务的部署，kolla-ansible提供了自动生成密码的脚本，安全性和便捷性得到了提高。<br>想到再补充吧，酱紫了……</p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://cheneydc.me">Cheney Dong</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://cheneydc.me/2018/06/25/kolla-for-openstack/">http://cheneydc.me/2018/06/25/kolla-for-openstack/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/openstack/">openstack</a>
+            
+              <a href="/tags/deploy/">deploy</a>
+            
+              <a href="/tags/kolla/">kolla</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/05/15/k8s-networking/">
+        <span class="next-text nav-default">访问k8s中的服务</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:cheneydc@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://plus.google.com/u/0/+CheneyDong" class="iconfont icon-google" title="google"></a>
+        
+      
+    
+      
+        
+          <a href="https://github.com/cheneydc" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Cheney Dong</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://cheneydc.me/2018/06/25/kolla-for-openstack/';
+        this.page.identifier = '2018/06/25/kolla-for-openstack/';
+        this.page.title = 'Openstack部署利器-Kolla回顾';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//cheneydc.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>
