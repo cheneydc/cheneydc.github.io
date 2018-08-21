@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cheneydc.me/2018/08/21/login-with-system-admin/</loc>
+    
+    <lastmod>2018-08-21T02:04:10.296Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cheneydc.me/2018/06/25/kolla-for-openstack/</loc>
     
     <lastmod>2018-06-25T01:38:49.355Z</lastmod>
@@ -177,14 +184,14 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
+    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
     
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/12/06/shadowsocks-on-ubuntu/</loc>
+    <loc>http://cheneydc.me/2015/12/17/how-work-on-freenode-openstack/</loc>
     
     <lastmod>2018-03-25T11:58:56.109Z</lastmod>
     
@@ -289,14 +296,14 @@
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/02/GoSublime-Setting/</loc>
+    <loc>http://cheneydc.me/2015/10/02/Shell-again/</loc>
     
     <lastmod>2018-03-25T11:58:56.102Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cheneydc.me/2015/10/02/Shell-again/</loc>
+    <loc>http://cheneydc.me/2015/10/02/GoSublime-Setting/</loc>
     
     <lastmod>2018-03-25T11:58:56.102Z</lastmod>
     
